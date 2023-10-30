@@ -11,9 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required",
-  }),
   email: z.string().min(1, {
     message: "Email is required",
   }),
@@ -22,7 +19,7 @@ const formSchema = z.object({
   }),
 });
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,37 +40,18 @@ const RegisterPage = () => {
       toast.error("Something went wrong");
     }
   }
-
+  
   return (  
     <div className="w-full flex flex-col gap-5 items-center justify-center h-full -mt-12 p-6 lg:-m-20">
       <div>
         <h1 className="text-3xl font-bold text-center text-primary">
-          Register
+          Login
         </h1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 mt-8 w-full "
+            className="space-y-8 mt-8 w-full"
           >
-            <FormField 
-              control={form.control}
-              name="name"
-              render={({field}) => (
-                <FormItem>
-                  <FormLabel>
-                    Name
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      className="w-full h-12 text-md" 
-                      disabled={isSubmitting}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField 
               control={form.control}
               name="email"
@@ -103,7 +81,7 @@ const RegisterPage = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full h-12 text-md md:w-96 h-"  
+                      className="w-full h-12 text-md md:w-96"  
                       disabled={isSubmitting}
                       {...field}
                     />
@@ -128,12 +106,12 @@ const RegisterPage = () => {
         <div className="flex flex-col gap-4 mt-5 w-full">
           <hr />
           <div className="text-neutral-500 text-center font-light">
-            <p>Already have an account?&nbsp; 
-              <span 
-                onClick={() => router.push("/login")} 
-                className="text-neutral-800 cursor-pointer hover:underline
-              ">
-                  Log in 
+            <p>First time using Internify?&nbsp; 
+            <span 
+                onClick={() => router.push("/register")} 
+                className="text-neutral-800 cursor-pointer hover:underline"
+              >
+                Create an account
               </span>
             </p>
           </div>
@@ -143,4 +121,4 @@ const RegisterPage = () => {
   );
 }
  
-export default RegisterPage;
+export default LoginPage;

@@ -19,7 +19,7 @@ export const NavbarRoutes = () => {
     <>
       <div 
         onClick={() => router.push("/")}
-        className="text-4xl font-bold text-primary cursor-pointer
+        className="md:text-4xl text-3xl font-bold text-primary cursor-pointer
       ">
         Internify
       </div>
