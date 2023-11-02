@@ -6,7 +6,6 @@ import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
 export const NavbarImage =  ({
   currentUser
@@ -18,7 +17,7 @@ export const NavbarImage =  ({
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Image 
-            className='rounded-full cursor-pointer'
+            className='rounded-full cursor-pointer w-10 h-10'
             height='40'
             width='40'
             alt='Avatar'
