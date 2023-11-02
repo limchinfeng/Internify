@@ -36,17 +36,13 @@ export const ProfileImage = ({
       toast.error("Something went wrong");
     }
   }
-
-  const imageName = currentUser.name || currentUser.email;
-  const shortImageName = imageName?.slice(0,2) 
-
   
   return (
     <div className="flex justify-center items-center">
       <div className="flex justify-center items-center relative">
         {!isEditing ? <>
           <Image 
-            className='rounded-full cursor-pointer md:w-40 md:h-40'
+            className='rounded-full cursor-pointer w-28 h-28 md:w-40 md:h-40'
             height='100'
             width='100'
             alt='Avatar'
