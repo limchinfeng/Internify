@@ -37,7 +37,10 @@ const RegisterPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/", values);
+      await axios.post("/api/register", values);
+      toast.success('Registered successfully!');
+      router.refresh();
+      router.push("/login");
 
     } catch {
       toast.error("Something went wrong");
@@ -45,7 +48,7 @@ const RegisterPage = () => {
   }
 
   return (  
-    <div className="w-full flex flex-col gap-5 items-center justify-center h-full -mt-12 p-6 lg:-m-20">
+    <div className="w-full flex flex-col gap-5 items-center justify-center h-full ">
       <div>
         <h1 className="text-3xl font-bold text-center text-primary">
           Register
@@ -103,7 +106,8 @@ const RegisterPage = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full h-12 text-md md:w-96 h-"  
+                      className="w-full h-12 text-md md:w-96"  
+                      type="password"
                       disabled={isSubmitting}
                       {...field}
                     />

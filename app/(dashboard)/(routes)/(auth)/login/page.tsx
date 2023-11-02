@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
 
 const formSchema = z.object({
   email: z.string().min(1, {
@@ -21,6 +23,7 @@ const formSchema = z.object({
 
 const LoginPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,11 +36,29 @@ const LoginPage = () => {
   const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+
     try {
-      await axios.post("/", values);
+      signIn('credentials', { 
+        ...values, 
+        redirect: false,
+      })
+      .then((callback) => {
+        if (callback?.ok) {
+          toast.success('Logged in');
+          router.refresh();
+          router.push("/");
+        }
+        
+        if (callback?.error) {
+          toast.error(callback.error);
+        }
+      })
 
     } catch {
       toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   }
   
@@ -63,7 +84,7 @@ const LoginPage = () => {
                   <FormControl>
                     <Input
                       className="w-full h-12 text-md" 
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || isLoading}
                       {...field}
                     />
                   </FormControl>
@@ -82,7 +103,8 @@ const LoginPage = () => {
                   <FormControl>
                     <Input
                       className="w-full h-12 text-md md:w-96"  
-                      disabled={isSubmitting}
+                      type="password"
+                      disabled={isSubmitting || isLoading}
                       {...field}
                     />
                   </FormControl>
@@ -94,7 +116,7 @@ const LoginPage = () => {
               <Button
                 size="xl"
                 type="submit"
-                disabled={!isValid || isSubmitting }
+                disabled={!isValid || isSubmitting || isLoading }
                 className="w-full"
               >
                 Continue
