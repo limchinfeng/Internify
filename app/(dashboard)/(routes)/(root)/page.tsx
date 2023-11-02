@@ -1,7 +1,6 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import { Button } from "@/components/ui/button";
-import { signOut } from "next-auth/react";
-import Test from "./_components/test";
+import { UserHome } from "./_components/user-home";
+import { Unauthorized } from "./_components/unauthorized";
 
 const Home = async () => {
 
@@ -13,11 +12,8 @@ const Home = async () => {
         hone 0page
       </p>
       { currentUser 
-        ? <Test currentUser={currentUser} />
-        : <div className="flex flex-row gap-3 text-lg font-bold p-5 cursor-pointer hover:text-primary transition">
-            <a href="/login">Login</a>
-            <a href="/register">register</a>
-          </div>
+        ? <UserHome currentUser={currentUser} />
+        : <Unauthorized />
       }
     </div>
   );

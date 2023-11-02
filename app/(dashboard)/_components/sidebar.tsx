@@ -3,8 +3,13 @@
 import { usePathname, useRouter } from "next/navigation";
 import { SidebarRoutes } from "./sidebar-routes"
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
+import { User } from "@prisma/client";
 
-export const Sidebar = () => {
+export const Sidebar = ({
+  currentUser
+}: {currentUser?: User | null}) => {
   const pathname = usePathname();
   const router = useRouter();
   
@@ -21,6 +26,14 @@ export const Sidebar = () => {
       <div className="flex flex-col w-full">
         <SidebarRoutes />
       </div>
+      {currentUser && 
+        <Button 
+          onClick={() => signOut()}
+          className="mt-auto mb-6 mx-4"
+        >
+          Sign Out
+        </Button>
+      }
     </div>    
   )
 }

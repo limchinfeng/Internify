@@ -2,8 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { NavbarImage } from "./navbar-image";
+import { User } from "@prisma/client";
 
-export const NavbarRoutes = () => {
+export const NavbarRoutes = ({
+  currentUser
+}: {currentUser?: User | null}) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 
@@ -24,7 +28,7 @@ export const NavbarRoutes = () => {
         Internify
       </div>
       <div className="ml-auto">
-        profile image
+        <NavbarImage currentUser={currentUser} />
       </div>
     </>
     

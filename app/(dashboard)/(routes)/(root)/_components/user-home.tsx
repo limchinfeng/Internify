@@ -1,24 +1,20 @@
 "use client"
 
-import { Button } from "@/components/ui/button";
-import { User } from "@prisma/client";
-import { signOut } from "next-auth/react";
+import { Button } from "@/components/ui/button"
+import { User } from "@prisma/client"
+import { signOut } from "next-auth/react"
 
-
-
-const Test = ({
+export const UserHome = ({
   currentUser
 }: {
   currentUser: User
 }) => {
-  return (  
+  return (
     <div className="flex justify-center items-center h-20 border"> 
       {currentUser.email}
       <Button onClick={() => signOut()}>
         Log Out
       </Button>
     </div>
-  );
+  )
 }
- 
-export default Test;
