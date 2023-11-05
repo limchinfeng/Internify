@@ -1,9 +1,12 @@
+import React from 'react';
+
+
 const CompanyPage = () => {
-  return (  
+  return (
     <div>
       company
     </div>
   );
 }
- 
+
 export default CompanyPage;
