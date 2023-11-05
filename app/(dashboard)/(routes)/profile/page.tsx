@@ -18,18 +18,17 @@ const ProfilePage = async () => {
   return (  
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
       <ProfileImage currentUser={currentUser} />
-      <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 md:gap-16 lg:gap-36 items-center">
-        <div className="md:w-80 w-5/6 space-y-6">
-          <div>
-
-          <ProfileName currentUser={currentUser} />
-          <ProfilePhone currentUser={currentUser} />
-          <ProfileEmail currentUser={currentUser} />
+      <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-10">
+        <div>
+          <div className="flex flex-col items-center gap-x-4">
+            <ProfileName currentUser={currentUser} />
+            <ProfilePhone currentUser={currentUser} />
+            <ProfileEmail currentUser={currentUser} />
           </div>
         </div>
 
-        <div className="md:w-80 w-5/6 space-y-6">
-          <div>
+        <div>
+          <div className="flex flex-col items-center gap-x-4">
             <ProfileLink currentUser={currentUser} />
             <ProfileDescription currentUser={currentUser} />
           </div>
