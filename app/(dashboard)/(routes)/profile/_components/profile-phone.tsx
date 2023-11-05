@@ -1,32 +1,33 @@
 "use client";
 
-import * as z from "zod";
-import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { User } from "@prisma/client";
+import { User } from "@prisma/client"
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-interface ProfileNameProps {
+
+interface ProfilePhoneProps {
   currentUser: User
 }
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required",
+  phone: z.string().min(1, {
+    message: "Phone is required",
   }),
 });
 
-export const ProfileName = ({
+export const ProfilePhone = ({
   currentUser
-}: ProfileNameProps) => {
+}: ProfilePhoneProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -35,14 +36,14 @@ export const ProfileName = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: currentUser?.name || "",
+      phone: currentUser?.phone || "",
     }
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/profile`, values);
-      toast.success("Profile updated");
+      toast.success("Phone updated");
       toggleEdit();
       router.refresh();
     } catch {
@@ -55,7 +56,7 @@ export const ProfileName = ({
   return (
     <div className="rounded-md p-4 w-full">
       <div className="font-medium text-sm flex items-center justify-between">
-        Name
+        Phone
         <div className="flex flex-row gap-2 mb-2">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
@@ -79,8 +80,8 @@ export const ProfileName = ({
         </div>
       </div>
       {!isEditing && (
-        <p className={cn("text-xl font-medium", !currentUser.name && "text-slate-500 italic text-sm")}>
-          {currentUser.name || "No Name"}
+        <p className={cn("text-xl font-medium", !currentUser.phone && "text-slate-500 italic text-sm")}>
+          {currentUser.phone || "No phone number"}
         </p>
       )}
       {isEditing && (
@@ -91,13 +92,13 @@ export const ProfileName = ({
           >
             <FormField 
               control={form.control}
-              name="name"
+              name="phone"
               render={({field}) => (
                 <FormItem>
                   <FormControl>
                     <Input 
                       disabled={isSubmitting}
-                      placeholder="e.g. Your Full Name"
+                      placeholder="e.g. 012345678"
                       {...field}
                     />
                   </FormControl>
@@ -105,14 +106,6 @@ export const ProfileName = ({
                 </FormItem>
               )}
             />
-            {/* <div className="flex items-center gap-x-2">
-              <Button
-                disabled={!isValid || isSubmitting}
-                type="submit"
-              >
-                Save
-              </Button>
-            </div> */}
           </form>
         </Form>
       )}

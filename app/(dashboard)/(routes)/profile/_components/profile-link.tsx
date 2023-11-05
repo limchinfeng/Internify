@@ -10,23 +10,23 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
-interface ProfileNameProps {
+interface ProfileLinkProps {
   currentUser: User
 }
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required",
+  link: z.string().min(1, {
+    message: "Link is required",
   }),
 });
 
-export const ProfileName = ({
+export const ProfileLink = ({
   currentUser
-}: ProfileNameProps) => {
+}: ProfileLinkProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -35,7 +35,7 @@ export const ProfileName = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: currentUser?.name || "",
+      link: currentUser?.link || "",
     }
   });
 
@@ -55,7 +55,7 @@ export const ProfileName = ({
   return (
     <div className="rounded-md p-4 w-full">
       <div className="font-medium text-sm flex items-center justify-between">
-        Name
+        Link
         <div className="flex flex-row gap-2 mb-2">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
@@ -78,10 +78,19 @@ export const ProfileName = ({
           )}
         </div>
       </div>
-      {!isEditing && (
-        <p className={cn("text-xl font-medium", !currentUser.name && "text-slate-500 italic text-sm")}>
-          {currentUser.name || "No Name"}
+      {!isEditing && !currentUser.link && (
+        <p className="font-medium text-slate-500 italic text-sm">
+          No Link
         </p>
+      )}
+      {!isEditing && currentUser.link && (
+        <Link
+          href={`https://${currentUser.link}`}
+          target="_blank"
+          className="text-lg font-medium italic text-primary"
+        >
+          {currentUser.link}
+        </Link>
       )}
       {isEditing && (
         <Form {...form} >
@@ -91,13 +100,13 @@ export const ProfileName = ({
           >
             <FormField 
               control={form.control}
-              name="name"
+              name="link"
               render={({field}) => (
                 <FormItem>
                   <FormControl>
                     <Input 
                       disabled={isSubmitting}
-                      placeholder="e.g. Your Full Name"
+                      placeholder="e.g. www.limkimseah.com"
                       {...field}
                     />
                   </FormControl>
@@ -105,14 +114,6 @@ export const ProfileName = ({
                 </FormItem>
               )}
             />
-            {/* <div className="flex items-center gap-x-2">
-              <Button
-                disabled={!isValid || isSubmitting}
-                type="submit"
-              >
-                Save
-              </Button>
-            </div> */}
           </form>
         </Form>
       )}

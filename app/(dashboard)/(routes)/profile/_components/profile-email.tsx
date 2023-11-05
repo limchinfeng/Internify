@@ -14,19 +14,19 @@ import { cn } from "@/lib/utils";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-interface ProfileNameProps {
+interface ProfileEmailProps {
   currentUser: User
 }
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required",
+  email: z.string().min(1, {
+    message: "Email is required",
   }),
 });
 
-export const ProfileName = ({
+export const ProfileEmail = ({
   currentUser
-}: ProfileNameProps) => {
+}: ProfileEmailProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -35,7 +35,7 @@ export const ProfileName = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: currentUser?.name || "",
+      email: currentUser?.email || "",
     }
   });
 
@@ -55,7 +55,7 @@ export const ProfileName = ({
   return (
     <div className="rounded-md p-4 w-full">
       <div className="font-medium text-sm flex items-center justify-between">
-        Name
+        Email
         <div className="flex flex-row gap-2 mb-2">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
@@ -79,8 +79,8 @@ export const ProfileName = ({
         </div>
       </div>
       {!isEditing && (
-        <p className={cn("text-xl font-medium", !currentUser.name && "text-slate-500 italic text-sm")}>
-          {currentUser.name || "No Name"}
+        <p className={cn("text-xl font-medium", !currentUser.email && "text-slate-500 italic text-sm")}>
+          {currentUser.email || "No Email"}
         </p>
       )}
       {isEditing && (
@@ -91,13 +91,13 @@ export const ProfileName = ({
           >
             <FormField 
               control={form.control}
-              name="name"
+              name="email"
               render={({field}) => (
                 <FormItem>
                   <FormControl>
                     <Input 
                       disabled={isSubmitting}
-                      placeholder="e.g. Your Full Name"
+                      placeholder="e.g. youremail@email.com"
                       {...field}
                     />
                   </FormControl>
@@ -105,14 +105,6 @@ export const ProfileName = ({
                 </FormItem>
               )}
             />
-            {/* <div className="flex items-center gap-x-2">
-              <Button
-                disabled={!isValid || isSubmitting}
-                type="submit"
-              >
-                Save
-              </Button>
-            </div> */}
           </form>
         </Form>
       )}
