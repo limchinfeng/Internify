@@ -87,7 +87,7 @@ export const ProfileLink = ({
         <Link
           href={`https://${currentUser.link}`}
           target="_blank"
-          className="text-lg font-medium italic text-primary"
+          className="text-lg font-medium italic text-primary hover:text-blue-800 transition hover:underline"
         >
           {currentUser.link}
         </Link>

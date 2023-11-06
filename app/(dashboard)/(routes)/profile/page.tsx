@@ -6,6 +6,9 @@ import { ProfilePhone } from "./_components/profile-phone";
 import { ProfileEmail } from "./_components/profile-email";
 import { ProfileLink } from "./_components/profile-link";
 import { ProfileDescription } from "./_components/profile-description";
+import prismadb from "@/lib/prismadb";
+import { columns } from "./_components/columns";
+import { DataTable } from "./_components/data-table";
 
 
 const ProfilePage = async () => {
@@ -14,6 +17,15 @@ const ProfilePage = async () => {
   if(!currentUser) {
     return redirect("/");
   }
+
+  const projects = await prismadb.project.findMany({
+    where: {
+      userId: currentUser.id
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
 
   return (  
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
@@ -33,6 +45,12 @@ const ProfilePage = async () => {
             <ProfileDescription currentUser={currentUser} />
           </div>
         </div>
+      </div>
+      <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
+        <DataTable 
+          columns={columns}
+          data={projects}
+        />
       </div>
     </div>
   );
