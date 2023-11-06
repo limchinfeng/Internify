@@ -44,6 +44,21 @@ export const columns: ColumnDef<Project>[] = [
         </Button>
       )
     },
+    cell: ({ row }) => {
+      const createdAt = new Date(row.getValue("createdAt"));
+      const formattedDate = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false,
+        timeZoneName: 'short',
+      }).format(createdAt);
+  
+      return <div className="ml-3">{formattedDate}</div>;
+    },
   },
   {
     accessorKey: "updatedAt",
@@ -57,6 +72,21 @@ export const columns: ColumnDef<Project>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
+    },
+    cell: ({ row }) => {
+      const updatedAt = new Date(row.getValue("updatedAt"));
+      const formattedDate = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false,
+        timeZoneName: 'short',
+      }).format(updatedAt);
+  
+      return <div className="ml-3">{formattedDate}</div>;
     },
   },
   {
@@ -76,7 +106,7 @@ export const columns: ColumnDef<Project>[] = [
       const isPublished = row.getValue("isPublished") || false;
 
       return (
-        <Badge className={cn("bg-slate-500 ml-5", isPublished ? "bg-sky-700" : "")}>
+        <Badge className={cn("bg-slate-500 ml-5", isPublished ? "bg-sky-700 text-white" : "")}>
           {isPublished ? "Published" : "Draft"}
         </Badge>
       )
@@ -98,7 +128,7 @@ export const columns: ColumnDef<Project>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <Link href={`/teacher/courses/${id}`}>
+            <Link href={`/profile/project/${id}`}>
               <DropdownMenuItem>
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit

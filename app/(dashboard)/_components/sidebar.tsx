@@ -13,7 +13,7 @@ export const Sidebar = ({
   const pathname = usePathname();
   const router = useRouter();
   
-  const isActive = pathname ==="/profile"  
+  const isActive = pathname === "/profile" || pathname?.includes("/profile"); 
 
   return (
     <div className="h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm md:mt-5">
