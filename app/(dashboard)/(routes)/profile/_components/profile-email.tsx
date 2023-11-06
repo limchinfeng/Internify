@@ -53,10 +53,10 @@ export const ProfileEmail = ({
   const {isSubmitting, isValid} = form.formState;
 
   return (
-    <div className="rounded-md p-4 w-full">
+    <div className="border rounded-md p-4 w-full">
       <div className="font-medium text-sm flex items-center justify-between">
         Email
-        <div className="flex flex-row gap-2 mb-2">
+        <div className="flex flex-row gap-2 items-center justify-between">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
               <>Cancel</>

@@ -4,30 +4,32 @@ import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { User } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Preview } from "@/components/description-preview";
-import { Editor } from "@/components/description-editor";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Project } from "@prisma/client";
+import { Combobox } from "@/components/ui/combobox";
 
-interface ProfileDescriptionProps {
-  currentUser: User
+interface ProjectCategoryProps {
+  initialData: Project;
+  projectId: string;
+  options: {
+    label: string;
+    value: string
+  }[]
 }
 
 const formSchema = z.object({
-  description: z.string().min(1, {
-    message: "Description is required",
-  }),
+  categoryId: z.string().min(1),
 });
 
-export const ProfileDescription = ({
-  currentUser
-}: ProfileDescriptionProps) => {
+export const ProjectCategory = ({
+  initialData, projectId, options
+}: ProjectCategoryProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -36,14 +38,16 @@ export const ProfileDescription = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: currentUser?.description || "",
+      categoryId: initialData?.categoryId || ""
     }
   });
 
+  const {isSubmitting, isValid} = form.formState;
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/profile`, values);
-      toast.success("Profile updated");
+      await axios.patch(`/api/profile/project/${projectId}`, values);
+      toast.success("Project updated");
       toggleEdit();
       router.refresh();
     } catch {
@@ -51,20 +55,20 @@ export const ProfileDescription = ({
     }
   }
 
-  const {isSubmitting, isValid} = form.formState;
+  const selectedOption = options.find((option) => option.value === initialData.categoryId)
 
   return (
-    <div className="border rounded-md p-4 w-full">
+    <div className="mt-6 border rounded-md p-4">
       <div className="font-medium text-sm flex items-center justify-between">
-        Description
-        <div className="flex flex-row gap-2 items-center justify-between">
+        Project category
+        <div className="flex flex-row gap-2 mb-2">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
               <>Cancel</>
               ) : (
                 <>
                 <Pencil className="w-4 h-4 mr-2" />
-                Edit 
+                Edit Category
               </>
             )}
           </Button>
@@ -80,13 +84,8 @@ export const ProfileDescription = ({
         </div>
       </div>
       {!isEditing && (
-        <p className={cn("text-xl font-medium", !currentUser.description && "text-slate-500 italic text-sm")}>
-          {!currentUser.description && "No description"}
-          {currentUser.description && (
-            <Preview 
-              value={currentUser.description}
-            />
-          )}
+        <p className={cn("text-xl font-medium", !initialData.categoryId && "text-slate-500 italic text-sm")}>
+          {selectedOption?.label || "No category"}
         </p>
       )}
       {isEditing && (
@@ -97,11 +96,12 @@ export const ProfileDescription = ({
           >
             <FormField 
               control={form.control}
-              name="description"
+              name="categoryId"
               render={({field}) => (
                 <FormItem>
                   <FormControl>
-                  <Editor 
+                    <Combobox 
+                      options={...options}
                       {...field}
                     />
                   </FormControl>

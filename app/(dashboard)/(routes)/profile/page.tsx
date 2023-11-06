@@ -32,15 +32,15 @@ const ProfilePage = async () => {
       <ProfileImage currentUser={currentUser} />
       <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-10">
         <div>
-          <div className="flex flex-col items-center gap-x-4">
+          <div className="flex flex-col items-center gap-x-4 gap-4">
             <ProfileName currentUser={currentUser} />
             <ProfilePhone currentUser={currentUser} />
             <ProfileEmail currentUser={currentUser} />
           </div>
         </div>
 
-        <div>
-          <div className="flex flex-col items-center gap-x-4">
+        <div className="mt-4 md:mt-0">
+          <div className="flex flex-col items-center gap-x-4 gap-4">
             <ProfileLink currentUser={currentUser} />
             <ProfileDescription currentUser={currentUser} />
           </div>
