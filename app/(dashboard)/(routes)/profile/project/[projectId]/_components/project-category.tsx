@@ -61,7 +61,7 @@ export const ProjectCategory = ({
     <div className="mt-6 border rounded-md p-4">
       <div className="font-medium text-sm flex items-center justify-between">
         Project category
-        <div className="flex flex-row gap-2 mb-2">
+        <div className="flex flex-row gap-2 items-center justify-between">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
               <>Cancel</>

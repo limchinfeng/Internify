@@ -6,6 +6,8 @@ import { Actions } from "./_components/actions";
 import { ProjectTitle } from "./_components/project-title";
 import { ProjectCategory } from "./_components/project-category";
 import { ProjectDescription } from "./_components/project-description";
+import { ProjectBackground } from "./_components/project-background";
+import { ProjectShowcase } from "./_components/project-showcase";
 
 
 const ProjectIdPage = async ({
@@ -105,14 +107,17 @@ const ProjectIdPage = async ({
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <div>
-            imageUrl
+            <ProjectBackground 
+              initialData={project}
+              projectId={project.id}              
+            />
           </div>
 
           {/* right hand */}
           <div>  
-            showcase Image
+            <ProjectShowcase />
           </div>
         </div>
       </div>
