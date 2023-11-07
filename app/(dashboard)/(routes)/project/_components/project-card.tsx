@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
+import { HeartButton } from "./heart-button";
+import * as cheerio from 'cheerio';
+import { User } from "@prisma/client";
 
 interface ProjectCardProps {
   id: string;
@@ -14,20 +17,24 @@ interface ProjectCardProps {
   userImage: string;
   imageUrl: string;
   category: string;
+  user: User;
 }
 
 export const ProjectCard = ({
-  id, title, description, name, userId,userImage, imageUrl, category
+  id, title, description, name, userId,userImage, imageUrl, category, user
 }: ProjectCardProps) => {
   const router = useRouter();
   const shortName: string = name.slice(0, 2);
 
   //shorten description
-  const parser = new DOMParser();
-  const parsedDescription = parser.parseFromString(description, 'text/html');
-  const textContent = parsedDescription.body.textContent || '';
-  const truncatedDescription = textContent.slice(0, 100) + (textContent.length > 100 ? '...' : '');
+  // const parser = new DOMParser();
+  // const parsedDescription = parser.parseFromString(description, 'text/html');
+  // const textContent = parsedDescription.body.textContent || '';
+  // const truncatedDescription = textContent.slice(0, 100) + (textContent.length > 100 ? '...' : '');
 
+  const cheerioDescription = cheerio.load(description);
+  const textContent = cheerioDescription.text();
+  const truncatedDescription = textContent.slice(0, 100) + (textContent.length > 100 ? '...' : '');
 
   const handleAvatarClick = (event: any) => {
     // Prevent the click event from reaching the parent div's click handler
@@ -49,7 +56,7 @@ export const ProjectCard = ({
               className="object-cover h-full w-full group-hover:scale-110 transition"
             />
             <div className="absolute top-3 right-3">
-              {/* <HeartButton listingId={data.id} currentUser={currentUser} /> */}
+              <HeartButton projectId={id} user={user} />
             </div>
         </div>
         <div>
@@ -72,8 +79,12 @@ export const ProjectCard = ({
             </div>
           </div>
 
+          {/* user name */}
+          <div className="my-1 text-base text-primary font-bold">
+            {name}
+          </div>
           {/* description */}
-          <div className="text-sm mt-2">
+          <div className="text-sm">
             {truncatedDescription}
           </div>
         </div>

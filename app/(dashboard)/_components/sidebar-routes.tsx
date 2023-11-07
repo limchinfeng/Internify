@@ -22,7 +22,7 @@ const routes = [
   {
     icon: null, //not important things, can skip if no time
     label: "Favorite",
-    href: "/"
+    href: "/favorite"
   },
 ]
 

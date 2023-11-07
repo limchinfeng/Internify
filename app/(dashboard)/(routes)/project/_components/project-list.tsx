@@ -27,6 +27,7 @@ export const ProjectList  = ({
             userImage={item.user.imageUrl!}
             imageUrl={item.imageUrl!}
             category={item?.category?.name!}
+            user={item.user}
           />
         ))}
       </div>

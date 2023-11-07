@@ -15,12 +15,15 @@ model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String?
   email String? @unique
+  emailVerified Boolean @default(false)
   hashedPassword String?
   description String?
   imageUrl String?
   phone String?
   link String?
   isCompany Boolean @default(false)
+  favoriteProjectIds String[] @db.ObjectId
+  favoriteListingIds String[] @db.ObjectId
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
