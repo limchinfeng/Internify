@@ -22,11 +22,15 @@ export const CategoryItem = ({
   const currentCategoryId = searchParams?.get("categoryId");
   const currentTitle = searchParams?.get("title");
 
+  if(!pathname) {
+    return;
+  }
+
   const isSelected = currentCategoryId === value;
 
   const onClick = () => {
     const url = qs.stringifyUrl({
-      url: pathname || "/project",
+      url: pathname,
       query: {
         title: currentTitle,
         categoryId: isSelected ? null : value,

@@ -92,7 +92,7 @@ export const ProjectCategory = ({
         <Form {...form} >
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4"
+            className="space-y-4 mt-2"
           >
             <FormField 
               control={form.control}

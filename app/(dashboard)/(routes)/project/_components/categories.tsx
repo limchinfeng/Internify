@@ -26,10 +26,10 @@ export const Categories = ({
   const handleWheelScroll = (event: { preventDefault: () => void; deltaY: number; }) => {
     event.preventDefault();
 
-    const element = document.getElementById("container"); // Replace with your actual ID
+    const element = document.getElementById("container"); 
     if (element) {
       element.scrollBy({
-        left: event.deltaY < 0 ? -30 : 30,
+        left: event.deltaY < 0 ? -80 : 80,
       });
     }
   };

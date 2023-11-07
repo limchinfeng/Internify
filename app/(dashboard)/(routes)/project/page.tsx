@@ -3,6 +3,8 @@ import { getProjects } from "@/actions/getProjects";
 import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 import { Categories } from "./_components/categories";
+import { SearchInput } from "./_components/search-input";
+import { ProjectList } from "./_components/project-list";
 
 interface ProjectPageProps {
   searchParams: {  
@@ -32,14 +34,16 @@ const ProjectPage = async ({
 
   return (
     <>
-      <div className="px-6 pt-6 md:hidden md:mb-0 block">
-        search input
+      <div className="px-6 pt-6 block">
+        <SearchInput />
       </div>
       <div className="p-6 space-y-4">
         <Categories 
           items={categories}
         />
-        project list
+        <ProjectList 
+          items={projects}
+        />
       </div>
     </>
   )

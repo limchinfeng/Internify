@@ -18,7 +18,8 @@ export const getProjects = async ({
         categoryId
       },
       include: {
-        category: true
+        category: true,
+        user: true,
       },
       orderBy: {
         createdAt: "desc"
