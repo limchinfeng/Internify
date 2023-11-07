@@ -78,7 +78,6 @@ model Category {
 
 model ShowcaseImage {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String 
   url String
 
   createdAt DateTime @default(now())

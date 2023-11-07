@@ -117,7 +117,10 @@ const ProjectIdPage = async ({
 
           {/* right hand */}
           <div>  
-            <ProjectShowcase />
+            <ProjectShowcase 
+              initialData={project}
+              projectId={project.id}                      
+            />
           </div>
         </div>
       </div>
