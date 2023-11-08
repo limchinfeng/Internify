@@ -4,6 +4,7 @@ import { ProjectCard } from "../../project/_components/project-card";
 
 type ProjectWithCategory = Project & {
   category: Category | null,
+  user: User
 }
 
 interface FavoriteProjectProps {
@@ -29,9 +30,9 @@ export const FavoriteProject = ({
                 id={project.id}
                 title={project.title}
                 description={project.description!}
-                name={currentUser.name!}
-                userId={currentUser.id}
-                userImage={currentUser.imageUrl!}
+                name={project.user.name!}
+                userId={project.user.id}
+                userImage={project.user.imageUrl!}
                 imageUrl={project.imageUrl!}
                 category={project?.category?.name!}
                 user={currentUser}

@@ -17,6 +17,7 @@ export default async function getProjectFavoriteListings() {
             },
             include: {
                 category: true,
+                user: true,
             }
         });
 

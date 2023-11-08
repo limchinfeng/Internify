@@ -44,7 +44,7 @@ const useFavorite = ({
           toast.success('Success');
       } catch (error) {
           toast.error("Something went wrong");
-      }
+      } 
   },[user, hasFavorited, projectId, router]);
 
   return {

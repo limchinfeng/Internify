@@ -43,6 +43,7 @@ const ProjectPage = async ({
         />
         <ProjectList 
           items={projects}
+          currentUser={currentUser}
         />
       </div>
     </>

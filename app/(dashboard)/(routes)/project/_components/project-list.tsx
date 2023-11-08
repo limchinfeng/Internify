@@ -1,3 +1,5 @@
+"use client"
+
 import { Category, Project, User } from "@prisma/client"
 import { ProjectCard } from "./project-card"
 
@@ -7,11 +9,12 @@ type ProjectWithCategory = Project & {
 }
 
 interface ProjectListProps {
-  items: ProjectWithCategory[]
+  items: ProjectWithCategory[];
+  currentUser: User;
 }
 
 export const ProjectList  = ({
-  items
+  items, currentUser
 }: ProjectListProps) => {
   return (
     <div>
@@ -27,7 +30,7 @@ export const ProjectList  = ({
             userImage={item.user.imageUrl!}
             imageUrl={item.imageUrl!}
             category={item?.category?.name!}
-            user={item.user}
+            user={currentUser}
           />
         ))}
       </div>

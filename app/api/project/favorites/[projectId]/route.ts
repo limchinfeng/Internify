@@ -10,7 +10,6 @@ export async function POST(
   req: Request,
   {params}: {params: IParams}
 ) {
-  try {
     const currentUser = await getCurrentUser();
 
     if(!currentUser) {
@@ -23,32 +22,26 @@ export async function POST(
       throw new Error('Invalid Project ID');
     }
 
-    let favoriteIds = [...(currentUser.favoriteProjectIds || [])];
+    let favoriteProjectIds = [...(currentUser.favoriteProjectIds || [])];
 
-    favoriteIds.push(projectId);
+    favoriteProjectIds.push(projectId);
 
     const user = await prismadb.user.update({
       where: {
           id: currentUser.id
       },
       data: {
-          favoriteProjectIds: favoriteIds
+          favoriteProjectIds
       }
   });
 
   return NextResponse.json(user);
-
-  } catch (error) {
-    console.log("[PROJECT_FAVORITE_ID]", error);
-    return new NextResponse("Internal Error", {status: 500});
-  }
 }
 
 export async function DELETE(
   req: Request,
   {params}: {params: IParams}
 ) {
-  try {
     const currentUser = await getCurrentUser();
 
     if(!currentUser) {
@@ -61,23 +54,18 @@ export async function DELETE(
       throw new Error('Invalid Project ID');
     }
 
-    let favoriteIds = [...(currentUser.favoriteProjectIds || [])];
+    let favoriteProjectIds = [...(currentUser.favoriteProjectIds || [])];
 
-    favoriteIds = favoriteIds.filter((id) => id !== projectId)
+    favoriteProjectIds = favoriteProjectIds.filter((id) => id !== projectId)
 
     const user = await prismadb.user.update({
       where: {
           id: currentUser.id
       },
       data: {
-          favoriteProjectIds: favoriteIds
+          favoriteProjectIds
       }
   });
 
   return NextResponse.json(user);
-
-  } catch (error) {
-    console.log("[PROJECT_FAVORITE_ID]", error);
-    return new NextResponse("Internal Error", {status: 500});
-  }
 }

@@ -12,17 +12,17 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "Name is required",
+    message: "Company Name is required",
   }),
   email: z.string().min(1, {
-    message: "Email is required",
+    message: "Company Email is required",
   }),
   password: z.string().min(1, {
     message: "Password is required",
   }),
 });
 
-const RegisterPage = () => {
+const CompanyRegisterPage = () => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,8 +38,8 @@ const RegisterPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/register", values);
-      toast.success('Registered successfully!');
+      await axios.post("/api/company/register", values);
+      toast.success('Company account registered successfully!');
       router.refresh();
       router.push("/login");
 
@@ -52,7 +52,7 @@ const RegisterPage = () => {
     <div className="w-full flex flex-col gap-5 items-center justify-center h-full ">
       <div>
         <h1 className="text-3xl font-bold text-center text-primary">
-          Register
+          Company Registration 
         </h1>
         <Form {...form}>
           <form
@@ -65,7 +65,7 @@ const RegisterPage = () => {
               render={({field}) => (
                 <FormItem>
                   <FormLabel>
-                    Name
+                    Company Name
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -84,7 +84,7 @@ const RegisterPage = () => {
               render={({field}) => (
                 <FormItem>
                   <FormLabel>
-                    Email
+                    Company Email
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -133,7 +133,7 @@ const RegisterPage = () => {
         <div className="flex flex-col gap-4 mt-5 w-full">
           <hr />
           <div className="text-neutral-500 text-center font-light">
-            <p>Already have an account?&nbsp; 
+            <p>Already have an company account?&nbsp; 
               <span 
                 onClick={() => router.push("/login")} 
                 className="text-neutral-800 cursor-pointer hover:underline
@@ -147,5 +147,5 @@ const RegisterPage = () => {
     </div>
   );
 }
- 
-export default RegisterPage;
+
+export default CompanyRegisterPage;

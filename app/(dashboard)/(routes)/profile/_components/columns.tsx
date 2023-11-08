@@ -106,7 +106,7 @@ export const columns: ColumnDef<Project>[] = [
       const isPublished = row.getValue("isPublished") || false;
 
       return (
-        <Badge className={cn("bg-slate-500 ml-5", isPublished ? "bg-sky-700 text-white" : "")}>
+        <Badge className={cn("bg-slate-500 ml-5", isPublished ? "bg-emerald-700 text-white hover:bg-emerald-600" : "")}>
           {isPublished ? "Published" : "Draft"}
         </Badge>
       )
