@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import { getDebounce } from "@/actions/getDebounced";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export const SearchInput = () => {
   const [value, setValue] = useState("");
@@ -16,6 +17,11 @@ export const SearchInput = () => {
   const pathname = usePathname();
 
   const currentCategoryId = searchParams?.get("categoryId");
+
+  const haveCategoryId = !!searchParams?.get("categoryId");
+  const haveTitle = !!searchParams?.get("title");
+  const disableFilter = haveTitle || haveCategoryId;
+
 
   useEffect(() => {
     const url = qs.stringifyUrl({
@@ -40,6 +46,14 @@ export const SearchInput = () => {
           placeholder="Search for a project"
           />
       </div>
+
+      {disableFilter &&
+        <Button
+          onClick={() => {router.push("/project")}}
+        >
+          Remove Filter
+        </Button>
+      }
     </div>
   )
 }

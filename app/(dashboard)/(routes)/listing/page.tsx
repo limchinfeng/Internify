@@ -4,6 +4,7 @@ import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 import { Categories } from "@/components/categories";
 import { ListingSearchInput } from "./_components/listing-search-input";
+import { ListingList } from "./_components/listing-list";
 
 interface ListingPageProps {
   searchParams: {  
@@ -41,10 +42,10 @@ const ListingPage = async ({
         <Categories 
           items={categories}
         />
-        {/* <ProjectList 
-          items={projects}
+        <ListingList 
+          items={listings}
           currentUser={currentUser}
-        /> */}
+        />
       </div>
     </>
   )
