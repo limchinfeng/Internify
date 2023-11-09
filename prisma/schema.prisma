@@ -58,6 +58,8 @@ model Listing {
   imageUrl String?
   description String?
   requirement String?
+  location String?
+  state String?
   isPublished Boolean @default(false)
 
   createdAt DateTime @default(now())

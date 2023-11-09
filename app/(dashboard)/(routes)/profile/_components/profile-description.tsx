@@ -80,14 +80,14 @@ export const ProfileDescription = ({
         </div>
       </div>
       {!isEditing && (
-        <p className={cn("text-xl font-medium", !currentUser.description && "text-slate-500 italic text-sm")}>
+        <div className={cn("text-xl font-medium", !currentUser.description && "text-slate-500 italic text-sm")}>
           {!currentUser.description && "No description"}
           {currentUser.description && (
             <Preview 
               value={currentUser.description}
             />
           )}
-        </p>
+        </div>
       )}
       {isEditing && (
         <Form {...form} >
