@@ -2,6 +2,8 @@ import getCurrentUser from "@/actions/getCurrentUser"
 import { Banner } from "@/components/banner";
 import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
+import { CompanyActions } from "./_components/company-actions";
+import { CompanyListingTitle } from "./_components/company-listing-title";
 
 const CompanyListingIdPage  = async ({
   params
@@ -66,15 +68,18 @@ const CompanyListingIdPage  = async ({
               Complete all fields {completionText}
             </span>
           </div>
-          {/* <CompanyActions 
+          <CompanyActions 
             disabled={!isComplete}
-            projectId={params.listingId}
+            listingId={params.listingId}
             isPublished={listing.isPublished}
-          /> */}
+          />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div>
-            title
+            <CompanyListingTitle 
+              initialData={listing}
+              listingId={listing.id}
+            />
             <br />
             category
             <br />

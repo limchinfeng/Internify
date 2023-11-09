@@ -26,7 +26,7 @@ export async function POST(
 
     return NextResponse.json(listing);
   } catch (error) {
-    console.log("[COMPANY_PROFILE_LISTING]", error);
+    console.log("[COMPANY_PROFILE_LISTING_POST]", error);
     return new NextResponse("Internal Error", {status: 500});
   }
 }

@@ -4,56 +4,56 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  {params} : {params: {projectId: string}}
+  {params} : {params: {listingId: string}}
 ) {
   try {
     const currentUser = await getCurrentUser();
 
-    if(!currentUser) {
+    if(!currentUser || !currentUser.isCompany) {
       return new NextResponse("Unauthorized", {status: 401});
     }
 
-    const project = await prismadb.project.findUnique({
+    const listing = await prismadb.listing.findUnique({
       where: {
-        id: params.projectId,
+        id: params.listingId,
         userId: currentUser.id,
       }
     });
 
-    if(!project) {
-      return new NextResponse("Project Not Found", {status: 404});
+    if(!listing) {
+      return new NextResponse("Listing Not Found", {status: 404});
     }
 
-    const deletedProject = await prismadb.project.delete({
+    const deletedListing = await prismadb.listing.delete({
       where: {
-        id: params.projectId,
+        id: params.listingId,
         userId: currentUser.id,
       }
     });
 
-    return NextResponse.json(deletedProject);
+    return NextResponse.json(deletedListing);
 
   } catch (error) {
-    console.log("[PROJECT_ID_DELETE]", error);
+    console.log("[COMPANY_LISTING_ID_DELETE]", error);
     return new NextResponse("Internal Error", {status: 500});
   }
 }
 
 export async function PATCH(
   req: Request,
-  {params} : {params: {projectId: string}}
+  {params} : {params: {listingId: string}}
 ) {
   try {
     const currentUser = await getCurrentUser();
     const values = await req.json();
 
-    if(!currentUser) {
+    if(!currentUser || !currentUser.isCompany) {
       return new NextResponse("Unauthorized", {status: 401});
     }
 
-    const project = await prismadb.project.update({
+    const listing = await prismadb.listing.update({
       where: {
-        id: params.projectId,
+        id: params.listingId,
         userId: currentUser.id
       },
       data: {
@@ -61,9 +61,9 @@ export async function PATCH(
       }
     })
     
-    return NextResponse.json(project);
+    return NextResponse.json(listing);
   } catch (error) {
-    console.log("[PROJECT_ID_PATCH]", error);
+    console.log("[COMPANY_LISTING_ID_PATCH]", error);
     return new NextResponse("Internal Error", {status: 500});
   }
 }
