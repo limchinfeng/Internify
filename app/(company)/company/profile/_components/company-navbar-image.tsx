@@ -7,7 +7,7 @@ import { signOut } from "next-auth/react";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 
-export const NavbarImage =  ({
+export const CompanyNavbarImage = ({
   currentUser
 }: {currentUser?: User | null}) => {
   const router = useRouter();
@@ -34,15 +34,9 @@ export const NavbarImage =  ({
             </div>
           </DropdownMenuLabel> 
           <DropdownMenuSeparator />
-            {currentUser?.isCompany && (
-              <DropdownMenuItem onClick={() => router.push("/company/profile")}>Go to Company</DropdownMenuItem>
-            )}
-            {currentUser ? <>
-              <DropdownMenuItem onClick={() => signOut()}>Log Out</DropdownMenuItem>
-            </> : <>
-            <DropdownMenuItem onClick={() => router.push("/login")}>Login</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => router.push("/register")}>Register</DropdownMenuItem>
-            </>}
+            <DropdownMenuItem onClick={() => router.push("/company/profile")}>Company Home</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push("/")}>Go to User</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => signOut()}>Log Out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

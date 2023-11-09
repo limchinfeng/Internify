@@ -1,16 +1,13 @@
 import { ToastProvider } from "@/providers/toaster-provider";
 
-const mainLayout = ({
+const CompanyLayout = ({
   children
 }: {
   children: React.ReactNode
 }) => {
   return (
     <div className="h-full">
-      <div className="h-[80px] fixed inset-y-0 w-full z-50 border border-b">
-        Navbar
-      </div>
-      <main className="pt-[80px] h-full">
+      <main className="h-full">
         <ToastProvider />
         {children}
       </main>
@@ -18,4 +15,4 @@ const mainLayout = ({
   )
 }
 
-export default mainLayout;
+export default CompanyLayout;

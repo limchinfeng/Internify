@@ -49,7 +49,7 @@ export const ProjectShowcase = ({
     try {
       setDeletingId(id);
       await axios.delete(`/api/profile/project/${projectId}/showcaseImage/${id}`);
-      toast.success("Attachment deleted");
+      toast.success("Project showcase image deleted");
       router.refresh();
     } catch {
       toast.error("Something went wrong");
@@ -96,7 +96,7 @@ export const ProjectShowcase = ({
                 key={image.id}
                 className="flex items-center w-full rounded-md relative"
                 >
-                <div className="relative aspect-video h-auto w-44">
+                <div className="aspect-video h-auto w-44">
                   <Image 
                     alt="Upload"
                     fill

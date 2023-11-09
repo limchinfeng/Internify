@@ -45,15 +45,15 @@ export const NavbarRoutes = ({
       </>}
 
       <div className="ml-auto flex flex-row items-center gap-3">
-        {currentUser?.isCompany && containsCompany &&  (
+        {/* {currentUser?.isCompany && containsCompany &&  (
           <div 
             className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
             onClick={() => router.push("/profile")}
           >
             Go to Profile
           </div>
-        )}
-        {currentUser?.isCompany && !containsCompany &&  (
+        )} */}
+        {currentUser?.isCompany && (
           <div 
             className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
             onClick={() => router.push("/company/profile")}
@@ -64,6 +64,5 @@ export const NavbarRoutes = ({
         <NavbarImage currentUser={currentUser} />
       </div>
     </>
-    
   )
 }
