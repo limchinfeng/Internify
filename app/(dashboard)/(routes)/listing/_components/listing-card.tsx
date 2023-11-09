@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 // import { HeartButton } from "./heart-button";
 import * as cheerio from 'cheerio';
+import { ListingHeartButton } from "./listing-heart-button";
 
 interface ListingCardProps {
   id: string;
@@ -51,7 +52,7 @@ return (
               className="object-cover h-full w-full group-hover:scale-110 transition"
             />
             <div className="absolute top-3 right-3">
-              {/* <HeartButton projectId={id} user={user} /> */}
+              <ListingHeartButton listingId={id} user={user} />
             </div>
         </div>
         <div>
