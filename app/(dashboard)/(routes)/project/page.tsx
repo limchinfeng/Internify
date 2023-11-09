@@ -2,7 +2,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import { getProjects } from "@/actions/getProjects";
 import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
-import { Categories } from "./_components/categories";
+import { Categories } from "../../../../components/categories";
 import { SearchInput } from "./_components/search-input";
 import { ProjectList } from "./_components/project-list";
 
