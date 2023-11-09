@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as z from "zod";
 import axios from "axios";
@@ -8,26 +8,28 @@ import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Listing, Project } from "@prisma/client";
+import { Combobox } from "@/components/ui/combobox";
 
-interface CompanyListingTitleProps {
-  initialData: {
-    title: string
-  };
-  listingId: string
+interface CompanyListingStateProps {
+  initialData: Listing;
+  listingId: string;
+  options: {
+    label: string;
+    value: string
+  }[]
 }
 
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title is required",
-  }),
+  state: z.string().min(1),
 });
 
-export const CompanyListingTitle = ({
-  initialData, listingId
-}: CompanyListingTitleProps) => {
+export const CompanyListingState = ({
+  initialData, listingId, options
+}: CompanyListingStateProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -35,7 +37,9 @@ export const CompanyListingTitle = ({
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      state: initialData.state || ""
+    }
   });
 
   const {isSubmitting, isValid} = form.formState;
@@ -51,10 +55,12 @@ export const CompanyListingTitle = ({
     }
   }
 
-  return (
-    <div className="border  rounded-md p-4">
+  const selectedOption = options.find((option) => option.value === initialData.state)
+
+return (
+    <div className="mt-6 border rounded-md p-4">
       <div className="font-medium text-sm flex items-center justify-between">
-        Listing title
+        Listing state
         <div className="flex flex-row gap-2 items-center justify-between">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
@@ -62,7 +68,7 @@ export const CompanyListingTitle = ({
               ) : (
                 <>
                 <Pencil className="w-4 h-4 mr-2" />
-                Edit Title
+                Edit State
               </>
             )}
           </Button>
@@ -78,8 +84,8 @@ export const CompanyListingTitle = ({
         </div>
       </div>
       {!isEditing && (
-        <p className="text-xl font-medium ">
-          {initialData.title}
+        <p className={cn("text-xl font-medium", !initialData.state && "text-slate-500 italic text-sm")}>
+          {selectedOption?.label || "No category"}
         </p>
       )}
       {isEditing && (
@@ -90,13 +96,12 @@ export const CompanyListingTitle = ({
           >
             <FormField 
               control={form.control}
-              name="title"
+              name="state"
               render={({field}) => (
                 <FormItem>
                   <FormControl>
-                    <Input 
-                      disabled={isSubmitting}
-                      placeholder="e.g. Your Listing Name"
+                    <Combobox 
+                      options={...options}
                       {...field}
                     />
                   </FormControl>

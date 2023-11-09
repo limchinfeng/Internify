@@ -11,23 +11,23 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Listing } from "@prisma/client";
 
-interface CompanyListingTitleProps {
-  initialData: {
-    title: string
-  };
+interface CompanyListingLocationProps {
+  initialData: Listing;
   listingId: string
 }
 
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title is required",
+  location: z.string().min(1, {
+    message: "Location is required",
   }),
 });
 
-export const CompanyListingTitle = ({
+export const CompanyListingLocation = ({
   initialData, listingId
-}: CompanyListingTitleProps) => {
+}: CompanyListingLocationProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -35,7 +35,9 @@ export const CompanyListingTitle = ({
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues:{ 
+      location: initialData?.location || ""
+    }
   });
 
   const {isSubmitting, isValid} = form.formState;
@@ -52,9 +54,9 @@ export const CompanyListingTitle = ({
   }
 
   return (
-    <div className="border  rounded-md p-4">
+    <div className="border rounded-md p-4 mt-6">
       <div className="font-medium text-sm flex items-center justify-between">
-        Listing title
+        Listing location
         <div className="flex flex-row gap-2 items-center justify-between">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
@@ -62,7 +64,7 @@ export const CompanyListingTitle = ({
               ) : (
                 <>
                 <Pencil className="w-4 h-4 mr-2" />
-                Edit Title
+                Edit Location
               </>
             )}
           </Button>
@@ -78,8 +80,8 @@ export const CompanyListingTitle = ({
         </div>
       </div>
       {!isEditing && (
-        <p className="text-xl font-medium ">
-          {initialData.title}
+        <p className={cn("text-xl font-medium", !initialData.location && "text-slate-500 italic text-sm")}>
+          {initialData.location || "No location"}
         </p>
       )}
       {isEditing && (
@@ -90,13 +92,13 @@ export const CompanyListingTitle = ({
           >
             <FormField 
               control={form.control}
-              name="title"
+              name="location"
               render={({field}) => (
                 <FormItem>
                   <FormControl>
                     <Input 
                       disabled={isSubmitting}
-                      placeholder="e.g. Your Listing Name"
+                      placeholder="e.g. Your listing location"
                       {...field}
                     />
                   </FormControl>

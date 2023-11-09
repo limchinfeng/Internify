@@ -46,7 +46,7 @@ export const CompanyActions = ({
 
       await axios.delete(`/api/company/profile/listing/${listingId}`)
       router.refresh();
-      router.push(`/profile`);
+      router.push(`/company/profile`);
       toast.success("Listing deleted");
     } catch {
       toast.error("Something went wrong");

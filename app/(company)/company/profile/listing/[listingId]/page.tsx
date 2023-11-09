@@ -4,6 +4,54 @@ import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 import { CompanyActions } from "./_components/company-actions";
 import { CompanyListingTitle } from "./_components/company-listing-title";
+import { CompanyListingCategory } from "./_components/company-listing-category";
+import { CompanyListingLocation } from "./_components/company-listing-location";
+import { CompanyListingState } from "./_components/company-listing-state";
+import { CompanyListingBackground } from "./_components/company-listing-background";
+import { CompanyListingDescription } from "./_components/company-listing-description";
+import { CompanyListingRequirement } from "./_components/company-listing-requirement";
+
+export const states = [
+  {
+    label: "Johor"
+  },
+  {
+    label: "Kedah"
+  },
+  {
+    label: "Kelatan"
+  },
+  {
+    label: "Malacca"
+  },
+  {
+    label: "Negeri Sembilan"
+  },
+  {
+    label: "Pahang"
+  },
+  {
+    label: "Penang"
+  },
+  {
+    label: "Perak"
+  },
+  {
+    label: "Perlis"
+  },
+  {
+    label: "Sabah"
+  },
+  {
+    label: "Sarawak"
+  },
+  {
+    label: "Selangor"
+  },
+  {
+    label: "Terengganu"
+  },
+]
 
 const CompanyListingIdPage  = async ({
   params
@@ -80,21 +128,42 @@ const CompanyListingIdPage  = async ({
               initialData={listing}
               listingId={listing.id}
             />
-            <br />
-            category
-            <br />
-            location
-            <br />
-            state
-            <br />
-            imageUrl
+            <CompanyListingCategory 
+              initialData={listing}
+              listingId={listing.id}
+              options={categories.map((category) => ({
+                label: category.name,
+                value: category.id
+              }))}
+            />
+            <CompanyListingLocation 
+              initialData={listing}
+              listingId={listing.id}
+            />
+            <CompanyListingState 
+              initialData={listing}
+              listingId={listing.id}
+              options={states.map((state) => ({
+                label: state.label,
+                value: state.label
+              }))}
+            />
+            <CompanyListingBackground 
+              initialData={listing}
+              listingId={listing.id}            
+            />
           </div>
 
           {/* right hand */}
           <div>  
-            description
-            <br />
-            requirement
+            <CompanyListingDescription 
+              initialData={listing}
+              listingId={listing.id}              
+            />
+            <CompanyListingRequirement 
+              initialData={listing}
+              listingId={listing.id}              
+            />
           </div>
         </div>
       </div>

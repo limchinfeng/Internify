@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as z from "zod";
 import axios from "axios";
@@ -8,26 +8,27 @@ import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Listing } from "@prisma/client";
+import { Editor } from "@/components/description-editor";
+import { Preview } from "@/components/description-preview";
 
-interface CompanyListingTitleProps {
-  initialData: {
-    title: string
-  };
-  listingId: string
+interface CompanyListingRequirementProps {
+  initialData: Listing;
+  listingId: string;
 }
 
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title is required",
+  requirement: z.string().min(1, {
+    message: "Listing Requirement is required",
   }),
 });
 
-export const CompanyListingTitle = ({
+export const CompanyListingRequirement = ({
   initialData, listingId
-}: CompanyListingTitleProps) => {
+}: CompanyListingRequirementProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -35,7 +36,9 @@ export const CompanyListingTitle = ({
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      requirement: initialData?.requirement || ""
+    }
   });
 
   const {isSubmitting, isValid} = form.formState;
@@ -52,9 +55,9 @@ export const CompanyListingTitle = ({
   }
 
   return (
-    <div className="border  rounded-md p-4">
+    <div className="border rounded-md p-4 mt-6">
       <div className="font-medium text-sm flex items-center justify-between">
-        Listing title
+        Listing requirement
         <div className="flex flex-row gap-2 items-center justify-between">
           <Button onClick={toggleEdit} variant="ghost" size="sm"> 
             {isEditing ? (
@@ -62,7 +65,7 @@ export const CompanyListingTitle = ({
               ) : (
                 <>
                 <Pencil className="w-4 h-4 mr-2" />
-                Edit Title
+                Edit Requirement
               </>
             )}
           </Button>
@@ -78,8 +81,13 @@ export const CompanyListingTitle = ({
         </div>
       </div>
       {!isEditing && (
-        <p className="text-xl font-medium ">
-          {initialData.title}
+        <p className={cn("text-xl font-medium", !initialData.requirement && "text-slate-500 italic text-sm")}>
+          {!initialData.requirement && "No requirement"}
+          {initialData.requirement && (
+            <Preview 
+              value={initialData.requirement}
+            />
+          )}
         </p>
       )}
       {isEditing && (
@@ -90,15 +98,13 @@ export const CompanyListingTitle = ({
           >
             <FormField 
               control={form.control}
-              name="title"
+              name="requirement"
               render={({field}) => (
                 <FormItem>
                   <FormControl>
-                    <Input 
-                      disabled={isSubmitting}
-                      placeholder="e.g. Your Listing Name"
-                      {...field}
-                    />
+                    <Editor 
+                        {...field}
+                      />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
