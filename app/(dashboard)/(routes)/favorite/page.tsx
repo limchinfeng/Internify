@@ -1,11 +1,14 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import getProjectFavoriteListings from "@/actions/getProjectFavorite";
-import { redirect } from "next/navigation";
+import getProjectFavoriteList from "@/actions/getProjectFavorite";
+import getListingFavoriteList from "@/actions/getListingFavorite";
 import { FavoriteProject } from "./_components/favorite-project";
+import { redirect } from "next/navigation";
+import { FavoriteListing } from "./_components/favorite-listing";
 
 const FavoritePage = async () => {
   const currentUser = await getCurrentUser();
-  const projects = await getProjectFavoriteListings();
+  const projects = await getProjectFavoriteList();
+  const listings = await getListingFavoriteList();
 
   if(!currentUser) {
     redirect("/");
@@ -21,8 +24,8 @@ const FavoritePage = async () => {
         currentUser={currentUser}
       />
       <div className="border-b border w-full px-3 border-gray-200" />
-      <FavoriteProject 
-        projects={projects}
+      <FavoriteListing 
+        listings={listings}
         currentUser={currentUser}
       /> 
     </div>

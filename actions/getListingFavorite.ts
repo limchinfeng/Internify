@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import getCurrentUser from "./getCurrentUser";
 
-export default async function getProjectFavoriteList() {
+export default async function getListingFavoriteList() {
     try {
         const currentUser = await getCurrentUser();
 
@@ -9,10 +9,10 @@ export default async function getProjectFavoriteList() {
             return [];
         }
 
-        const favorites = await prismadb.project.findMany({
+        const favorites = await prismadb.listing.findMany({
             where: {
                 id: {
-                    in: [...(currentUser.favoriteProjectIds || [])]
+                    in: [...(currentUser.favoriteListingIds || [])]
                 }
             },
             include: {
