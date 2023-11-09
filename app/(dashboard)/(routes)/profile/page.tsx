@@ -6,6 +6,7 @@ import { ProfilePhone } from "./_components/profile-phone";
 import { ProfileEmail } from "./_components/profile-email";
 import { ProfileLink } from "./_components/profile-link";
 import { ProfileDescription } from "./_components/profile-description";
+import { ProfilePageLink } from "./_components/profile-page-link";
 import prismadb from "@/lib/prismadb";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
@@ -46,6 +47,9 @@ const ProfilePage = async () => {
           </div>
         </div>
       </div>
+      
+      <ProfilePageLink currentUser={currentUser} />
+      
       <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
         <DataTable 
           columns={columns}

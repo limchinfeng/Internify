@@ -9,6 +9,7 @@ import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 import { CompanyDataTable } from "./_components/company-data-table";
 import { CompanyColumns } from "./_components/company-columns";
+import { CompanyProfilePageLink } from "./_components/company-profile-page-link";
 
 const CompanyProfilePage = async () => {
   const currentUser = await getCurrentUser();
@@ -45,6 +46,9 @@ const CompanyProfilePage = async () => {
           </div>
         </div>
       </div>
+
+      <CompanyProfilePageLink currentUser={currentUser} />
+
       <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
         <CompanyDataTable 
           columns={CompanyColumns}

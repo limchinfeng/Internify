@@ -85,7 +85,7 @@ export const ProfileLink = ({
       )}
       {!isEditing && currentUser.link && (
         <Link
-          href={`https://${currentUser.link}`}
+          href={`${currentUser.link}`}
           target="_blank"
           className="text-lg font-medium italic text-primary hover:text-blue-800 transition hover:underline"
         >
