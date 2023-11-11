@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import axios from "axios";
-import {zodResolver} from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -41,9 +41,9 @@ const ProfileCreateProject = () => {
   return (
     <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
       <div>
-        <h1 className="text-2xl">
+        <h2 className="text-2xl">
           Name your Project
-        </h1>
+        </h2>
         <p className="text-sm text-slate-600">
           What would you like to name your course? Don&apos;t worry, you can change this later
         </p>
@@ -52,16 +52,16 @@ const ProfileCreateProject = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8 mt-8"
           >
-            <FormField 
+            <FormField
               control={form.control}
               name="title"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>
                     Project title
                   </FormLabel>
                   <FormControl>
-                    <Input 
+                    <Input
                       disabled={isSubmitting}
                       placeholder="e.g. 'CAT304 - Group Innovation Project and Study for Sustainability'"
                       {...field}
@@ -76,16 +76,16 @@ const ProfileCreateProject = () => {
             />
             <div className="flex items-center gap-x-2">
               <Link href="/profile">
-                <Button 
+                <Button
                   type="button"
                   variant="ghost"
                 >
                   Cancel
-                </Button>                
+                </Button>
               </Link>
               <Button
                 type="submit"
-                disabled={!isValid || isSubmitting }
+                disabled={!isValid || isSubmitting}
               >
                 Continue
               </Button>
@@ -96,5 +96,5 @@ const ProfileCreateProject = () => {
     </div>
   )
 }
- 
+
 export default ProfileCreateProject;

@@ -13,11 +13,11 @@ import { ProjectShowcase } from "./_components/project-showcase";
 const ProjectIdPage = async ({
   params
 }: {
-  params: {projectId: string}
+  params: { projectId: string }
 }) => {
   const currentUser = await getCurrentUser();
 
-  if(!currentUser) {
+  if (!currentUser) {
     return redirect("/");
   }
 
@@ -41,7 +41,7 @@ const ProjectIdPage = async ({
     }
   });
 
-  if(!project) {
+  if (!project) {
     return redirect("/");
   }
 
@@ -63,21 +63,21 @@ const ProjectIdPage = async ({
   return (
     <>
       {!project.isPublished && (
-        <Banner 
+        <Banner
           label="This project is unpublished. It will not be visible to the public."
         />
-      )}  
+      )}
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
-            <h1 className="text-2xl font-medium">
+            <h2 className="text-2xl font-medium">
               Project Setup
-            </h1>
+            </h2>
             <span className="text-sm text-slate-700">
               Complete all fields {completionText}
             </span>
           </div>
-          <Actions 
+          <Actions
             disabled={!isComplete}
             projectId={params.projectId}
             isPublished={project.isPublished}
@@ -85,11 +85,11 @@ const ProjectIdPage = async ({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div>
-            <ProjectTitle 
+            <ProjectTitle
               initialData={project}
               projectId={project.id}
             />
-            <ProjectCategory 
+            <ProjectCategory
               initialData={project}
               projectId={project.id}
               options={categories.map((category) => ({
@@ -100,8 +100,8 @@ const ProjectIdPage = async ({
           </div>
 
           {/* right hand */}
-          <div>  
-            <ProjectDescription 
+          <div>
+            <ProjectDescription
               initialData={project}
               projectId={project.id}
             />
@@ -109,23 +109,23 @@ const ProjectIdPage = async ({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <div>
-            <ProjectBackground 
+            <ProjectBackground
               initialData={project}
-              projectId={project.id}              
+              projectId={project.id}
             />
           </div>
 
           {/* right hand */}
-          <div>  
-            <ProjectShowcase 
+          <div>
+            <ProjectShowcase
               initialData={project}
-              projectId={project.id}                      
+              projectId={project.id}
             />
           </div>
         </div>
       </div>
-    </> 
+    </>
   );
 }
- 
+
 export default ProjectIdPage;
