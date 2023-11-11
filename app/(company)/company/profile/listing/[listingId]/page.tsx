@@ -53,14 +53,14 @@ export const states = [
   },
 ]
 
-const CompanyListingIdPage  = async ({
+const CompanyListingIdPage = async ({
   params
 }: {
-  params: {listingId: string}
+  params: { listingId: string }
 }) => {
   const currentUser = await getCurrentUser();
 
-  if(!currentUser || !currentUser.isCompany) {
+  if (!currentUser || !currentUser.isCompany) {
     return redirect("/");
   }
 
@@ -71,7 +71,7 @@ const CompanyListingIdPage  = async ({
     },
   });
 
-  if(!listing) {
+  if (!listing) {
     return redirect("/");
   }
 
@@ -102,21 +102,21 @@ const CompanyListingIdPage  = async ({
   return (
     <>
       {!listing.isPublished && (
-        <Banner 
+        <Banner
           label="This job listing is unpublished. It will not be visible to the public."
         />
-      )}  
+      )}
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
-            <h1 className="text-2xl font-medium">
+            <h2 className="text-2xl font-medium">
               Project Setup
-            </h1>
+            </h2>
             <span className="text-sm text-slate-700">
               Complete all fields {completionText}
             </span>
           </div>
-          <CompanyActions 
+          <CompanyActions
             disabled={!isComplete}
             listingId={params.listingId}
             isPublished={listing.isPublished}
@@ -124,11 +124,11 @@ const CompanyListingIdPage  = async ({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div>
-            <CompanyListingTitle 
+            <CompanyListingTitle
               initialData={listing}
               listingId={listing.id}
             />
-            <CompanyListingCategory 
+            <CompanyListingCategory
               initialData={listing}
               listingId={listing.id}
               options={categories.map((category) => ({
@@ -136,11 +136,11 @@ const CompanyListingIdPage  = async ({
                 value: category.id
               }))}
             />
-            <CompanyListingLocation 
+            <CompanyListingLocation
               initialData={listing}
               listingId={listing.id}
             />
-            <CompanyListingState 
+            <CompanyListingState
               initialData={listing}
               listingId={listing.id}
               options={states.map((state) => ({
@@ -148,26 +148,26 @@ const CompanyListingIdPage  = async ({
                 value: state.label
               }))}
             />
-            <CompanyListingBackground 
+            <CompanyListingBackground
               initialData={listing}
-              listingId={listing.id}            
+              listingId={listing.id}
             />
           </div>
 
           {/* right hand */}
-          <div>  
-            <CompanyListingDescription 
+          <div>
+            <CompanyListingDescription
               initialData={listing}
-              listingId={listing.id}              
+              listingId={listing.id}
             />
-            <CompanyListingRequirement 
+            <CompanyListingRequirement
               initialData={listing}
-              listingId={listing.id}              
+              listingId={listing.id}
             />
           </div>
         </div>
       </div>
-    </> 
+    </>
   )
 }
 

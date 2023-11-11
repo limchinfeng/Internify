@@ -22,17 +22,23 @@ const Home = async () => {
 
   const currentUser = await getCurrentUser();
 
-  return (  
+  return (
     <div>
-      <p>
-        hone 0page
-      </p>
-      { currentUser 
-        ? <UserHome currentUser={currentUser} />
-        : <Unauthorized />
-      }
+      <div>
+        {currentUser
+          ? <UserHome currentUser={currentUser} />
+          : <Unauthorized />
+        }
+      </div>
+
+      <div>
+        <div className="">
+          <h2>Home Page </h2>
+          <p>Slogan Slogan Slogan Slogan</p>
+        </div>
+      </div>
     </div>
   );
 }
- 
+
 export default Home;
