@@ -41,6 +41,8 @@ const Home = async () => {
     return redirect("/register");
   }
 
+  var buttonSize = "w-56 h-16";
+
   return (
     <div>
       {currentUser ? (
@@ -58,17 +60,17 @@ const Home = async () => {
               <p>Where Internships and Simplicity at a place</p>
 
               <div className="mt-10 space-x-5 > * + *">
-                <Button className="w-48 h-12">
+                <Button className={buttonSize} variant="outline">
                   <GraduationCap className="mr-2 h-4 w-4" /> Internship Listing
 
                 </Button>
-                <Button className="w-48 h-12" variant="outline">
+                <Button className={buttonSize} variant="outline">
                   <Rocket className="mr-2 h-4 w-4" />Project Showcase</Button>
               </div>
               <div className="mt-5 space-x-5 > * + *">
-                <Button className="w-48 h-12">
+                <Button className={buttonSize} variant="outline">
                   <ScrollText className="mr-2 h-4 w-4" />Resume Upload</Button>
-                <Button className="w-48 h-12">
+                <Button className={buttonSize} variant="outline">
                   <Heart className="mr-2 h-4 w-4" />Favorite</Button>
               </div>
             </div>
