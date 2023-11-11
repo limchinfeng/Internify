@@ -28,6 +28,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "framer-motion": "^10.16.4",
     "html-to-text": "^9.0.5",
     "lucide-react": "^0.290.0",
     "next": "14.0.0",
@@ -43,6 +44,7 @@
     "tailwind-merge": "^1.14.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-content-visibility": "^0.1.0",
     "uploadthing": "^5.7.4",
     "zod": "^3.22.4"
   },
