@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Root Layout */
 html,
 body,
 :root {
@@ -10,7 +11,7 @@ body,
   margin: 0;
 }
 
-
+/* Tailwind Default */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -75,6 +76,7 @@ body,
   }
 }
 
+/* General Layout */
 @layer utilities {
   @variants responsive {
 
@@ -98,6 +100,7 @@ body,
   }
 }
 
+/* General Styling  */
 @layer base {
   * {
     @apply border-border;
@@ -107,6 +110,7 @@ body,
     @apply bg-background text-foreground;
   }
 
+  /* Content */
   h1,
   .h1 {
     @apply text-primary;
@@ -139,6 +143,8 @@ body,
       @apply text-teal;
     }
   }
+
+
 }
 
 /* react-quill -  description */

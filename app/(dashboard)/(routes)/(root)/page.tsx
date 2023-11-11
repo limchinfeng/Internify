@@ -24,13 +24,19 @@ const Home = async () => {
 
   return (
     <div>
-      <h2>
-        hone Page
-      </h2>
-      {currentUser
-        ? <UserHome currentUser={currentUser} />
-        : <Unauthorized />
-      }
+      <div>
+        {currentUser
+          ? <UserHome currentUser={currentUser} />
+          : <Unauthorized />
+        }
+      </div>
+
+      <div>
+        <div className="">
+          <h2>Home Page </h2>
+          <p>Slogan Slogan Slogan Slogan</p>
+        </div>
+      </div>
     </div>
   );
 }
