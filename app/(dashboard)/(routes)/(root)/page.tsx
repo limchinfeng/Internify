@@ -27,7 +27,6 @@ import { Button } from "@/components/ui/button"
 import { GraduationCap, ScrollText, Rocket, Heart } from "lucide-react";
 import Register from "../(auth)/register/page";
 import { redirect } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 
 const Home = async () => {
@@ -42,6 +41,7 @@ const Home = async () => {
   }
 
   var buttonSize = "w-56 h-16";
+  var iconStyle = "mr-2 h-4 w-4";
 
   return (
     <div>
@@ -61,17 +61,17 @@ const Home = async () => {
 
               <div className="mt-10 space-x-5 > * + *">
                 <Button className={buttonSize} variant="outline">
-                  <GraduationCap className="mr-2 h-4 w-4" /> Internship Listing
+                  <GraduationCap className={iconStyle} /> Internship Listing
 
                 </Button>
                 <Button className={buttonSize} variant="outline">
-                  <Rocket className="mr-2 h-4 w-4" />Project Showcase</Button>
+                  <Rocket className={iconStyle} />Project Showcase</Button>
               </div>
               <div className="mt-5 space-x-5 > * + *">
                 <Button className={buttonSize} variant="outline">
-                  <ScrollText className="mr-2 h-4 w-4" />Resume Upload</Button>
+                  <ScrollText className={iconStyle} />Resume Upload</Button>
                 <Button className={buttonSize} variant="outline">
-                  <Heart className="mr-2 h-4 w-4" />Favorite</Button>
+                  <Heart className={iconStyle} />Favorite</Button>
               </div>
             </div>
           </div>
