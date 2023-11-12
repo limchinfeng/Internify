@@ -20,7 +20,8 @@ export async function GET(
     try {
         const findToken = await prismadb.activateToken.findUnique({
             where: {
-                token: params.token
+                token: params.token,
+                createdAt: { gt: new Date(Date.now() - 24 * 60 * 60 * 1000) }
             }
         })
 
@@ -31,33 +32,13 @@ export async function GET(
         const user = await prismadb.user.findUnique({
             where: {
                 id: findToken.userId
+
             }
         })
         if (!user) {
             throw new Error('User Not found')
         }
 
-        // const user = await prismadb.user.findFirst({
-        //     where: {
-        //         activateTokens: {
-        //             some: {
-        //                 AND: [
-        //                     {
-        //                         activatedAt: null,
-        //                     },
-        //                     {
-        //                         createdAt: {
-        //                             gt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 24 hours ago
-        //                         },
-        //                     },
-        //                     {
-        //                         token
-        //                     },
-        //                 ],
-        //             },
-        //         },
-        //     },
-        // })
 
         await prismadb.user.update({
             where: {
@@ -84,6 +65,6 @@ export async function GET(
 
     } catch (error) {
         console.error("Error during activation,", error);
-        return new NextResponse('Internal Error');
+        return new NextResponse('Internal Error 404,Please Try Again Later ');
     }
 }
