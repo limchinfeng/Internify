@@ -4,11 +4,15 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import * as z from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
+
+
+
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -48,7 +52,7 @@ const RegisterPage = () => {
     }
   }
 
-  return (  
+  return (
     <div className="w-full flex flex-col gap-5 items-center justify-center h-full ">
       <div>
         <h1 className="text-3xl font-bold text-center text-primary">
@@ -59,17 +63,17 @@ const RegisterPage = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8 mt-8 w-full "
           >
-            <FormField 
+            <FormField
               control={form.control}
               name="name"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>
                     Name
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full h-12 text-md" 
+                      className="w-full h-12 text-md"
                       disabled={isSubmitting}
                       {...field}
                     />
@@ -78,17 +82,17 @@ const RegisterPage = () => {
                 </FormItem>
               )}
             />
-            <FormField 
+            <FormField
               control={form.control}
               name="email"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>
                     Email
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full h-12 text-md" 
+                      className="w-full h-12 text-md"
                       disabled={isSubmitting}
                       {...field}
                     />
@@ -97,17 +101,17 @@ const RegisterPage = () => {
                 </FormItem>
               )}
             />
-            <FormField 
+            <FormField
               control={form.control}
               name="password"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>
                     Password
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full h-12 text-md md:w-96"  
+                      className="w-full h-12 text-md md:w-96"
                       type="password"
                       disabled={isSubmitting}
                       {...field}
@@ -121,7 +125,7 @@ const RegisterPage = () => {
               <Button
                 size="xl"
                 type="submit"
-                disabled={!isValid || isSubmitting }
+                disabled={!isValid || isSubmitting}
                 className="w-full"
               >
                 Continue
@@ -133,12 +137,12 @@ const RegisterPage = () => {
         <div className="flex flex-col gap-4 mt-5 w-full">
           <hr />
           <div className="text-neutral-500 text-center font-light">
-            <p>Already have an account?&nbsp; 
-              <span 
-                onClick={() => router.push("/login")} 
+            <p>Already have an account?&nbsp;
+              <span
+                onClick={() => router.push("/login")}
                 className="text-neutral-800 cursor-pointer hover:underline
               ">
-                  Log in 
+                Log in
               </span>
             </p>
           </div>
@@ -147,5 +151,5 @@ const RegisterPage = () => {
     </div>
   );
 }
- 
+
 export default RegisterPage;

@@ -15,7 +15,7 @@ model User {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   name               String?
   email              String?  @unique
-  emailVerified      Boolean  @default(false)
+  active             Boolean  @default(false)
   hashedPassword     String?
   description        String?
   imageUrl           String?
@@ -28,8 +28,21 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  projects Project[]
-  listings Listing[]
+  projects       Project[]
+  listings       Listing[]
+  activateTokens ActivateToken[]
+}
+
+model ActivateToken {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  token       String    @unique
+  activatedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Project {

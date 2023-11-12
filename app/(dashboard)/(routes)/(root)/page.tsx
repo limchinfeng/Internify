@@ -25,7 +25,6 @@ import { UserHome } from "./_components/user-home";
 import { Unauthorized } from "./_components/unauthorized";
 import { Button } from "@/components/ui/button"
 import { GraduationCap, ScrollText, Rocket, Heart } from "lucide-react";
-import Register from "../(auth)/register/page";
 import { redirect } from "next/navigation";
 
 
@@ -46,49 +45,52 @@ const Home = async () => {
   return (
     <div>
       {currentUser ? (
-        <div>
-          <div className="border-4 shadow-md  w-6/12 text-center my-4 mx-auto">
-            {currentUser
-              ? <UserHome currentUser={currentUser} />
-              : <Unauthorized />
-            }
-          </div>
-
+        <>
           <div>
-            <div className="text-center my-10 mx-auto">
-              <h2>Home Page </h2>
-              <p>Where Internships and Simplicity at a place</p>
+            <div className="border-4 shadow-md  w-6/12 text-center my-4 mx-auto">
+              {currentUser
+                ? <UserHome currentUser={currentUser} />
+                : <Unauthorized />
+              }
+            </div>
 
-              <div className="mt-10 space-x-5 > * + *">
-                <Button className={buttonSize} variant="outline">
-                  <GraduationCap className={iconStyle} /> Internship Listing
+            <div>
+              <div className="text-center my-10 mx-auto">
+                <h2>Home Page </h2>
+                <p>Where Internships and Simplicity at a place</p>
 
-                </Button>
-                <Button className={buttonSize} variant="outline">
-                  <Rocket className={iconStyle} />Project Showcase</Button>
-              </div>
-              <div className="mt-5 space-x-5 > * + *">
-                <Button className={buttonSize} variant="outline">
-                  <ScrollText className={iconStyle} />Resume Upload</Button>
-                <Button className={buttonSize} variant="outline">
-                  <Heart className={iconStyle} />Favorite</Button>
+                <div className="mt-10 space-x-5 > * + *">
+                  <Button className={buttonSize} variant="outline">
+                    <GraduationCap className={iconStyle} /> Internship Listing
+
+                  </Button>
+                  <Button className={buttonSize} variant="outline">
+                    <Rocket className={iconStyle} />Project Showcase</Button>
+                </div>
+                <div className="mt-5 space-x-5 > * + *">
+                  <Button className={buttonSize} variant="outline">
+                    <ScrollText className={iconStyle} />Resume Upload</Button>
+                  <Button className={buttonSize} variant="outline">
+                    <Heart className={iconStyle} />Favorite</Button>
+                </div>
               </div>
             </div>
+
+
           </div>
-
-
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           <div>
-            <h1>Invalid Account!</h1>
-          </div>
-          <div>
-            <Button onSubmit={onSubmit}>Register Now</Button>
-          </div>
+            <div>
+              <h1>Invalid Account!</h1>
+            </div>
+            <div>
+              <Button onSubmit={onSubmit}>Register Now</Button>
+            </div>
 
-        </div>
-
+          </div>
+        </>
       )
 
       }
