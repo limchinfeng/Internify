@@ -36,7 +36,8 @@ export async function POST(
     const mg = mailgun.client({ username: 'api', key: API_KEY })
 
     await mg.messages.create(DOMAIN, {
-        from: `Example Email <hello@${DOMAIN}>`,
+        // from: `Example Email <hello@${DOMAIN}>`,
+        from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
         subject: 'Please Activate Your Account',
         text: `Hello ${user.name}, please activate your account by clicking this link: http://localhost:3000/api/register/activate/${token.token}`,

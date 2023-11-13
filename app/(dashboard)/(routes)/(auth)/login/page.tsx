@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import * as z from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -39,21 +39,21 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      signIn('credentials', { 
-        ...values, 
+      signIn('credentials', {
+        ...values,
         redirect: false,
       })
-      .then((callback) => {
-        if (callback?.ok) {
-          toast.success('Logged in');
-          router.refresh();
-          router.push("/");
-        }
-        
-        if (callback?.error) {
-          toast.error(callback.error);
-        }
-      })
+        .then((callback) => {
+          if (callback?.ok) {
+            toast.success('Logged in');
+            router.refresh();
+            router.push("/");
+          }
+
+          if (callback?.error) {
+            toast.error(callback.error);
+          }
+        })
 
     } catch {
       toast.error("Something went wrong");
@@ -61,10 +61,10 @@ const LoginPage = () => {
       setIsLoading(false);
     }
   }
-  
-  return (  
-    <div className="w-full flex flex-col gap-5 items-center justify-center h-full -mt-12 p-6 lg:-m-20">
-      <div>
+
+  return (
+    <div className="w-full flex flex-col gap-5 items-center justify-center h-full">
+      <div className=" mb-12 mx-auto">
         <h1 className="text-3xl font-bold text-center text-primary">
           Login
         </h1>
@@ -73,17 +73,17 @@ const LoginPage = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8 mt-8 w-full"
           >
-            <FormField 
+            <FormField
               control={form.control}
               name="email"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>
                     Email
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full h-12 text-md" 
+                      className="w-full h-12 text-md"
                       disabled={isSubmitting || isLoading}
                       {...field}
                     />
@@ -92,17 +92,17 @@ const LoginPage = () => {
                 </FormItem>
               )}
             />
-            <FormField 
+            <FormField
               control={form.control}
               name="password"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>
                     Password
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="w-full h-12 text-md md:w-96"  
+                      className="w-full h-12 text-md md:w-96"
                       type="password"
                       disabled={isSubmitting || isLoading}
                       {...field}
@@ -116,7 +116,7 @@ const LoginPage = () => {
               <Button
                 size="xl"
                 type="submit"
-                disabled={!isValid || isSubmitting || isLoading }
+                disabled={!isValid || isSubmitting || isLoading}
                 className="w-full"
               >
                 Continue
@@ -128,9 +128,9 @@ const LoginPage = () => {
         <div className="flex flex-col gap-4 mt-5 w-full">
           <hr />
           <div className="text-neutral-500 text-center font-light">
-            <p>First time using Internify?&nbsp; 
-            <span 
-                onClick={() => router.push("/register")} 
+            <p>First time using Internify?&nbsp;
+              <span
+                onClick={() => router.push("/register")}
                 className="text-neutral-800 cursor-pointer hover:underline"
               >
                 Create an account
@@ -142,5 +142,5 @@ const LoginPage = () => {
     </div>
   );
 }
- 
+
 export default LoginPage;

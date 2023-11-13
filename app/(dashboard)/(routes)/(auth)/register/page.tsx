@@ -53,7 +53,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="w-full flex flex-col gap-5 items-center justify-center h-full ">
+    <div className="w-full flex flex-col gap-5 items-center justify-center h-full mx-auto">
       <div>
         <h1 className="text-3xl font-bold text-center text-primary">
           Register

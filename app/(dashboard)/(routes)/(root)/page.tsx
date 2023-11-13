@@ -30,10 +30,6 @@ import { redirect } from "next/navigation";
 const Home = async () => {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    return redirect("/register");
-  }
-
   return (
 
     <div >
