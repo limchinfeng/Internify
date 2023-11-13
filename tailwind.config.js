@@ -28,6 +28,7 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
 
+
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -71,7 +72,7 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "transition": "all 400ms cubic-bezier(0.215, 0.610, 0.355, 1)",
+        "transition": "all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1)",
         "jerk-transition": "all 500ms cubic-bezier(0.77, 0.0, 0.175, 1)",
 
       },

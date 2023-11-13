@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 import prisma from "@/lib/prismadb";
+import { error } from "console";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -25,6 +26,8 @@ export const authOptions: AuthOptions = {
           }
         });
 
+
+
         if (!user || !user?.hashedPassword) {
           throw new Error('Invalid credentials 2');
         }
@@ -36,6 +39,10 @@ export const authOptions: AuthOptions = {
 
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials 3');
+        }
+
+        if (!user.active) {
+          throw new Error('User is not activated yet');
         }
 
         return user;

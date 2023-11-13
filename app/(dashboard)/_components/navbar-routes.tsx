@@ -7,24 +7,24 @@ import { User } from "@prisma/client";
 
 export const NavbarRoutes = ({
   currentUser
-}: {currentUser?: User | null}) => {
+}: { currentUser?: User | null }) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const containsCompany = pathname?.includes('/company');
-  
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  if(!isMounted) {
+  if (!isMounted) {
     return null;
   }
-  
+
   return (
     <>
       {currentUser?.isCompany ? <>
-        <div 
+        <div
           onClick={() => router.push("/")}
           className="md:text-4xl text-3xl font-bold text-primary cursor-pointer flex items-center justify-center flex-row"
         >
@@ -36,7 +36,7 @@ export const NavbarRoutes = ({
           </p>
         </div>
       </> : <>
-        <div 
+        <div
           onClick={() => router.push("/")}
           className="md:text-4xl text-3xl font-bold text-primary cursor-pointer"
         >
@@ -54,7 +54,7 @@ export const NavbarRoutes = ({
           </div>
         )} */}
         {currentUser?.isCompany && (
-          <div 
+          <div
             className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
             onClick={() => router.push("/company/profile")}
           >
