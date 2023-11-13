@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { Loader2 } from "lucide-react"
+
 
 const formSchema = z.object({
   email: z.string().min(1, {
@@ -57,8 +59,6 @@ const LoginPage = () => {
 
     } catch {
       toast.error("Something went wrong");
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -119,7 +119,14 @@ const LoginPage = () => {
                 disabled={!isValid || isSubmitting || isLoading}
                 className="w-full"
               >
-                Continue
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  "Continue"
+                )}
               </Button>
             </div>
           </form>

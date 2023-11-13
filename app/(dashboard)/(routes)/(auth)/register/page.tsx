@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-
+import { useState } from "react";
+import { Loader2 } from "lucide-react"
 
 
 
@@ -39,8 +39,10 @@ const RegisterPage = () => {
   });
 
   const { isSubmitting, isValid } = form.formState;
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     try {
       await axios.post("/api/register", values);
       toast.success('Registered successfully!');
@@ -125,10 +127,17 @@ const RegisterPage = () => {
               <Button
                 size="xl"
                 type="submit"
-                disabled={!isValid || isSubmitting}
+                disabled={!isValid || isSubmitting || isLoading}
                 className="w-full"
               >
-                Continue
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  "Continue"
+                )}
               </Button>
             </div>
           </form>
