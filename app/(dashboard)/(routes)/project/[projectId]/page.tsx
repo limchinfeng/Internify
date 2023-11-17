@@ -48,8 +48,6 @@ const ProjectIdPage = async ({
     return redirect("/");
   }
 
-  const firstImage = project.showcaseImages[0];
-
   return (
 
     <div className="//max-w-[250px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4 my-10">
