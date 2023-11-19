@@ -46,7 +46,7 @@ export const CompanyListingCategory = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/company/profile/listing/${listingId}`, values);
+      await axios.patch(`/service/company/profile/listing/${listingId}`, values);
       toast.success("Listing updated");
       toggleEdit();
       router.refresh();

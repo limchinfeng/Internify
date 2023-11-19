@@ -25,10 +25,10 @@ export const Actions = ({
       setIsLoading(true);
 
       if(isPublished) {
-        await axios.patch(`/api/profile/project/${projectId}/unpublish`);
+        await axios.patch(`/service/profile/project/${projectId}/unpublish`);
         toast.success("Project unpublished");
       } else {
-        await axios.patch(`/api/profile/project/${projectId}/publish`);
+        await axios.patch(`/service/profile/project/${projectId}/publish`);
         toast.success("Project published");
       }
 
@@ -44,7 +44,7 @@ export const Actions = ({
     try {
       setIsLoading(true);
 
-      await axios.delete(`/api/profile/project/${projectId}`)
+      await axios.delete(`/service/profile/project/${projectId}`)
       router.refresh();
       router.push(`/profile`);
       toast.success("Project deleted");

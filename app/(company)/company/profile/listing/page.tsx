@@ -31,7 +31,7 @@ const CompanyProfileCreateListing = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post("/api/company/profile/listing", values);
+      const response = await axios.post("/service/company/profile/listing", values);
       router.push(`/company/profile/listing/${response.data.id}`);
     } catch {
       toast.error("Something went wrong");

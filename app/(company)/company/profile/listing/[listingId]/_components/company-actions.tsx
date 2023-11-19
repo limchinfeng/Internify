@@ -25,10 +25,10 @@ export const CompanyActions = ({
       setIsLoading(true);
 
       if(isPublished) {
-        await axios.patch(`/api/company/profile/listing/${listingId}/unpublish`);
+        await axios.patch(`/service/company/profile/listing/${listingId}/unpublish`);
         toast.success("Listing unpublished");
       } else {
-        await axios.patch(`/api/company/profile/listing/${listingId}/publish`);
+        await axios.patch(`/service/company/profile/listing/${listingId}/publish`);
         toast.success("Listing published");
       }
 
@@ -44,7 +44,7 @@ export const CompanyActions = ({
     try {
       setIsLoading(true);
 
-      await axios.delete(`/api/company/profile/listing/${listingId}`)
+      await axios.delete(`/service/company/profile/listing/${listingId}`)
       router.refresh();
       router.push(`/company/profile`);
       toast.success("Listing deleted");

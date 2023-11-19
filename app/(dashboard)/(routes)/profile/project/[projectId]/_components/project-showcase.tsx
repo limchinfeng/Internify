@@ -36,7 +36,7 @@ export const ProjectShowcase = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post(`/api/profile/project/${projectId}/showcaseImage`, values);
+      await axios.post(`/service/profile/project/${projectId}/showcaseImage`, values);
       toast.success("Project updated");
       toggleEdit();
       router.refresh();
@@ -48,7 +48,7 @@ export const ProjectShowcase = ({
   const onDelete = async (id: string) => {
     try {
       setDeletingId(id);
-      await axios.delete(`/api/profile/project/${projectId}/showcaseImage/${id}`);
+      await axios.delete(`/service/profile/project/${projectId}/showcaseImage/${id}`);
       toast.success("Project showcase image deleted");
       router.refresh();
     } catch {

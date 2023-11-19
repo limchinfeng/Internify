@@ -44,7 +44,7 @@ const RegisterPage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      await axios.post("/api/register", values);
+      await axios.post("/service/register", values);
       toast.success('Registered successfully!');
       router.refresh();
       router.push("/login");

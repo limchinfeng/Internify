@@ -41,7 +41,7 @@ export const ProfileLink = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/profile`, values);
+      await axios.patch(`/service/profile`, values);
       toast.success("Profile updated");
       toggleEdit();
       router.refresh();

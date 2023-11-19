@@ -31,7 +31,7 @@ const ProfileCreateProject = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post("/api/profile/project", values);
+      const response = await axios.post("/service/profile/project", values);
       router.push(`/profile/project/${response.data.id}`);
     } catch {
       toast.error("Something went wrong");
