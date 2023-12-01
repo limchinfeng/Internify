@@ -4,6 +4,7 @@ import Image from "next/image";
 import avatar from "@/public/images/placeholder.jpg";
 import Link from "next/link";
 import { User } from "@prisma/client";
+import { useOrigin } from "@/hooks/use-origin";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail, AiOutlineLink } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa6";
@@ -27,6 +28,8 @@ const ProjectDetails = ({
   email,
   currentUser,
 }: ProjectDetailsProps) => {
+  const origin = useOrigin();
+
   return (
     <div className="flex flex-col gap-7">
       <div>
