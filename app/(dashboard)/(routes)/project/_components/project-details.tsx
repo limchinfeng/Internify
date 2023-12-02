@@ -75,7 +75,7 @@ const ProjectDetails = ({
               LinkedIn Profile
             </Link>
             {!currentUser.link && (
-              <p className="font-medium text-slate-500 italic text-sm">
+              <p className="font-medium italic text-lg">
                 No Link
               </p>
             )}
