@@ -53,13 +53,14 @@ const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
         <div className="flex">
           <div className="flex-shrink-0 w-1/2 pr-8">
             <ProjectDetails
+              id={currentUser.id}
               title={project.title}
               category={project.category?.name || ""}
               imageSrc={currentUser.imageUrl || ""}
               name={currentUser.name || ""}
               phone={currentUser.phone || ""}
               email={currentUser.email || ""}
-              currentUser={currentUser}
+              link={currentUser.link || ""}
             />
           </div>
 
