@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Loader2 } from "lucide-react"
+import { useEffect } from "react";
+
 
 
 
@@ -29,6 +31,8 @@ const formSchema = z.object({
 const RegisterPage = () => {
   const router = useRouter();
 
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,6 +44,14 @@ const RegisterPage = () => {
 
   const { isSubmitting, isValid } = form.formState;
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+    }
+  }, [isLoading]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
