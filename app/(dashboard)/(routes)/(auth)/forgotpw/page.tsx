@@ -9,7 +9,8 @@ import toast from "react-hot-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { signIn } from "next-auth/react";
+import axios from "axios";
+
 
 
 const formSchema = z.object({
@@ -35,21 +36,10 @@ export default function ForgotPw() {
         setIsLoading(true);
 
         try {
-            signIn('credentials', {
-                ...values,
-                redirect: false,
-            })
-                .then((callback) => {
-                    if (callback?.ok) {
-                        toast.success('Logged in');
-                        router.refresh();
-                        router.push("/");
-                    }
-
-                    if (callback?.error) {
-                        toast.error(callback.error);
-                    }
-                })
+            await axios.post("/api/forgotPw", values);
+            toast.success('Check Your Email to Login!');
+            router.refresh();
+            router.push("/login");
 
         } catch {
             toast.error("Something went wrong");
