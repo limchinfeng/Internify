@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Loader2 } from "lucide-react"
+import { useEffect } from "react";
 
 
 const formSchema = z.object({
@@ -36,6 +37,14 @@ const LoginPage = () => {
   });
 
   const { isSubmitting, isValid } = form.formState;
+
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2500);
+    }
+  }, [isLoading]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
