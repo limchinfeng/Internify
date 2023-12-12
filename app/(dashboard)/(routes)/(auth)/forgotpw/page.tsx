@@ -10,6 +10,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { Loader2 } from "lucide-react"
+
 
 
 
@@ -30,6 +32,14 @@ export default function ForgotPw() {
         },
     });
     const { isSubmitting, isValid } = form.formState;
+
+    useEffect(() => {
+        if (isLoading) {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2500);
+        }
+    }, [isLoading]);
 
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -85,7 +95,14 @@ export default function ForgotPw() {
                                 disabled={!isValid || isSubmitting || isLoading}
                                 className="w-full"
                             >
-                                Get Reset link
+                                {isLoading ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Sending...
+                                    </>
+                                ) : (
+                                    "Get Reset link"
+                                )}
                             </Button>
                         </div>
                     </form>
@@ -105,6 +122,5 @@ export default function ForgotPw() {
                 </div>
             </div>
         </div>
-        // <ResetPassword></ResetPassword>
     )
 }

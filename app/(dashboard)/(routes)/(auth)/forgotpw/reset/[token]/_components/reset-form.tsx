@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { Loader2 } from "lucide-react"
 
 interface resetProps {
     token: string;
@@ -40,12 +41,20 @@ export default function ResetForm({
     });
     const { isSubmitting, isValid } = form.formState;
 
+    useEffect(() => {
+        if (isLoading) {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2500);
+        }
+    }, [isLoading]);
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setIsLoading(true);
 
         try {
             await axios.patch(`/api/forgotPw/reset/${token}`, values);
-            toast.success('Check Your Email to Login!');
+            toast.success('your password has been reset successfully!');
             router.refresh();
             router.push("/login");
 
@@ -118,7 +127,14 @@ export default function ResetForm({
                             disabled={!isValid || isSubmitting || isLoading}
                             className="w-full"
                         >
-                            Change Password
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Pending...
+                                </>
+                            ) : (
+                                "Change Password"
+                            )}
                         </Button>
                     </div>
                 </form>
