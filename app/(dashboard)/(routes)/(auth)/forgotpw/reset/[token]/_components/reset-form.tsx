@@ -23,6 +23,9 @@ const formSchema = z.object({
     confirmPassword: z.string().min(1, {
         message: "Same Password is required",
     }),
+}).refine(data => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ['confirmPassword'] // specify the field that the error is attached to
 });
 
 export default function ResetForm({
