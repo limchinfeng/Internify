@@ -10,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import ResetPassword from "./reset/[token]";
+import ResetPassword from "./reset/[token]/page";
 
 
 
