@@ -10,24 +10,27 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import ResetPassword from "./reset/[token]";
 
 
 
 const formSchema = z.object({
-    email: z.string().min(1, {
-        message: "Email is required",
+    password: z.string().min(1, {
+        message: "Password is required",
+    }),
+    confirmPassword: z.string().min(1, {
+        message: "Same Password is required",
     }),
 });
+export default function ResetPassword() {
 
-export default function ForgotPw() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
+            password: "",
+            confirmPassword: "",
         },
     });
     const { isSubmitting, isValid } = form.formState;
@@ -47,13 +50,18 @@ export default function ForgotPw() {
         }
     }
 
+
+
     return (
         <div className="w-full flex flex-col gap-5 items-center justify-center h-full">
             <div className=" mb-12 mx-auto">
                 <h1 className="text-3xl font-bold text-center text-primary">
-                    Reset your password
+                    Change Your password
                 </h1>
-                <p>Enter your user account's verified email address and we will send you a password reset link.</p>
+
+                <p>Enter your new password. After confirming, you will be asked to log in again.</p>
+                <p></p>
+
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
@@ -61,11 +69,31 @@ export default function ForgotPw() {
                     >
                         <FormField
                             control={form.control}
-                            name="email"
+                            name="password"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
-                                        Email
+                                        Password
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className="w-full h-12 text-md"
+                                            disabled={isSubmitting || isLoading}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="confirmPassword"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>
+                                        Confirm Password
                                     </FormLabel>
                                     <FormControl>
                                         <Input
@@ -86,7 +114,7 @@ export default function ForgotPw() {
                                 disabled={!isValid || isSubmitting || isLoading}
                                 className="w-full"
                             >
-                                Get Reset link
+                                Change Password
                             </Button>
                         </div>
                     </form>
@@ -106,6 +134,5 @@ export default function ForgotPw() {
                 </div>
             </div>
         </div>
-        // <ResetPassword></ResetPassword>
     )
 }

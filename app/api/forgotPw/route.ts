@@ -7,17 +7,15 @@ import { User } from "lucide-react";
 
 
 export async function POST(
-    _request: Request,
-    {
-        params,
-    }: {
-        params: { email: string }
-    }
+    request: Request,
 ) {
 
     const API_KEY = process.env.MAILGUN_API_KEY || ' '
     const DOMAIN = process.env.MAILGUN_DOMAIN || ' '
-    const { email } = params
+    const body = await request.json();
+    const {
+        email
+    } = body;
 
     if (!email) {
         return new NextResponse('No email provided', { status: 400 });
@@ -26,7 +24,7 @@ export async function POST(
 
     const user = await prisma.user.findUnique({
         where: {
-            email: params.email,
+            email: body.email,
         }
     });
 
@@ -48,7 +46,7 @@ export async function POST(
         from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
         subject: 'Please Activate Your Account',
-        text: `Hello ${user.name}, please activate your account by clicking this link: http://localhost:3000/api/forgotPw/reset/${token.token}`,
+        text: `Hello ${user.name}, please activate your account by clicking this link: http://localhost:3000/app/(dashboard)/(routes)/(auth)/forgotpw/${token.token}/reset`,
     })
 
         .then(msg => console.log(msg)) // logs response data
