@@ -46,7 +46,7 @@ export async function POST(
         from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
         subject: 'Please Activate Your Account',
-        text: `Hello ${user.name}, please activate your account by clicking this link: http://localhost:3000/app/(dashboard)/(routes)/(auth)/forgotpw/${token.token}/reset`,
+        text: `Hello ${user.name}, please activate your account by clicking this link: http://localhost:3000/forgotpw/reset/${token.token}`,
     })
 
         .then(msg => console.log(msg)) // logs response data

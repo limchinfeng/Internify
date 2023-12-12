@@ -10,7 +10,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import ResetPassword from "./reset/[token]/page";
 
 
 
@@ -53,7 +52,7 @@ export default function ForgotPw() {
                 <h1 className="text-3xl font-bold text-center text-primary">
                     Reset your password
                 </h1>
-                <p>Enter your user account's verified email address and we will send you a password reset link.</p>
+                <p>Enter your user accounts verified email address and we will send you a password reset link.</p>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
