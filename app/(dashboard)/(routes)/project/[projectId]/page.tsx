@@ -10,10 +10,10 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
-import ProjectHead from "../_components/project-head";
-import ProjectDetails from "../_components/project-details";
-import ProjectDescription from "../_components/project-description";
-import ProjectShowcase from "../_components/project-showcase";
+import ProjectHead from "./_components/project-head";
+import ProjectDetails from "./_components/project-details";
+import ProjectDescription from "./_components/project-description";
+import ProjectShowcase from "./_components/project-showcase";
 
 const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
   const currentUser = await getCurrentUser();

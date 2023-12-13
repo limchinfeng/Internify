@@ -11,10 +11,10 @@
 import { redirect } from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 import prismadb from "@/lib/prismadb";
-import ProfileHead from "../_components/profile-head";
-import ProfileDetails from "../_components/profile-details";
-import ProfileProject from "../_components/profile-project";
-import { columns } from "../_components/columns";
+import ProfileHead from "./_components/profile-head";
+import ProfileDetails from "./_components/profile-details";
+import ProfileProject from "./_components/profile-project";
+import { columns } from "./_components/columns";
 
 const UserProfileIdPage = async () => {
   const currentUser = await getCurrentUser();

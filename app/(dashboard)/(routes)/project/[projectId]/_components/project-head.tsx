@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { User } from "@prisma/client";
-import { HeartButton } from "./heart-button";
+// import { HeartButton } from "../heart-button";
+import { HeartButton } from "../../_components/heart-button"
 
 interface ProjectHeadProps {
   id: string;
