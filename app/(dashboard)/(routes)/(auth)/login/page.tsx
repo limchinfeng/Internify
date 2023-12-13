@@ -10,9 +10,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react"
-import { useEffect } from "react";
 
 
 const formSchema = z.object({
@@ -140,7 +139,14 @@ const LoginPage = () => {
             </div>
           </form>
         </Form>
-
+        <div className="text-neutral-500 text-center font-light pt-4">
+          <span
+            onClick={() => router.push("/forgotpw")}
+            className="text-neutral-800 cursor-pointer hover:underline"
+          >
+            Forgot your password?
+          </span>
+        </div>
         <div className="flex flex-col gap-4 mt-5 w-full">
           <hr />
           <div className="text-neutral-500 text-center font-light">
@@ -154,6 +160,7 @@ const LoginPage = () => {
             </p>
           </div>
         </div>
+
       </div>
     </div>
   );
