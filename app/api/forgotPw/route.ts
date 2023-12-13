@@ -45,8 +45,8 @@ export async function POST(
         // from: `Example Email <hello@${DOMAIN}>`,
         from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
-        subject: 'Please Activate Your Account',
-        text: `Hello ${user.name}, please activate your account by clicking this link: http://localhost:3000/forgotpw/reset/${token.token}`,
+        subject: 'Please Reset the Password of your Account',
+        text: `Dear ${user.name}, Reset the password of your account by clicking this link: http://localhost:3000/forgotpw/reset/${token.token}`,
     })
 
         .then(msg => console.log(msg)) // logs response data
