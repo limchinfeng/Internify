@@ -1,19 +1,9 @@
-/*
-  TASK - Yohan
-  create a page for the public user to view the profile page (like others view your social media profile)
-
-  1. get current user
-  2. check if current user is valid (can refer to others page)
-  3. shows the user details (can design what you like )
-  4. get the user projects and shows it in table (can refer to user profile data table)
-*/
-
 import { redirect } from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 import prismadb from "@/lib/prismadb";
 import ProfileHead from "./_components/profile-head";
 import ProfileDetails from "./_components/profile-details";
-import ProfileProject from "./_components/profile-project";
+import DataTable from "./_components/data-table";
 import { columns } from "./_components/columns";
 
 const UserProfileIdPage = async () => {
@@ -47,7 +37,7 @@ const UserProfileIdPage = async () => {
         </div>
       </div>
       <div className="w-full md:px-10 px-4">
-        <ProfileProject columns={columns} data={project} />
+        <DataTable columns={columns} data={project} />
       </div>
     </div>
   );
