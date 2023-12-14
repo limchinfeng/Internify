@@ -1,16 +1,8 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { FiEye } from "react-icons/fi";
+import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -28,6 +20,25 @@ export const columns: ColumnDef<Project>[] = [
           Title
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const { id, title } = row.original;
+      const isPublished = row.getValue("isPublished") || false;
+
+      return (
+        <div>
+          {isPublished ? (
+            <Link href={`/project/${id}`}
+            target="_blank"
+            className="text-lg italic text-primary hover:text-blue-800 transition hover:underline"
+            >
+              <p className="font-medium">{title}</p>
+            </Link>
+          ) : (
+            <p className="">{title}</p>
+          )}
+        </div>
       );
     },
   },
@@ -114,38 +125,6 @@ export const columns: ColumnDef<Project>[] = [
         >
           {isPublished ? "Published" : "Draft"}
         </Badge>
-      );
-    },
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const { id } = row.original;
-      const isPublished = row.getValue("isPublished") || false;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-4 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-          {isPublished ? (
-            <Link href={`/project/${id}`}>
-              <DropdownMenuItem>
-                <FiEye className="h-4 w-4 mr-2" />
-                View
-              </DropdownMenuItem>
-            </Link>
-          ) : (
-            <DropdownMenuItem className="pointer-events-none hover:bg-transparent">
-              Project has not been published
-            </DropdownMenuItem>
-          )}
-          </DropdownMenuContent>
-        </DropdownMenu>
       );
     },
   },
