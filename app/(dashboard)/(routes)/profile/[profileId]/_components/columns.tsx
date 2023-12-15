@@ -29,14 +29,15 @@ export const columns: ColumnDef<Project>[] = [
       return (
         <div>
           {isPublished ? (
-            <Link href={`/project/${id}`}
-            target="_blank"
-            className="text-lg italic text-primary hover:text-blue-800 transition hover:underline"
+            <Link
+              href={`/project/${id}`}
+              target="_blank"
+              className="font-medium italic text-primary hover:text-blue-800 transition hover:underline"
             >
-              <p className="font-medium">{title}</p>
+              {title}
             </Link>
           ) : (
-            <p className="">{title}</p>
+            <p>{title}</p>
           )}
         </div>
       );
