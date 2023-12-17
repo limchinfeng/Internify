@@ -34,19 +34,15 @@ const UserProfileIdPage = async ({
   });
 
   return (
-    <div className="p-6 w-full flex flex-col items-center justify-center gap-5">
+    <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
       <ProfileHead imageSrc={user.imageUrl || ""} />
-      <div className="max-w-screen-lg m-auto p-5">
-        <div>
-          <ProfileDetails
-            name={user.name || ""} //change currentUser to the project's owner
-            email={user.email || ""}
-            description={user.description || ""}
-            phone={user.phone || ""}
-            link={user.link || ""}
-          />
-        </div>
-      </div>
+      <ProfileDetails
+        name={user.name || ""}
+        email={user.email || ""}
+        description={user.description || ""}
+        phone={user.phone || ""}
+        link={user.link || ""}
+      />
       <div className="w-full md:px-10 px-4">
         <DataTable columns={columns} data={project} />
       </div>
