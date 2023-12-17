@@ -16,10 +16,10 @@ const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
   const project = await prismadb.project.findUnique({
     where: {
       id: params.projectId,
-      userId: currentUser.id,
     },
     include: {
       category: true,
+      user: true,
       showcaseImages: {
         orderBy: {
           createdAt: "asc",
@@ -33,7 +33,7 @@ const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
   }
 
   return (
-    <div className="max-w-screen-lg m-auto">
+    <div className="max-w-screen-lg m-auto xl:px-5 md:px-10 sm:px-2 py-4">
       <div className="flex flex-col gap-7">
         <ProjectHead
           id={project.id}
@@ -41,22 +41,22 @@ const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
           currentUser={currentUser}
         />
 
-        <div className="flex">
-          <div className="flex-shrink-0 w-1/2 pr-8">
-            <ProjectDetails
-              id={currentUser.id}
-              title={project.title}
-              category={project.category?.name || ""}
-              imageSrc={currentUser.imageUrl || ""}
-              name={currentUser.name || ""}
-              phone={currentUser.phone || ""}
-              email={currentUser.email || ""}
-              link={currentUser.link || ""}
-            />
+        <div className="flex flex-col md:flex-row md:gap-10">
+          <div className="order-1 md:order-2 flex-1">
+            <ProjectDescription description={project.description || ""} />
           </div>
 
-          <div className="w-1/2">
-            <ProjectDescription description={project.description || ""} />
+          <div className="order-2 md:order-1 mb-5 md:mb-0 flex-1">
+            <ProjectDetails
+              id={project.user.id}
+              title={project.title}
+              category={project.category?.name || ""}
+              imageSrc={project.user.imageUrl || ""}
+              name={project.user.name || ""}
+              phone={project.user.phone || ""}
+              email={project.user.email || ""}
+              link={project.user.link || ""}
+            />
           </div>
         </div>
 
