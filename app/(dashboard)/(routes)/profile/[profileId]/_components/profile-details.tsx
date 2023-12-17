@@ -32,7 +32,7 @@ export const ProfileDetails = ({
               <LuUser2 className={iconStyle} />
               <h1 className="text-lg text-black">Name</h1>
             </div>
-            <p className="text-xl mx-11 font-sans mt-1">{name}</p>
+            <p className="text-xl mx-10 font-sans mt-1">{name}</p>
           </div>
         </div>
 
@@ -42,7 +42,7 @@ export const ProfileDetails = ({
               <BsTelephone className={iconStyle} />
               <h1 className="text-lg text-black">Phone</h1>
             </div>
-            <p className="text-xl mx-11 font-sans mt-1">{phone}</p>
+            <p className="text-xl mx-10 font-sans mt-1">{phone}</p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ export const ProfileDetails = ({
               <AiOutlineMail className={iconStyle} />
               <h1 className="text-lg text-black">Email</h1>
             </div>
-            <p className="text-xl mx-11 font-sans mt-1">{email}</p>
+            <p className="text-xl mx-10 font-sans mt-1">{email}</p>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@ export const ProfileDetails = ({
             <Link
               href={`http://${link}`}
               target="_blank"
-              className="text-xl font-medium italic text-primary hover:text-blue-800 transition hover:underline mx-11 font-sans mt-1"
+              className="text-xl font-medium italic text-primary hover:text-blue-800 transition hover:underline mx-10 font-sans mt-1"
             >
               {link}
             </Link>
