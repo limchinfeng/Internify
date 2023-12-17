@@ -4,9 +4,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { Project } from "@prisma/client";
+import { Preview } from "@/components/description-preview";
+import * as cheerio from "cheerio";
 
 export const columns: ColumnDef<Project>[] = [
   {
@@ -24,52 +24,45 @@ export const columns: ColumnDef<Project>[] = [
     },
     cell: ({ row }) => {
       const { id, title } = row.original;
-      const isPublished = row.getValue("isPublished") || false;
 
       return (
         <div>
-          {isPublished ? (
-            <Link
-              href={`/project/${id}`}
-              target="_blank"
-              className="font-medium italic text-primary hover:text-blue-800 transition hover:underline"
-            >
-              {title}
-            </Link>
-          ) : (
-            <p>{title}</p>
-          )}
+          <Link
+            href={`/project/${id}`}
+            target="_blank"
+            className="font-medium italic text-primary hover:text-blue-800 transition hover:underline"
+          >
+            {title}
+          </Link>
         </div>
       );
     },
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: "description",
     header: ({ column }) => {
       return (
         <Button
           variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Created At
+          Description
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const createdAt = new Date(row.getValue("createdAt"));
-      const formattedDate = new Intl.DateTimeFormat("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-        hour12: false,
-        timeZoneName: "short",
-      }).format(createdAt);
+      const description = row.original.description;
+      const cheerioDescription = cheerio.load(description || "");
+      const textContent = cheerioDescription.text();
+      const truncatedDescription =
+        textContent.slice(0, 170) + (textContent.length > 100 ? "..." : "");
 
-      return <div className="ml-3">{formattedDate}</div>;
+      return (
+        <div>
+          <Preview value={truncatedDescription} />
+        </div>
+      );
     },
   },
   {
@@ -99,34 +92,6 @@ export const columns: ColumnDef<Project>[] = [
       }).format(updatedAt);
 
       return <div className="ml-3">{formattedDate}</div>;
-    },
-  },
-  {
-    accessorKey: "isPublished",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="link"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Published
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const isPublished = row.getValue("isPublished") || false;
-
-      return (
-        <Badge
-          className={cn(
-            "bg-slate-500 ml-5",
-            isPublished ? "bg-emerald-700 text-white hover:bg-emerald-600" : ""
-          )}
-        >
-          {isPublished ? "Published" : "Draft"}
-        </Badge>
-      );
     },
   },
 ];
