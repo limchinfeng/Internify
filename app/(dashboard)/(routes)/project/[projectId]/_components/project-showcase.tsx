@@ -10,15 +10,14 @@ interface ProjectShowcaseProps {
 const ProjectShowcase = ({ id, showcaseImages }: ProjectShowcaseProps) => {
   return (
     <div>
-      <h1 className="text-black">Project Showcase</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 mb-10 mt-3">
+      <h1 className="text-black text-xl">Project Showcase</h1>
+      <div className="grid md:grid-cols-2 gap-10 my-5">
         {showcaseImages.map((image) => (
-          <div key={image.id} className="justify-center items-center relative">
+          <div className="md:container relative aspect-video">
             <Image
-              className="rounded-xl"
-              height="450"
-              width="600"
-              alt="Showcase Image"
+              className="w-full h-full relative object-cover object-center rounded-lg"
+              alt="Project Showcase Image"
+              fill={true}
               src={image.url}
             />
           </div>
