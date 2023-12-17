@@ -37,17 +37,17 @@ const ProjectDetails = ({
   return (
     <div className="flex flex-col gap-7">
       <div>
-        <h1 className="text-black">Project Title</h1>
+        <h1 className="text-black text-xl">Project Title</h1>
         <p className="text-2xl mt-2">{title}</p>
       </div>
 
       <div>
-        <h1 className="text-black">Project Category</h1>
+        <h1 className="text-black text-xl">Project Category</h1>
         <p className="text-2xl mt-2">{category}</p>
       </div>
 
       <div>
-        <h1 className="text-black">User Details</h1>
+        <h1 className="text-black text-xl">User Details</h1>
         <div className="flex flex-col gap-3 px-5 mt-2">
           <div className="flex flex-col gap-2">
             <div className="flex flex-row gap-3 mt-2">
