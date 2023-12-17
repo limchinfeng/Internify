@@ -13,7 +13,7 @@ interface ProjectHeadProps {
 
 const ProjectHead = ({ id, imageSrc, currentUser }: ProjectHeadProps) => {
   return (
-    <div className="w-full h-[60vh] overflow-hidden rounded-xl relative mt-10">
+    <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
       <Image
         alt="Project Image"
         src={imageSrc}
