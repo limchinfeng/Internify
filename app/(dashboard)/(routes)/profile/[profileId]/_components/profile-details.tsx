@@ -23,16 +23,15 @@ export const ProfileDetails = ({
   phone,
   link,
 }: ProfileDetailsProps) => {
-
-  var iconStyle = "m-1 h-6 w-6";
+  var iconStyle = "m-1 h-5 w-5";
 
   return (
     <div className="flex flex-col gap-6">
       <div className="border rounded-md p-4 w-full">
         <div className="mx-6">
           <div className="flex flex-row gap-3">
-            <LuUser2 className={iconStyle}/>
-            <h1 className="font-medium text-black">Name</h1>
+            <LuUser2 className={iconStyle} />
+            <h1 className="text-lg text-black">Name</h1>
           </div>
           <p className="text-xl mx-11 font-sans mt-1">{name}</p>
         </div>
@@ -41,18 +40,8 @@ export const ProfileDetails = ({
       <div className="border rounded-md p-4 w-full">
         <div className="mx-6">
           <div className="flex flex-row gap-3">
-            <AiOutlineMail className={iconStyle}/>
-            <h1 className="font-medium text-black">Email</h1>
-          </div>
-          <p className="text-xl mx-11 font-sans mt-1">{email}</p>
-        </div>
-      </div>
-
-      <div className="border rounded-md p-4 w-full">
-        <div className="mx-6">
-          <div className="flex flex-row gap-3">
-            <BsTelephone className={iconStyle}/>
-            <h1 className="font-medium text-black">Phone</h1>
+            <BsTelephone className={iconStyle} />
+            <h1 className="text-lg text-black">Phone</h1>
           </div>
           <p className="text-xl mx-11 font-sans mt-1">{phone}</p>
         </div>
@@ -61,8 +50,18 @@ export const ProfileDetails = ({
       <div className="border rounded-md p-4 w-full">
         <div className="mx-6">
           <div className="flex flex-row gap-3">
-            <IoIosLink className={iconStyle}/>
-            <h1 className="font-medium text-black">Link</h1>
+            <AiOutlineMail className={iconStyle} />
+            <h1 className="text-lg text-black">Email</h1>
+          </div>
+          <p className="text-xl mx-11 font-sans mt-1">{email}</p>
+        </div>
+      </div>
+
+      <div className="border rounded-md p-4 w-full">
+        <div className="mx-6">
+          <div className="flex flex-row gap-3">
+            <IoIosLink className={iconStyle} />
+            <h1 className="text-lg text-black">Link</h1>
           </div>
           <Link
             href={`http://${link}`}
@@ -78,8 +77,8 @@ export const ProfileDetails = ({
       <div className="border rounded-md p-4 w-full">
         <div className="mx-6">
           <div className="flex flex-row gap-3">
-            <TbFileDescription className={iconStyle}/>
-            <h1 className="font-medium text-black">Description</h1>
+            <TbFileDescription className={iconStyle} />
+            <h1 className="text-lg text-black">Description</h1>
           </div>
           {description && <Preview value={description} />}
         </div>
