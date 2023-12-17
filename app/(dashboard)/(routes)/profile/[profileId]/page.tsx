@@ -6,33 +6,44 @@ import ProfileDetails from "./_components/profile-details";
 import DataTable from "./_components/data-table";
 import { columns } from "./_components/columns";
 
-const UserProfileIdPage = async () => {
+const UserProfileIdPage = async ({
+  params,
+}: {
+  params: { profileId: string };
+}) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
     return redirect("/");
   }
 
+  const user = await prismadb.user.findUnique({
+    where: {
+      id: params.profileId,
+    },
+  });
+
+  if (!user) {
+    return redirect("/");
+  }
+
   const project = await prismadb.project.findMany({
     where: {
-      userId: currentUser.id,
-    },
-    orderBy: {
-      createdAt: "desc",
+      userId: params.profileId,
     },
   });
 
   return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-5">
-      <ProfileHead imageSrc={currentUser.imageUrl || ""} />
+      <ProfileHead imageSrc={user.imageUrl || ""} />
       <div className="max-w-screen-lg m-auto p-5">
         <div>
           <ProfileDetails
-            name={currentUser.name || ""}
-            email={currentUser.email || ""}
-            description={currentUser.description || ""}
-            phone={currentUser.phone || ""}
-            link={currentUser.link || ""}
+            name={user.name || ""} //change currentUser to the project's owner
+            email={user.email || ""}
+            description={user.description || ""}
+            phone={user.phone || ""}
+            link={user.link || ""}
           />
         </div>
       </div>
