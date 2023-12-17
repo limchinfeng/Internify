@@ -30,7 +30,11 @@ const UserProfileIdPage = async ({
   const project = await prismadb.project.findMany({
     where: {
       userId: params.profileId,
+      isPublished: true
     },
+    orderBy:{
+      createdAt:"desc"
+    }
   });
 
   return (
