@@ -17,7 +17,7 @@ const ProjectHead = ({ id, imageSrc, currentUser }: ProjectHeadProps) => {
       <Image
         alt="Project Image"
         src={imageSrc}
-        fill
+        fill={true}
         className="object-cover w-full"
       />
       <div className="absolute top-5 right-5">
