@@ -11,6 +11,8 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 import { ListingIdHead } from "./_components/listing-id-head";
+import { ListingIdTitle } from "./_components/listing-id-title";
+import { ListingIdCompanyDetails } from "./_components/listing-id-company-details";
 
 const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
   const currentUser = await getCurrentUser();
@@ -41,23 +43,47 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
         currentUser={currentUser} 
       />
 
-      <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-10">
+      <div className="md:hidden">
+        applu now
+      </div>
+
+      <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-8">
         <div>
-          <div className="flex flex-col items-center gap-x-4 gap-4">
-            {/* <ProfileName currentUser={currentUser} />
-            <ProfilePhone currentUser={currentUser} />
-            <ProfileEmail currentUser={currentUser} /> */}
-            dddd
+          <div className="flex flex-col gap-x-4 gap-6">
+            <ListingIdTitle 
+              title={listing.title}
+              category={listing.category?.name!}
+            />
+            <ListingIdCompanyDetails 
+              name={listing.user.name!}
+              location={listing.location!}
+              state={listing.state!}
+              link={listing.user.link!}
+              userId={listing.userId}
+              image={listing.user.imageUrl!}
+            />
           </div>
         </div>
 
-        <div className="mt-4 md:mt-0">
+        <div className="mt-4 md:mt-0 invisible md:visible">
           <div className="flex flex-col items-center gap-x-4 gap-4">
-            {/* <ProfileLink currentUser={currentUser} />
-            <ProfileDescription currentUser={currentUser} /> */}
-            ddd
+            Apply Now
           </div>
         </div>
+      </div>
+
+      <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-8">
+        <div>
+          description
+        </div>
+
+        <div className="mt-4 md:mt-0">
+          requirement
+        </div>
+      </div>
+
+      <div className="h-10">
+
       </div>
     </div>
   );
