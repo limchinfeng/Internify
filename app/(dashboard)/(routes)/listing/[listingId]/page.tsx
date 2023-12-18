@@ -13,6 +13,9 @@ import { redirect } from "next/navigation";
 import { ListingIdHead } from "./_components/listing-id-head";
 import { ListingIdTitle } from "./_components/listing-id-title";
 import { ListingIdCompanyDetails } from "./_components/listing-id-company-details";
+import { ListingIdDescription } from "./_components/listing-id-description";
+import { ListingIdRequirement } from "./_components/listing-id-requirement";
+import { ListingIdApply } from "./_components/listing-id-apply";
 
 const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
   const currentUser = await getCurrentUser();
@@ -34,6 +37,8 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
   if (!listing) {
     return redirect("/");
   }
+
+  
   
   return (  
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
@@ -67,18 +72,24 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
 
         <div className="mt-4 md:mt-0 invisible md:visible">
           <div className="flex flex-col items-center gap-x-4 gap-4">
-            Apply Now
+            <ListingIdApply 
+              listingId={listing.id}
+            />
           </div>
         </div>
       </div>
 
       <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-8">
         <div>
-          description
+          <ListingIdDescription 
+            description={listing.description!}
+          />
         </div>
 
         <div className="mt-4 md:mt-0">
-          requirement
+          <ListingIdRequirement 
+            requirement={listing.requirement!}
+          />
         </div>
       </div>
 
