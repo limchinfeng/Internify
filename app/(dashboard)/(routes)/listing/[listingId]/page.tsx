@@ -38,7 +38,12 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
     return redirect("/");
   }
 
-  
+  const application = await prismadb.application.findUnique({
+    where: {
+      userId: currentUser.id,
+      listingId: params.listingId,
+    }
+  });
   
   return (  
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
@@ -48,8 +53,13 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
         currentUser={currentUser} 
       />
 
-      <div className="md:hidden">
-        applu now
+      <div className="md:hidden w-full">
+          <ListingIdApply 
+            listingId={listing.id}
+            isApply={!!application}
+            disabled={listing.userId === currentUser.id}
+            isCompany={!!currentUser.isCompany}
+          />
       </div>
 
       <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-8">
@@ -71,9 +81,12 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
         </div>
 
         <div className="mt-4 md:mt-0 invisible md:visible">
-          <div className="flex flex-col items-center gap-x-4 gap-4">
+          <div className="flex flex-col items-center justify-center gap-x-4 gap-4 h-full">
             <ListingIdApply 
               listingId={listing.id}
+              isApply={!!application}
+              disabled={listing.userId === currentUser.id}
+              isCompany={!!currentUser.isCompany}
             />
           </div>
         </div>

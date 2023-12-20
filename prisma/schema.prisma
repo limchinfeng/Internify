@@ -113,9 +113,9 @@ model Application {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @db.ObjectId
+  userId String @db.ObjectId  @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  listingId String @db.ObjectId
+  listingId String @db.ObjectId @unique
   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
