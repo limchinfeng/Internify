@@ -71,6 +71,7 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
             />
             <ListingIdCompanyDetails 
               name={listing.user.name!}
+              email={listing.user.email!}
               location={listing.location!}
               state={listing.state!}
               link={listing.user.link!}

@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import avatar from "@/public/images/placeholder.jpg";
 import Link from "next/link";
 import Image from "next/image";
-import { ExternalLink, Link2, MapPin } from "lucide-react";
+import { ExternalLink, Link2, MapPin, Mail } from "lucide-react";
 
 interface ListingIdCompanyDetailsProps {
   name: string;
+  email: string;
   location: string;
   state: string;
   link: string;
@@ -17,7 +18,7 @@ interface ListingIdCompanyDetailsProps {
 }
 
 export const ListingIdCompanyDetails = ({
-  name, location, state, link, userId, image
+  name, email, location, state, link, userId, image
 }: ListingIdCompanyDetailsProps) => {
 
   const origin = useOrigin();
@@ -29,7 +30,7 @@ export const ListingIdCompanyDetails = ({
         Company Details
       </div>
       <div className="flex flex-col gap-2 text-md">
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-2 -ml-1">
          <Image
             className="rounded-full"
             height="30"
@@ -38,6 +39,10 @@ export const ListingIdCompanyDetails = ({
             src={image || avatar}
           />
           {name}
+        </div>
+        <div className="flex flex-row gap-2">
+          <Mail />
+          {email}
         </div>
         <div className="flex flex-row gap-2">
           <MapPin />
