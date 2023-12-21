@@ -27,15 +27,15 @@ import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { PlusCircle } from "lucide-react"
 
-interface ApplicationDataTableProps<TData, TValue> {
+interface CompanyApplicationDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-export function ApplicationDataTable<TData, TValue>({
+export function CompanyApplicationDataTable<TData, TValue>({
   columns,
   data,
-}: ApplicationDataTableProps<TData, TValue>) {
+}: CompanyApplicationDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -68,10 +68,10 @@ export function ApplicationDataTable<TData, TValue>({
           className="max-w-sm"
         />
         <Input
-          placeholder="Filter company name..."
-          value={(table.getColumn("company")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter candidate name..."
+          value={(table.getColumn("candidate")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("company")?.setFilterValue(event.target.value)
+            table.getColumn("candidate")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

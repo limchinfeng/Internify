@@ -87,15 +87,17 @@ const ProfilePage = async () => {
         />
       </div>
 
-      <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
-        <p className="text-lg font-bold">
-          Project
-        </p>
-        <ApplicationDataTable 
-          columns={application_columns}
-          data={newData}
-        />
-      </div>
+      {!currentUser.isCompany && (
+        <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
+          <p className="text-lg font-bold">
+            Listing Application
+          </p>
+          <ApplicationDataTable 
+            columns={application_columns}
+            data={newData}
+          />
+        </div>
+      )}
     </div>
   );
 }
