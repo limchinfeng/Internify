@@ -81,7 +81,7 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
         </div>
 
         <div className="mt-4 md:mt-0 invisible md:visible">
-          <div className="flex flex-col items-center justify-center gap-x-4 gap-4 h-full">
+          <div className="flex flex-col items-center justify-center gap-x-4 gap-4 md:h-full">
             <ListingIdApply 
               listingId={listing.id}
               isApply={!!application}
@@ -92,7 +92,7 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
         </div>
       </div>
 
-      <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-8">
+      <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-8 -mt-24 md:mt-0">
         <div>
           <ListingIdDescription 
             description={listing.description!}

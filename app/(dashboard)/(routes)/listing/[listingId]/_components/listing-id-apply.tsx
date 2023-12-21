@@ -61,6 +61,7 @@ export const ListingIdApply = ({
         </Button>}
       {disabled && isCompany && <p className="text-red-600 text-sm italic">You are the author of this listing</p>}
       {!disabled && isCompany && <p className="text-red-600 text-sm italic">Company account is not allowed to apply</p>}
+      {isApply && <p className="text-primary text-sm italic">You have applied this listing.</p>}
     </>
   )
 }
