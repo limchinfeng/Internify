@@ -21,7 +21,7 @@ import { company_application_columns } from "@/app/(company)/company/profile/_co
 const ProfilePage = async () => {
   const currentUser = await getCurrentUser();
 
-  if(!currentUser) {
+  if (!currentUser) {
     return redirect("/");
   }
 
@@ -70,7 +70,7 @@ const ProfilePage = async () => {
     company: item.listing.user.name || "",
   }));
 
-    const company_applications = await prismadb.application.findMany({
+  const company_applications = await prismadb.application.findMany({
     where: {
       listingId: {
         in: listingIds,
@@ -96,7 +96,7 @@ const ProfilePage = async () => {
   }));
 
 
-  return (  
+  return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
       <ProfileImage currentUser={currentUser} />
       <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-10">
@@ -115,14 +115,14 @@ const ProfilePage = async () => {
           </div>
         </div>
       </div>
-      
+
       <ProfilePageLink currentUser={currentUser} />
-      
+
       <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
         <p className="text-lg font-bold">
           Project
         </p>
-        <DataTable 
+        <DataTable
           columns={columns}
           data={projects}
         />
@@ -133,7 +133,7 @@ const ProfilePage = async () => {
           <p className="text-lg font-bold">
             Listing Application
           </p>
-          <ApplicationDataTable 
+          <ApplicationDataTable
             columns={application_columns}
             data={newDataUser}
           />
@@ -143,9 +143,9 @@ const ProfilePage = async () => {
       {currentUser.isCompany && (
         <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
           <p className="text-lg font-bold">
-            Listing 
+            Listing
           </p>
-          <CompanyDataTable 
+          <CompanyDataTable
             columns={CompanyColumns}
             data={listings}
           />
@@ -157,7 +157,7 @@ const ProfilePage = async () => {
           <p className="text-lg font-bold">
             Candidate Listing Application
           </p>
-          <CompanyApplicationDataTable 
+          <CompanyApplicationDataTable
             columns={company_application_columns}
             data={newDataApplication}
           />
@@ -166,5 +166,5 @@ const ProfilePage = async () => {
     </div>
   );
 }
- 
+
 export default ProfilePage;
