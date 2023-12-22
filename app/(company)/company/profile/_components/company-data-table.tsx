@@ -57,7 +57,7 @@ export function CompanyDataTable<TData, TValue>({
   })
 
   return (
-    <div>
+    <div className="border-b border-black">
       <div className="flex items-center py-4 justify-between">
         <Input
           placeholder="Filter listings..."
