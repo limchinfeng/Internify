@@ -5,6 +5,8 @@ import ProfileHead from "./_components/profile-head";
 import ProfileDetails from "./_components/profile-details";
 import DataTable from "./_components/data-table";
 import { columns } from "./_components/columns";
+import { ListingDataTable } from "./_components/listing-data-table";
+import { ProfilePageLink } from "../_components/profile-page-link";
 
 const UserProfileIdPage = async ({
   params,
@@ -37,9 +39,21 @@ const UserProfileIdPage = async ({
     }
   });
 
+  const listings = await prismadb.listing.findMany({
+    where: {
+      userId: params.profileId,
+      isPublished: true,
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
   return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
+      
       <ProfileHead imageSrc={user.imageUrl || ""} />
+
       <ProfileDetails
         name={user.name || ""}
         email={user.email || ""}
@@ -47,9 +61,30 @@ const UserProfileIdPage = async ({
         phone={user.phone || ""}
         link={user.link || ""}
       />
+
+      <ProfilePageLink currentUser={user} />
+
       <div className="w-full md:px-10 px-4">
-        <DataTable columns={columns} data={project} />
+        <p className="text-lg font-bold">
+          Projects
+        </p>
+        <DataTable 
+          columns={columns} 
+          data={project} 
+        />
       </div>
+
+      {user.isCompany && (
+        <div className="w-full md:px-10 px-4 border-t border-black pt-8">
+          <p className="text-lg font-bold">
+            Listings
+          </p>
+          <ListingDataTable 
+            columns={columns} 
+            data={listings} 
+          />
+        </div>
+      )}
     </div>
   );
 };

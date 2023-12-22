@@ -20,12 +20,12 @@ export const ProfilePageLink = ({
   const [copied, setCopied] = useState(false);
   const origin = useOrigin();
 
-  let userProfilePageLink : string;
+  let userProfilePageLink = `${origin}/profile/${currentUser.id}`;
 
-  {currentUser.isCompany 
-    ? userProfilePageLink = `${origin}/company/profile/${currentUser.id}`
-    : userProfilePageLink = `${origin}/profile/${currentUser.id}` 
-  }
+  // {currentUser.isCompany 
+  //   ? userProfilePageLink = `${origin}/company/profile/${currentUser.id}`
+  //   : userProfilePageLink = `${origin}/profile/${currentUser.id}` 
+  // }
 
   const onCopy = () => {
     navigator.clipboard.writeText(userProfilePageLink);
