@@ -16,39 +16,39 @@ const useFavorite = ({
   const router = useRouter();
 
   const hasFavorited = useMemo(() => {
-      const list = user?.favoriteProjectIds || [];
+    const list = user?.favoriteProjectIds || [];
 
-      return list.includes(projectId);
+    return list.includes(projectId);
   }, [user, projectId]);
 
-  const toggleFavorite = useCallback(async(
-      e: React.MouseEvent<HTMLDivElement>
+  const toggleFavorite = useCallback(async (
+    e: React.MouseEvent<HTMLDivElement>
   ) => {
-      e.stopPropagation();
+    e.stopPropagation();
 
-      if(!user) {
-        redirect("/");
+    if (!user) {
+      redirect("/");
+    }
+
+    try {
+      let request;
+
+      if (hasFavorited) {
+        request = () => axios.delete(`/api/project/favorites/${projectId}`);
+      } else {
+        request = () => axios.post(`/api/project/favorites/${projectId}`);
       }
 
-      try {
-          let request;
-
-          if(hasFavorited) {
-              request = () => axios.delete(`/api/project/favorites/${projectId}`);
-          } else {
-              request = () => axios.post(`/api/project/favorites/${projectId}`);
-          }
-
-          await request();
-          router.refresh();
-          toast.success('Success');
-      } catch (error) {
-          toast.error("Something went wrong");
-      } 
-  },[user, hasFavorited, projectId, router]);
+      await request();
+      router.refresh();
+      toast.success('Success');
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  }, [user, hasFavorited, projectId, router]);
 
   return {
-      hasFavorited, toggleFavorite
+    hasFavorited, toggleFavorite
   }
 }
 

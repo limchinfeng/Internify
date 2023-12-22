@@ -8,10 +8,14 @@ export async function getSession() {
 }
 
 export default async function getCurrentUser() {
+
+    // immitate delay
+
+    await new Promise(resolve => setTimeout(resolve, 500))
     try {
         const session = await getSession();
 
-        if(!session?.user?.email) {
+        if (!session?.user?.email) {
             return null;
         }
 

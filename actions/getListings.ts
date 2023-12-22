@@ -9,6 +9,8 @@ interface getListingProps {
 export const getListings = async ({
   title, categoryId, state
 }: getListingProps) => {
+  await new Promise(resolve => setTimeout(resolve, 500))
+
   try {
     const listings = await prismadb.listing.findMany({
       where: {
@@ -29,8 +31,8 @@ export const getListings = async ({
     });
 
     return listings;
-  } catch (error){
+  } catch (error) {
     console.log("[GET_LISTINGS]", error);
-    return [];    
+    return [];
   }
 }

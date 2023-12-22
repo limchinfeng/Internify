@@ -13,42 +13,43 @@ interface IUseListingProjectFavorite {
 const useListingFavorite = ({
   listingId, user
 }: IUseListingProjectFavorite) => {
+
   const router = useRouter();
 
   const hasFavorited = useMemo(() => {
-      const list = user?.favoriteListingIds || [];
+    const list = user?.favoriteListingIds || [];
 
-      return list.includes(listingId);
+    return list.includes(listingId);
   }, [user, listingId]);
 
-  const toggleFavorite = useCallback(async(
-      e: React.MouseEvent<HTMLDivElement>
+  const toggleFavorite = useCallback(async (
+    e: React.MouseEvent<HTMLDivElement>
   ) => {
-      e.stopPropagation();
+    e.stopPropagation();
 
-      if(!user) {
-        redirect("/");
+    if (!user) {
+      redirect("/");
+    }
+
+    try {
+      let request;
+
+      if (hasFavorited) {
+        request = () => axios.delete(`/api/listing/favorites/${listingId}`);
+      } else {
+        request = () => axios.post(`/api/listing/favorites/${listingId}`);
       }
 
-      try {
-          let request;
-
-          if(hasFavorited) {
-              request = () => axios.delete(`/api/listing/favorites/${listingId}`);
-          } else {
-              request = () => axios.post(`/api/listing/favorites/${listingId}`);
-          }
-
-          await request();
-          router.refresh();
-          toast.success('Success');
-      } catch (error) {
-          toast.error("Something went wrong");
-      } 
-  },[user, hasFavorited, listingId, router]);
+      await request();
+      router.refresh();
+      toast.success('Success');
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  }, [user, hasFavorited, listingId, router]);
 
   return {
-      hasFavorited, toggleFavorite
+    hasFavorited, toggleFavorite
   }
 }
 
