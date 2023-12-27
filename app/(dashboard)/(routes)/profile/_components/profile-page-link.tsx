@@ -7,6 +7,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineCheckCircle } from "react-icons/ai"
 import { BiCopy } from "react-icons/bi";
+import { useOrigin } from "@/hooks/use-origin";
+
 
 interface ProfilePageLinkProps {
   currentUser: User;
@@ -15,10 +17,12 @@ interface ProfilePageLinkProps {
 export const ProfilePageLink = ({
   currentUser
 }: ProfilePageLinkProps) => {
+
+  const origin = useOrigin();
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  let userProfilePageLink = `https://internify-deploy.vercel.app/profile/${currentUser.id}`;
+  let userProfilePageLink = `${origin}/profile/${currentUser.id}`;
 
   // {currentUser.isCompany 
   //   ? userProfilePageLink = `${origin}/company/profile/${currentUser.id}`
