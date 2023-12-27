@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
+import { useOrigin } from "@/hooks/use-origin";
 
 
 
@@ -11,6 +12,7 @@ export async function POST(
     request: Request
 ) {
 
+    const origin = useOrigin();
     const API_KEY = process.env.MAILGUN_API_KEY || ' '
     const DOMAIN = process.env.MAILGUN_DOMAIN || ' '
     const body = await request.json();
@@ -40,7 +42,7 @@ export async function POST(
         from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
         subject: 'Please Activate Your Account',
-        text: `Hello ${user.name}, please activate your account by clicking this link: https://internify-deploy.vercel.app/api/register/activate/${token.token}`,
+        text: `Hello ${user.name}, please activate your account by clicking this link: ${origin}/api/register/activate/${token.token}`,
     })
 
         .then(msg => console.log(msg)) // logs response data

@@ -2,6 +2,7 @@ import prismadb from "@/lib/prismadb"
 import { redirect } from 'next/navigation'
 import { NextResponse, NextRequest } from 'next/server'
 import bcrypt from "bcrypt";
+import { useOrigin } from "@/hooks/use-origin";
 
 export async function PATCH(
     request: NextRequest,
@@ -12,6 +13,7 @@ export async function PATCH(
     }
 ) {
 
+    const origin = useOrigin();
     const { token } = params
     const body = await request.json();
     const {
@@ -68,7 +70,7 @@ export async function PATCH(
 
 
 
-        return NextResponse.redirect('https://internify-deploy.vercel.app/login');
+        return NextResponse.redirect(`${origin}/login`);
 
 
     } catch (error) {
