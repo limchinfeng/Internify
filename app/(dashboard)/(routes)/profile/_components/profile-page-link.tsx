@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useOrigin } from "@/hooks/use-origin";
 import { User } from "@prisma/client";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -17,9 +18,9 @@ export const ProfilePageLink = ({
 }: ProfilePageLinkProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
-  // const origin = useOrigin();
+  const origin = useOrigin();
 
-  let userProfilePageLink = `https://internify-deploy.vercel.app/profile/${currentUser.id}`;
+  let userProfilePageLink = `${origin}/profile/${currentUser.id}`;
 
   // {currentUser.isCompany 
   //   ? userProfilePageLink = `${origin}/company/profile/${currentUser.id}`
