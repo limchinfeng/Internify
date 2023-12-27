@@ -68,7 +68,7 @@ export async function PATCH(
 
 
 
-        return NextResponse.redirect('http://localhost:3000/login');
+        return NextResponse.redirect('https://internify-deploy.vercel.app/login');
 
 
     } catch (error) {
