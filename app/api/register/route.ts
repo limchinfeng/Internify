@@ -40,7 +40,7 @@ export async function POST(
         from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
         subject: 'Please Activate Your Account',
-        text: `Hello ${user.name}, please activate your account by clicking this link: http://localhost:3000/api/register/activate/${token.token}`,
+        text: `Hello ${user.name}, please activate your account by clicking this link: https://internify-deploy.vercel.app/api/register/activate/${token.token}`,
     })
 
         .then(msg => console.log(msg)) // logs response data
