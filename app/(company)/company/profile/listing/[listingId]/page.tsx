@@ -11,53 +11,54 @@ import { CompanyListingBackground } from "./_components/company-listing-backgrou
 import { CompanyListingDescription } from "./_components/company-listing-description";
 import { CompanyListingRequirement } from "./_components/company-listing-requirement";
 
-export const states = [
-  {
-    label: "Johor"
-  },
-  {
-    label: "Kedah"
-  },
-  {
-    label: "Kelatan"
-  },
-  {
-    label: "Malacca"
-  },
-  {
-    label: "Negeri Sembilan"
-  },
-  {
-    label: "Pahang"
-  },
-  {
-    label: "Penang"
-  },
-  {
-    label: "Perak"
-  },
-  {
-    label: "Perlis"
-  },
-  {
-    label: "Sabah"
-  },
-  {
-    label: "Sarawak"
-  },
-  {
-    label: "Selangor"
-  },
-  {
-    label: "Terengganu"
-  },
-]
 
 const CompanyListingIdPage = async ({
   params
 }: {
   params: { listingId: string }
 }) => {
+
+  const states = [
+    {
+      label: "Johor"
+    },
+    {
+      label: "Kedah"
+    },
+    {
+      label: "Kelatan"
+    },
+    {
+      label: "Malacca"
+    },
+    {
+      label: "Negeri Sembilan"
+    },
+    {
+      label: "Pahang"
+    },
+    {
+      label: "Penang"
+    },
+    {
+      label: "Perak"
+    },
+    {
+      label: "Perlis"
+    },
+    {
+      label: "Sabah"
+    },
+    {
+      label: "Sarawak"
+    },
+    {
+      label: "Selangor"
+    },
+    {
+      label: "Terengganu"
+    },
+  ]
   const currentUser = await getCurrentUser();
 
   if (!currentUser || !currentUser.isCompany) {
