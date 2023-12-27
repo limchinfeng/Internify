@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb"
 import { redirect } from 'next/navigation'
 import { NextResponse, NextRequest } from 'next/server'
-import { useOrigin } from "@/hooks/use-origin";
+
 
 export async function GET(
     _request: NextRequest,
@@ -11,7 +11,6 @@ export async function GET(
         params: { token: string }
     }
 ) {
-    const origin = useOrigin();
     const { token } = params
 
     if (!token) {
@@ -61,7 +60,7 @@ export async function GET(
 
 
 
-        return NextResponse.redirect(`${origin}/login`);
+        return NextResponse.redirect('https://internify-deploy.vercel.app/login');
 
 
     } catch (error) {
