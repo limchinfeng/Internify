@@ -21,6 +21,11 @@ const UserProfileIdPage = async ({
     return redirect("/");
   }
 
+  if (!params || !params.profileId) {
+    return redirect("/"); // Redirect to a different page or display an error message
+  }
+
+
   const user = await prismadb.user.findUnique({
     where: {
       id: params.profileId,
