@@ -21,7 +21,7 @@ export const Unauthorized = () => {
   return (
     <div className="text-center my-32 mx-auto">
 
-      <h2>Your Account is Unauthorized!</h2>
+      <h2>Your Account!</h2>
       <p className="pt-2">Log In/Register to view all the content </p>
       <div className="mt-10 space-x-5 > * + *">
         <Button className={buttonSize} variant="outline" onClick={handleClickLogin} disabled={buttonClicked}>
