@@ -6,7 +6,7 @@ import ProfileDetails from "./_components/profile-details";
 import DataTable from "./_components/data-table";
 import { columns } from "./_components/columns";
 import { ListingDataTable } from "./_components/listing-data-table";
-import { ProfilePageLink } from "../_components/profile-page-link";
+import { ProfilePageLink } from ".././_components/profile-page-link";
 
 
 const UserProfileIdPage = async ({
