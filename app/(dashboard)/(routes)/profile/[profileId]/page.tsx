@@ -8,11 +8,13 @@ import { columns } from "./_components/columns";
 import { ListingDataTable } from "./_components/listing-data-table";
 import { ProfilePageLink } from "../_components/profile-page-link";
 
+
 const UserProfileIdPage = async ({
   params,
 }: {
   params: { profileId: string };
 }) => {
+
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -34,8 +36,8 @@ const UserProfileIdPage = async ({
       userId: params.profileId,
       isPublished: true
     },
-    orderBy:{
-      createdAt:"desc"
+    orderBy: {
+      createdAt: "desc"
     }
   });
 
@@ -51,7 +53,7 @@ const UserProfileIdPage = async ({
 
   return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
-      
+
       <ProfileHead imageSrc={user.imageUrl || ""} />
 
       <ProfileDetails
@@ -68,9 +70,9 @@ const UserProfileIdPage = async ({
         <p className="text-lg font-bold">
           Projects
         </p>
-        <DataTable 
-          columns={columns} 
-          data={project} 
+        <DataTable
+          columns={columns}
+          data={project}
         />
       </div>
 
@@ -79,9 +81,9 @@ const UserProfileIdPage = async ({
           <p className="text-lg font-bold">
             Listings
           </p>
-          <ListingDataTable 
-            columns={columns} 
-            data={listings} 
+          <ListingDataTable
+            columns={columns}
+            data={listings}
           />
         </div>
       )}
