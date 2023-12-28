@@ -146,7 +146,7 @@ const ProfilePage = async () => {
 
       <div>
         <>
-          {currentUser.isCompany && (
+          {currentUser.isCompany ? (
             <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
               <p className="text-lg font-bold">
                 Listing
@@ -155,11 +155,7 @@ const ProfilePage = async () => {
                 columns={CompanyColumns}
                 data={listings}
               />
-            </div>
-          )}
 
-          {currentUser.isCompany && (
-            <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
               <p className="text-lg font-bold">
                 Candidate Listing Application
               </p>
@@ -168,6 +164,8 @@ const ProfilePage = async () => {
                 data={newDataApplication}
               />
             </div>
+          ) : (
+            <div> </div>
           )}
         </>
       </div>
