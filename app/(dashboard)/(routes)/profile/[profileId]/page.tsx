@@ -59,7 +59,7 @@ const UserProfileIdPage = async ({
   return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
 
-      <ProfileHead imageSrc={user.imageUrl || ""} />
+      {/* <ProfileHead imageSrc={user.imageUrl || ""} />
 
       <ProfileDetails
         name={user.name || ""}
@@ -67,7 +67,7 @@ const UserProfileIdPage = async ({
         description={user.description || ""}
         phone={user.phone || ""}
         link={user.link || ""}
-      />
+      /> */}
 
       <ProfilePageLink currentUser={user} />
 
