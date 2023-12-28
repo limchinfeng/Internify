@@ -61,13 +61,13 @@ const UserProfileIdPage = async ({
 
       <ProfileHead imageSrc={user.imageUrl || ""} />
 
-      {/* <ProfileDetails
-        name={user.name || ""}
-        email={user.email || ""}
-        description={user.description || ""}
-        phone={user.phone || ""}
-        link={user.link || ""}
-      /> */}
+      <ProfileDetails
+        name={user?.name || ""}
+        email={user?.email || ""}
+        description={user?.description || ""}
+        phone={user?.phone || ""}
+        link={user?.link || ""}
+      />
 
       <ProfilePageLink currentUser={user} />
 
