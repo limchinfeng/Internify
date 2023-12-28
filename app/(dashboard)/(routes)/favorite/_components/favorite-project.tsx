@@ -19,13 +19,13 @@ export const FavoriteProject = ({
     <div className="w-full">
       {projects.length > 0 ? (
         <>
-          <Heading 
+          <Heading
             title='Projects Favorites'
             subtitle='List of projects you have favorited!'
           />
           <div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 mt-5'>
             {projects.map((project) => (
-              <ProjectCard 
+              <ProjectCard
                 key={project.id}
                 id={project.id}
                 title={project.title}
@@ -42,12 +42,12 @@ export const FavoriteProject = ({
         </>
       ) : (
         <div className='h-[20vh] flex flex-col gap-2 justify-center items-center'>
-        <Heading 
-          center
-          title="No Favorites Project found"
-          subtitle="Looks like you have no favorite projects"
+          <Heading
+            center
+            title="No Favorites Project found"
+            subtitle="Looks like you have no favorite projects"
           />
-      </div>
+        </div>
       )}
     </div>
   )
