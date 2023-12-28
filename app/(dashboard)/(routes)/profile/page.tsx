@@ -128,47 +128,42 @@ const ProfilePage = async () => {
         />
       </div>
 
-      <div>
-        <>
-          {!currentUser.isCompany && (
-            <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
-              <p className="text-lg font-bold">
-                Listing Application
-              </p>
-              <ApplicationDataTable
-                columns={application_columns}
-                data={newDataUser}
-              />
-            </div>
-          )}</>
-      </div>
 
-      {/* 
-      <div>
-        <>
-          {currentUser.isCompany ? (
-            <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
-              <p className="text-lg font-bold">
-                Listing
-              </p>
-              <CompanyDataTable
-                columns={CompanyColumns}
-                data={listings}
-              />
+      {!currentUser.isCompany && (
+        <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
+          <p className="text-lg font-bold">
+            Listing Application
+          </p>
+          <ApplicationDataTable
+            columns={application_columns}
+            data={newDataUser}
+          />
+        </div>
+      )}
 
-              <p className="text-lg font-bold">
-                Candidate Listing Application
-              </p>
-              <CompanyApplicationDataTable
-                columns={company_application_columns}
-                data={newDataApplication}
-              />
-            </div>
-          ) : (
-            <div> </div>
-          )}
-        </>
-      </div> */}
+
+
+      {currentUser.isCompany ? (
+        <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
+          <p className="text-lg font-bold">
+            Listing
+          </p>
+          <CompanyDataTable
+            columns={CompanyColumns}
+            data={listings}
+          />
+
+          <p className="text-lg font-bold">
+            Candidate Listing Application
+          </p>
+          <CompanyApplicationDataTable
+            columns={company_application_columns}
+            data={newDataApplication}
+          />
+        </div>
+      ) : (
+        <div> </div>
+      )}
 
     </div>
   );
