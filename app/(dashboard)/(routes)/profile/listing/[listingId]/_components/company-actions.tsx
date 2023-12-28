@@ -24,7 +24,7 @@ export const CompanyActions = ({
     try {
       setIsLoading(true);
 
-      if(isPublished) {
+      if (isPublished) {
         await axios.patch(`/api/company/profile/listing/${listingId}/unpublish`);
         toast.success("Listing unpublished");
       } else {
@@ -35,7 +35,7 @@ export const CompanyActions = ({
       router.refresh();
     } catch {
       toast.error("Something went wrong");
-    } finally { 
+    } finally {
       setIsLoading(false);
     }
   }
@@ -46,7 +46,7 @@ export const CompanyActions = ({
 
       await axios.delete(`/api/company/profile/listing/${listingId}`)
       router.refresh();
-      router.push(`/company/profile`);
+      router.push(`/profile`);
       toast.success("Listing deleted");
     } catch {
       toast.error("Something went wrong");
