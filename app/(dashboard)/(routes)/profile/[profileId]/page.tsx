@@ -59,9 +59,9 @@ const UserProfileIdPage = async ({
   return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
 
-      {/* <ProfileHead imageSrc={user.imageUrl || ""} />
+      <ProfileHead imageSrc={user.imageUrl || ""} />
 
-      <ProfileDetails
+      {/* <ProfileDetails
         name={user.name || ""}
         email={user.email || ""}
         description={user.description || ""}
