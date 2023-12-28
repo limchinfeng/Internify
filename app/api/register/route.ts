@@ -40,7 +40,7 @@ export async function POST(
         // from: `Example Email <hello@${DOMAIN}>`,
         from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
-        subject: 'Please Activate Your Account',
+        subject: 'Please Activate Your Account Now!',
         text: `Hello ${user.name}, please activate your account by clicking this link: https://internify-deploy.vercel.app/api/register/activate/${token.token}`,
     })
 
