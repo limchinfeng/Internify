@@ -23,7 +23,7 @@ const Error: React.FC<ErrorStateProps> = ({
             {hasError ? (
                 <div className='h-full w-full flex flex-col items-center justify-center gap-3'>
                     <div>
-                        Uh Oh
+                        Uh Oh,sad
                     </div>
                     <div>
                         Something went wrong,{error?.message}
