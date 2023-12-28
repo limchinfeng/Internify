@@ -79,13 +79,13 @@ export const ProfileDetails = ({
                 )}
 
               {/* <Link
-              href={`http://${link}`}
-              target="_blank"
-              className="text-xl font-medium italic text-primary hover:text-blue-800 transition hover:underline mx-10 font-sans mt-1"
-            >
-              {link}
-            </Link>
-            {!link && <p className="font-medium italic text-xl">No Link</p>} */}
+                href={`http://${link}`}
+                target="_blank"
+                className="text-xl font-medium italic text-primary hover:text-blue-800 transition hover:underline mx-10 font-sans mt-1"
+              >
+                {link}
+              </Link>
+              {!link && <p className="font-medium italic text-xl">No Link</p>} */}
             </>
           </div>
         </div>

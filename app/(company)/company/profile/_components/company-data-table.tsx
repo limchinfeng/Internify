@@ -67,7 +67,7 @@ export function CompanyDataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <Link href="/company/profile/listing">
+        <Link href="/profile/listing">
           <Button>
             <PlusCircle className="h-4 w-4 mr-2" />
             New Listing

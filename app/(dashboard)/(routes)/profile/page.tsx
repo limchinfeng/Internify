@@ -95,7 +95,6 @@ const ProfilePage = async () => {
     email: item.user.email || "",
   }));
 
-
   return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
       <ProfileImage currentUser={currentUser} />
@@ -142,28 +141,31 @@ const ProfilePage = async () => {
       )}
 
 
+      <div>
+        <>
+          {currentUser.isCompany ? (
+            <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
+              <p className="text-lg font-bold">
+                Listing
+              </p>
+              <CompanyDataTable
+                columns={CompanyColumns}
+                data={listings}
+              />
 
-      {currentUser.isCompany ? (
-        <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
-          <p className="text-lg font-bold">
-            Listing
-          </p>
-          <CompanyDataTable
-            columns={CompanyColumns}
-            data={listings}
-          />
-
-          <p className="text-lg font-bold">
-            Candidate Listing Application
-          </p>
-          <CompanyApplicationDataTable
-            columns={company_application_columns}
-            data={newDataApplication}
-          />
-        </div>
-      ) : (
-        <div> </div>
-      )}
+              <p className="text-lg font-bold">
+                Candidate Listing Application
+              </p>
+              <CompanyApplicationDataTable
+                columns={company_application_columns}
+                data={newDataApplication}
+              />
+            </div>
+          ) : (
+            <div> </div>
+          )}
+        </>
+      </div>
 
     </div>
   );
