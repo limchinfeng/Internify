@@ -64,14 +64,14 @@ export const ProfileDetails = ({
               <IoIosLink className={iconStyle} />
               <h1 className="text-lg text-black">Link</h1>
             </div>
-            <Link
+            {/* <Link
               href={`http://${link}`}
               target="_blank"
               className="text-xl font-medium italic text-primary hover:text-blue-800 transition hover:underline mx-10 font-sans mt-1"
             >
               {link}
             </Link>
-            {!link && <p className="font-medium italic text-xl">No Link</p>}
+            {!link && <p className="font-medium italic text-xl">No Link</p>} */}
           </div>
         </div>
 
@@ -81,7 +81,7 @@ export const ProfileDetails = ({
               <TbFileDescription className={iconStyle} />
               <h1 className="text-lg text-black">Description</h1>
             </div>
-            {description && <Preview value={description} />}
+            {/* {description && <Preview value={description} />} */}
           </div>
         </div>
       </div>
