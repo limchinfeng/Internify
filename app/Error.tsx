@@ -19,7 +19,7 @@ const Error: React.FC<ErrorStateProps> = ({
                 Uh Oh
             </div>
             <div>
-                Something went wrong!Try Again later!
+                Something went wrong!Try Again later.
             </div>
         </div>
     )
