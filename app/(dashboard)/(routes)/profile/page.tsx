@@ -143,7 +143,7 @@ const ProfilePage = async () => {
           )}</>
       </div>
 
-
+      {/* 
       <div>
         <>
           {currentUser.isCompany ? (
@@ -168,7 +168,7 @@ const ProfilePage = async () => {
             <div> </div>
           )}
         </>
-      </div>
+      </div> */}
 
     </div>
   );
