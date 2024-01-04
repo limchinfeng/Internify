@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
-import { User } from "lucide-react";
 
 
 export async function POST(
@@ -46,7 +45,7 @@ export async function POST(
         from: `Internify <Internify@gmail.com>`,
         to: `${user.email}`,
         subject: 'Please Reset the Password of your Account',
-        text: `Dear ${user.name}, Reset the password of your account by clicking this link: http://localhost:3000/forgotpw/reset/${token.token}`,
+        text: `Dear ${user.name}, Reset the password of your account by clicking this link: https://internify-deploy.vercel.app/forgotpw/reset/${token.token}`,
     })
 
         .then(msg => console.log(msg)) // logs response data

@@ -6,18 +6,25 @@ import ProfileDetails from "./_components/profile-details";
 import DataTable from "./_components/data-table";
 import { columns } from "./_components/columns";
 import { ListingDataTable } from "./_components/listing-data-table";
-import { ProfilePageLink } from "../_components/profile-page-link";
+import { ProfilePageLink } from ".././_components/profile-page-link";
+
 
 const UserProfileIdPage = async ({
   params,
 }: {
   params: { profileId: string };
 }) => {
+
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
     return redirect("/");
   }
+
+  if (!params || !params.profileId) {
+    return redirect("/"); // Redirect to a different page or display an error message
+  }
+
 
   const user = await prismadb.user.findUnique({
     where: {
@@ -34,8 +41,8 @@ const UserProfileIdPage = async ({
       userId: params.profileId,
       isPublished: true
     },
-    orderBy:{
-      createdAt:"desc"
+    orderBy: {
+      createdAt: "desc"
     }
   });
 
@@ -51,15 +58,15 @@ const UserProfileIdPage = async ({
 
   return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
-      
+
       <ProfileHead imageSrc={user.imageUrl || ""} />
 
       <ProfileDetails
-        name={user.name || ""}
-        email={user.email || ""}
-        description={user.description || ""}
-        phone={user.phone || ""}
-        link={user.link || ""}
+        name={user?.name || ""}
+        email={user?.email || ""}
+        description={user?.description || ""}
+        phone={user?.phone || ""}
+        link={user?.link || ""}
       />
 
       <ProfilePageLink currentUser={user} />
@@ -68,9 +75,9 @@ const UserProfileIdPage = async ({
         <p className="text-lg font-bold">
           Projects
         </p>
-        <DataTable 
-          columns={columns} 
-          data={project} 
+        <DataTable
+          columns={columns}
+          data={project}
         />
       </div>
 
@@ -79,9 +86,9 @@ const UserProfileIdPage = async ({
           <p className="text-lg font-bold">
             Listings
           </p>
-          <ListingDataTable 
-            columns={columns} 
-            data={listings} 
+          <ListingDataTable
+            columns={columns}
+            data={listings}
           />
         </div>
       )}

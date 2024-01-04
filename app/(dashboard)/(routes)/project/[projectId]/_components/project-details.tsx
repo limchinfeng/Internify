@@ -72,7 +72,7 @@ const ProjectDetails = ({
           <p className="text-xl font-sans flex gap-3">
             <FaLinkedin className={iconStyle} />
             <Link
-              href={`http://${link}`}
+              href={`${link}`}
               target="_blank"
               className="text-lg font-medium italic text-primary hover:text-blue-800 transition hover:underline"
             >

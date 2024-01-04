@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { NextResponse, NextRequest } from 'next/server'
 import bcrypt from "bcrypt";
 
+
 export async function PATCH(
     request: NextRequest,
     {
@@ -68,7 +69,7 @@ export async function PATCH(
 
 
 
-        return NextResponse.redirect('http://localhost:3000/login');
+        return NextResponse.redirect('https://internify-deploy.vercel.app/login');
 
 
     } catch (error) {
