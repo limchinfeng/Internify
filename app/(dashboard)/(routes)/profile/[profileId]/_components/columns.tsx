@@ -28,7 +28,7 @@ export const columns: ColumnDef<Project>[] = [
       return (
         <div>
           <Link
-            href={`/project/${id}`}
+            href={`/listing/${id}`}
             target="_blank"
             className="font-medium italic text-primary hover:text-blue-800 transition hover:underline"
           >
