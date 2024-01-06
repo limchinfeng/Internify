@@ -152,7 +152,7 @@ const ProfilePage = async () => {
             data={listings}
           />
 
-          <p className="text-lg font-bold">
+          <p className="text-lg font-bold mt-8">
             Candidate Listing Application
           </p>
           <CompanyApplicationDataTable

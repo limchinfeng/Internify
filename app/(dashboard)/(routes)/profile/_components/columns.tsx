@@ -30,6 +30,26 @@ export const columns: ColumnDef<Project>[] = [
         </Button>
       )
     },
+    cell: ({ row }) => {
+      const { id, title, isPublished } = row.original;
+      return <>
+        {isPublished ? (
+          <div>
+            <Link
+              href={`/project/${id}`}
+              target="_blank"
+              className="font-medium text-primary hover:text-blue-800 transition hover:underline"
+            >
+              {title}
+            </Link>
+          </div>
+        ): (
+          <p>
+            {title}
+          </p>
+        )}  
+      </>
+    },
   },
   {
     accessorKey: "createdAt",
