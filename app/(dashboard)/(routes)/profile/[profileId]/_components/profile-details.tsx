@@ -42,7 +42,11 @@ export const ProfileDetails = ({
               <BsTelephone className={iconStyle} />
               <h1 className="text-lg text-black">Phone</h1>
             </div>
-            <p className="text-xl mx-10 font-sans mt-1">{phone}</p>
+            {phone === "" ? <>
+              <p className="mx-10 text-slate-500 italic text-sm">No phone number</p>
+            </> : <>
+              <p className="text-xl mx-10 font-sans mt-1">{phone}</p>
+            </>}
           </div>
         </div>
 
@@ -64,14 +68,20 @@ export const ProfileDetails = ({
               <IoIosLink className={iconStyle} />
               <h1 className="text-lg text-black">Link</h1>
             </div>
-            <Link
-              href={`http://${link}`}
-              target="_blank"
-              className="text-xl font-medium italic text-primary hover:text-blue-800 transition hover:underline mx-10 font-sans mt-1"
-            >
-              {link}
-            </Link>
-            {!link && <p className="font-medium italic text-xl">No Link</p>}
+            <>
+              {link ?
+                (
+                  <Link
+                    href={`http://${link}`}
+                    target="_blank"
+                    className="text-xl font-medium italic text-primary hover:text-blue-800 transition hover:underline mx-10 font-sans mt-1"
+                  >
+                    {link}
+                  </Link>
+                ) : (
+                  <p className="mx-10 text-slate-500 italic text-sm">No Link</p>
+                )}
+            </>
           </div>
         </div>
 
@@ -81,7 +91,13 @@ export const ProfileDetails = ({
               <TbFileDescription className={iconStyle} />
               <h1 className="text-lg text-black">Description</h1>
             </div>
-            {description && <Preview value={description} />}
+            <>
+              {description === "" ? <>
+                <p className="mx-10 text-slate-500 italic text-sm">No description</p>
+              </> : <>
+                (<Preview value={description} />)
+              </>}
+            </>
           </div>
         </div>
       </div>

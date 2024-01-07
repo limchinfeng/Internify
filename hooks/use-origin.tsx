@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react"
 
 export const useOrigin = () => {
@@ -8,7 +9,7 @@ export const useOrigin = () => {
     setIsMounted(true);
   }, []);
 
-  if(!isMounted) {
+  if (!isMounted) {
     return '';
   }
 

@@ -13,7 +13,7 @@ export const FileUpload = ({
   onChange, endpoint
 }: FileUploadProps) => {
   return (
-    <UploadDropzone 
+    <UploadDropzone
       endpoint={endpoint}
       onClientUploadComplete={(res) => {
         onChange(res?.[0].url);
@@ -24,3 +24,4 @@ export const FileUpload = ({
     />
   )
 }
+

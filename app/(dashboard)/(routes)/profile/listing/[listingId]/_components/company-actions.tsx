@@ -10,12 +10,12 @@ import toast from "react-hot-toast";
 
 interface ActionsProps {
   disabled: boolean;
-  projectId: string;
+  listingId: string;
   isPublished: boolean;
 }
 
-export const Actions = ({
-  disabled, projectId, isPublished
+export const CompanyActions = ({
+  disabled, listingId, isPublished
 }: ActionsProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,18 +24,18 @@ export const Actions = ({
     try {
       setIsLoading(true);
 
-      if(isPublished) {
-        await axios.patch(`/api/profile/project/${projectId}/unpublish`);
-        toast.success("Project unpublished");
+      if (isPublished) {
+        await axios.patch(`/api/company/profile/listing/${listingId}/unpublish`);
+        toast.success("Listing unpublished");
       } else {
-        await axios.patch(`/api/profile/project/${projectId}/publish`);
-        toast.success("Project published");
+        await axios.patch(`/api/company/profile/listing/${listingId}/publish`);
+        toast.success("Listing published");
       }
 
       router.refresh();
     } catch {
       toast.error("Something went wrong");
-    } finally { 
+    } finally {
       setIsLoading(false);
     }
   }
@@ -44,10 +44,10 @@ export const Actions = ({
     try {
       setIsLoading(true);
 
-      await axios.delete(`/api/profile/project/${projectId}`)
+      await axios.delete(`/api/company/profile/listing/${listingId}`)
       router.refresh();
       router.push(`/profile`);
-      toast.success("Project deleted");
+      toast.success("Listing deleted");
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -57,22 +57,22 @@ export const Actions = ({
 
   const onVisit = () => {
     setIsLoading(true);
-    router.push(`/project/${projectId}`)
+    router.push(`/listing/${listingId}`)
   }
 
   return (
     <div className="flex items-center gap-x-2">
       {isPublished ? (
-      <Button
-        onClick={onVisit}
-        disabled={isLoading}
-        variant="black"
-        size="sm"
-      >
-        View Page
-      </Button>         
+        <Button
+          onClick={onVisit}
+          disabled={isLoading}
+          variant="black"
+          size="sm"
+        >
+          View Page
+        </Button>         
       ) : (
-        <></>
+          <></>
       )}
       <Button
         onClick={onClick}
