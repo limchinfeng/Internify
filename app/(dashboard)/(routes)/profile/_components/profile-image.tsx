@@ -59,6 +59,7 @@ export const ProfileImage = ({
         )}
        
       </div>
+      
         {isEditing && (
           <div className="w-80 flex flex-col justify-between items-center">
             <FileUpload 

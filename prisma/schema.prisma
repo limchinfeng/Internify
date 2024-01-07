@@ -21,6 +21,7 @@ model User {
   imageUrl           String?
   phone              String?
   link               String?
+  resumeUrl          String?
   isCompany          Boolean  @default(false)
   favoriteProjectIds String[] @db.ObjectId
   favoriteListingIds String[] @db.ObjectId

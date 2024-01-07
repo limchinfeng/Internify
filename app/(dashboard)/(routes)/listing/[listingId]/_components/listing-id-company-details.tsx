@@ -54,7 +54,7 @@ export const ListingIdCompanyDetails = ({
           {email}
         </div>
         <div className="flex flex-row gap-2 items-center">
-          <MapPin className="h-6 w-6" />
+          <MapPin className="h-6 w-6 flex-shrink-0" />
           {location} | {state}
         </div>
         <div className="flex flex-row gap-2 items-center">
