@@ -38,6 +38,7 @@ export const NavbarImage =  ({
               <DropdownMenuItem onClick={() => router.push("/company/profile")}>Go to Company</DropdownMenuItem>
             )} */}
             {currentUser ? <>
+              <DropdownMenuItem onClick={() => router.push("/profile")}>Profile</DropdownMenuItem>
               <DropdownMenuItem onClick={() => signOut()}>Log Out</DropdownMenuItem>
             </> : <>
             <DropdownMenuItem onClick={() => router.push("/login")}>Login</DropdownMenuItem>
