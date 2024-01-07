@@ -7,6 +7,7 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import { redirect } from "next/navigation";
 import { ResumeUpload } from "./_components/resume-upload";
+import { ResumeReader } from "./_components/resume-reader";
 
 
 
@@ -20,6 +21,8 @@ const ResumePage = async () => {
   return (  
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
       <ResumeUpload currentUser={currentUser} />
+
+      <ResumeReader currentUser={currentUser} />
     </div>
   );
 }
