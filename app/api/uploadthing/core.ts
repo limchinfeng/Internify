@@ -23,6 +23,9 @@ export const ourFileRouter = {
   projectShowcaseImage:f({image: {maxFileCount: 4, maxFileSize: "4MB"}})
     .middleware(() => handleAuth())
     .onUploadComplete(() => {}),
+  resumeAttachment: f({pdf: {maxFileCount: 1, maxFileSize: "16MB"}})
+    .middleware(() => handleAuth())
+    .onUploadComplete(() => {}),
 } satisfies FileRouter;
  
 export type OurFileRouter = typeof ourFileRouter;
