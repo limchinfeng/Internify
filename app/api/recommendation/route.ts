@@ -57,46 +57,34 @@ export async function POST(
       id: listing.id,
       title: listing.title,
       description: listing.description,
-      requirement: listing.requirement,
       state: listing.state,
       category: listing.category ? listing.category.name : null,
     }));
 
-    console.log("1");
+    console.log(internListing);
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-1106",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           "role": "system",
-          "content": `You are a job recommendation bot, designed to analyze job listings and recommend suitable jobs to users based on their specific criteria or preferences. You should recommend 1 job that best fit the user's criteria and justify your choices in your response. You must only return the json structure without any other text.
+          "content": `You are a job recommendation bot, designed to analyze job listings provided in json format and recommend suitable jobs to users based on their specific criteria or preferences. You should recommend 1 job that best fit the user's criteria and justify your choices in your response.
 
-          Here is the job listing in json format and contain id of job, title of job, description of job, requirement of job, location of job, state of job and job categry: ${internListing} 
+          Read the following JSON carefully as you will need to recommend a job from this JSON: ${internListing}
 
-          Here is the messages from user: ${messages}
-
-          if there is match job in job listing, return the id and title of the job. else return null
-          Example of JSON to return:
-          START OF JSON
-          [
-            {
-              id: ${id},
-              title: ${title},
-            }
-          ]
-          END OF JSON
-
+          return the most suitable job's title: 
+          EXAMPLE: ${title}
           `
         },  
-        // {
-        //   role: 'user',
-        //   content: messages
-        // }
+        {
+          role: 'user',
+          content: messages
+        }
       ]
       // messages: ["", ...messages]
     });
 
-    console.log(response.choices[0].message)
+    console.log(response.choices[0].message.content)
 
     return NextResponse.json(response.choices[0].message.content);
   } catch (error) {
