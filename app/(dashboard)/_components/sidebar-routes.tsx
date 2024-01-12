@@ -16,6 +16,11 @@ const routes = [
   },
   {
     icon: null,
+    label: "Recommendation",
+    href: "/recommendation"
+  },
+  {
+    icon: null,
     label: "Resume Upload",
     href: "/resume"
   },
