@@ -3,7 +3,6 @@ import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 import Configuration from "openai";
 import OpenAI from "openai";
-import ChatCompletionRequestMessage from "openai";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -47,43 +46,42 @@ export async function POST(
       }
     });
 
+    const id = listings[0].id;
+    const title = listings[0].title;
+    const description = listings[0].description;
+
     const internListing = listings.map(listing => ({
+      id: listing.id,
       title: listing.title,
       description: listing.description,
       requirement: listing.requirement,
       location: listing.location,
       state: listing.state,
-      name: listing.category ? listing.category.name : null,
+      category: listing.category ? listing.category.name : null,
     }));
 
     console.log("1");
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-1106",
       messages: [
         {
           "role": "system",
-          "content": `You are a job recommendation bot, designed to analyze job listings and recommend suitable jobs to users based on their specific criteria or preferences. Your task involves parsing job details from provided listings in JSON format and matching them with the requirements or preferences expressed in the user's message. You should recommend two jobs that best fit the user's criteria and justify your choices in your response. If no suitable jobs are found, provide a reasoned explanation in JSON format. For instance, if a user states they have experience in data analytics and are looking for a job in Kedah, you should analyze the job listings to find matches that align with these criteria, focusing on roles related to data analytics located in Kedah. You must only return the json structure without any other text.
+          "content": `You are a job recommendation bot, designed to analyze job listings and recommend suitable jobs to users based on their specific criteria or preferences. Your task involves parsing job details from provided listings in JSON format and matching them with the requirements or preferences expressed in the user's message. You should recommend job that best fit the user's criteria and justify your choices in your response. You must only return the json structure without any other text.
           
-          Here is the job listing in json format for you to parse: ${internListing}
+          Here is the job listing in json format and contain id of job, title of job, description of job, requirement of job, location of job, state of job and job categry for you to parse: ${internListing} 
 
-          If there is 2 suitable recommendations, return this JSON structure without any other text:
+          You should return the id,title and description of job that is availbel in ${internListing}, and the reason why you recommend this job. Example in JSON structure to return
           [
             {
-              "id": "job_id_1",
-              "title": "job_title_1",
-              "description": "job_description_1",
-              "reason": "Explanation for recommendation based on user's criteria"
-            },
-            {
-              "id": "job_id_2",
-              "title": "job_title_2",
-              "description": "job_description_2",
-              "reason": "Explanation for recommendation based on user's criteria"
+              "id": ${id},
+              "title": ${title},
+              "description": ${description},
+              "reason": "WRITE DOWN THE REASON"
             }
           ]
 
-          If there is only 1 suitable recommendation, return this JSON structure without any other text:
+         If there is suitable job that match the user's message, return this JSON structure without any other text:
           [
             {
               "id": "job_id_1",
@@ -91,12 +89,6 @@ export async function POST(
               "description": "job_description_1",
               "reason": "Explanation for recommendation based on user's criteria"
             },
-            {
-              "id": null,
-              "title": "",
-              "description": "",
-              "reason": "Explanation for the absence of suitable job recommendations based on user's criteria"
-            }
           ]
           
           IF no suitable job found, return this JSON structure without any other text:
@@ -120,11 +112,9 @@ export async function POST(
 
     console.log(response.choices[0].message)
 
-    return NextResponse.json(response.choices[0].message);
+    return NextResponse.json(response.choices[0].message.content);
   } catch (error) {
     console.log('[CODE_ERROR]', error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 };
-
-//https://stackoverflow.com/questions/77397517/making-api-calls-to-open-ai-using-next-js-and-react
