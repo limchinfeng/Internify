@@ -4,7 +4,6 @@ import Configuration from "openai";
 import OpenAI from "openai";
 import ChatCompletionRequestMessage from "openai";
 
-
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -29,7 +28,6 @@ export async function POST(
       return new NextResponse("Messages are required", { status: 400 });
     }
 
-
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
@@ -39,7 +37,7 @@ export async function POST(
         },
         {
           role: 'user',
-          content: ''
+          content: messages
         }
       ]
       // messages: ["", ...messages]
