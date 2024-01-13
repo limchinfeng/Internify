@@ -27,7 +27,7 @@ export async function POST(
 ) {
   try {
     const body = await req.json();
-    const { messages  } = body;
+    const { messages, categoryId  } = body;
 
     if (!configuration.apiKey) {
       return new NextResponse("OpenAI API Key not configured.", { status: 500 });
@@ -37,12 +37,14 @@ export async function POST(
       return new NextResponse("Messages are required", { status: 400 });
     }
 
+    if (!categoryId) {
+      return new NextResponse("Category ID is required", { status: 400 });
+    }
+
     const listings = await prismadb.listing.findMany({
       where: {
         isPublished: true,
-        category: {
-          name: "Software Engineering"
-        }
+        categoryId
       },
       select: {
         id: true,
@@ -58,12 +60,22 @@ export async function POST(
       }
     });
 
-    const id = listings[0].id;
-    const title = listings[0].title;
-    const description = listings[0].description;
-    const requirement = listings[0].requirement;
-    const state = listings[0].state;
-    const category = listings[0].category?.name;
+    const category = await prismadb.category.findUnique({
+      where: {
+        id: categoryId
+      }
+    })
+
+    if(listings.length === 0) {
+      return NextResponse.json({
+        id: '',
+        title: '',
+        description: '',
+        requirement: '',
+        state: '',
+        reason: `No job listing in ${category?.name}`
+      });
+    }
 
     const internListing = listings.map(listing => ({
       id: listing.id,
@@ -111,7 +123,7 @@ export async function POST(
               id: 'ID',
               title: 'Job Title',
               description: 'Description',
-              requirement: 'Requirement',
+              requirement: 'Requirements',
               state: 'Location',
               reason: 'Write down the reason'
             }

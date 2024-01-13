@@ -9,20 +9,31 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea"
 import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
+import { Combobox } from "@/components/ui/combobox";
 
+interface RecommendationInputProps {
+  options: {
+    label: string;
+    value: string
+  }[]
+}
 
 const formSchema = z.object({
   message: z.string().min(1, {
       message: "Prompt is required",
   }),
+  categoryId: z.string().min(1),
 });
 
-export const RecommendationInput = () => {
+export const RecommendationInput = ({
+  options
+}: RecommendationInputProps) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      message: ""
+      message: "",
+      categoryId: "",
     }
   });
 
@@ -31,7 +42,7 @@ export const RecommendationInput = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values.message);
     try {
-      const response = await axios.post('/api/recommendation', { messages: values.message });
+      const response = await axios.post('/api/recommendation', { messages: values.message, categoryId: values.categoryId });
       console.log(response.data);
     } catch(error: any) {
       toast.error("Something went wrong");
@@ -59,6 +70,20 @@ export const RecommendationInput = () => {
                       placeholder="I'm interested in computer science field, specifically in software engineering"
                       className="resize-none w-full"
                       disabled={isSubmitting}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField 
+              control={form.control}
+              name="categoryId"
+              render={({field}) => (
+                <FormItem>
+                  <FormControl>
+                    <Combobox 
+                      options={...options}
                       {...field}
                     />
                   </FormControl>

@@ -10,9 +10,20 @@ const RecommmendationPage = async () => {
     redirect("/");
   }
 
+  const categories = await prismadb.category.findMany({
+    orderBy: {
+      name: "asc"
+    }
+  });
+
   return (
     <div>
-      <RecommendationInput />
+      <RecommendationInput 
+        options={categories.map((category) => ({
+          label: category.name,
+          value: category.id
+        }))}
+      />
     </div>
   )
 }
