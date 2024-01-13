@@ -13,6 +13,15 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+type JobListing = {
+  id: string;
+  title: string;
+  description: string;
+  requirement: string;
+  state: string;
+  category: string;
+};
+
 export async function POST(
   req: Request
 ) {
@@ -30,7 +39,10 @@ export async function POST(
 
     const listings = await prismadb.listing.findMany({
       where: {
-        isPublished: true
+        isPublished: true,
+        category: {
+          name: "Software Engineering"
+        }
       },
       select: {
         id: true,
@@ -55,37 +67,69 @@ export async function POST(
 
     const internListing = listings.map(listing => ({
       id: listing.id,
-      title: listing.title,
-      description: listing.description,
-      state: listing.state,
-      category: listing.category ? listing.category.name : null,
+      title: listing.title || "",
+      description: listing.description || "",
+      requirement: listing.requirement || "",
+      state: listing.state || "",
+      category: listing.category ? listing.category.name : "",
     }));
 
+  
+  const convertListingsToText = (listings: JobListing[]): string => {
+      return listings.map((listing, index) => {
+          // Convert HTML to plain text if needed
+          const description = listing.description.replace(/<[^>]+>/g, '');
+          const requirement = listing.requirement.replace(/<[^>]+>/g, '');
+  
+          return [
+              `${index + 1}. Job Title: ${listing.title}`,
+              `   ID: ${listing.id}`,
+              `   Location: ${listing.state}`,
+              `   Category: ${listing.category}`,
+              `   Description:`,
+              `     - ${description}`,
+              `   Requirements:`,
+              `     - ${requirement}`,
+          ].join('\n');
+      }).join('\n\n');
+  };
+
     console.log(internListing);
+    const jobListingsText = convertListingsToText(internListing);
+    console.log(jobListingsText);
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
           "role": "system",
-          "content": `You are a job recommendation bot, designed to analyze job listings provided in json format and recommend suitable jobs to users based on their specific criteria or preferences. You should recommend 1 job that best fit the user's criteria and justify your choices in your response.
-
-          Read the following JSON carefully as you will need to recommend a job from this JSON: ${internListing}
-
-          return the most suitable job's title: 
-          EXAMPLE: ${title}
+          "content": `Find the requirement "${messages}" that match with the job below: ${jobListingsText}
+          
+          return the result in this JSON format without any other text:
+          [
+            {
+              id: 'ID',
+              title: 'Job Title',
+              description: 'Description',
+              requirement: 'Requirement',
+              state: 'Location',
+              reason: 'Write down the reason'
+            }
+          ]
+          
           `
         },  
-        {
-          role: 'user',
-          content: messages
-        }
+        // {
+        //   role: 'user',
+        //   content: messages
+        // }
       ]
       // messages: ["", ...messages]
     });
 
     console.log(response.choices[0].message.content)
 
+    // return NextResponse.json(internListing);
     return NextResponse.json(response.choices[0].message.content);
   } catch (error) {
     console.log('[CODE_ERROR]', error);
