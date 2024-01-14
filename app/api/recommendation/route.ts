@@ -73,7 +73,7 @@ export async function POST(
         description: '',
         requirement: '',
         state: '',
-        reason: `No job listing in ${category?.name}`
+        reason: `No job listing in ${category?.name} category`
       });
     }
 
@@ -117,36 +117,51 @@ export async function POST(
           "role": "system",
           "content": `Find the requirement "${messages}" that match with the job below: ${jobListingsText}
           
-          return the result in this JSON format without any other text:
-          [
-            {
-              id: 'ID',
-              title: 'Job Title',
-              description: 'Description',
-              requirement: 'Requirements',
-              state: 'Location',
-              reason: 'Write down the reason'
-            }
-          ]
+          return only 1 job and the result in this JSON format without any other text:
+          {
+            id: 'ID',
+            title: 'Job Title',
+            description: 'Description',
+            requirement: 'Requirements',
+            state: 'Location',
+            reason: 'Write down the reason'
+          }
           
           `
         },  
-        // {
-        //   role: 'user',
-        //   content: messages
-        // }
       ]
-      // messages: ["", ...messages]
     });
 
     console.log(response.choices[0].message.content)
 
-    // return NextResponse.json(internListing);
-    return NextResponse.json(response.choices[0].message.content);
+     // Extract the content from the response
+     const jsonString = response.choices[0].message.content;
+
+     // Parse the content to JSON using the function
+     const parsedJSON = parseContentToJSON(jsonString || "");
+    console.log("--" + parsedJSON)
+
+    return NextResponse.json(parsedJSON);
+    // return NextResponse.json(response.choices[0].message.content);
   } catch (error) {
     console.log('[CODE_ERROR]', error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 };
 
-//https://stackoverflow.com/questions/77397517/making-api-calls-to-open-ai-using-next-js-and-react
+const parseContentToJSON = (content: string): any => {
+  try {
+    // Parse the content as JSON
+    const jsonContent = JSON.parse(content);
+
+    // If the parsing is successful, and it has the expected structure, return it
+    if (jsonContent && typeof jsonContent === 'object') {
+      return jsonContent;
+    }
+  } catch (error) {
+    console.error('Failed to parse content to JSON:', error);
+  }
+
+  // Handle cases where the content doesn't match the expected structure or parsing fails
+  return null;
+};
