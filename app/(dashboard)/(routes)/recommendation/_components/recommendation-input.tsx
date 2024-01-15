@@ -118,7 +118,7 @@ export const RecommendationInput = ({
               Generate
             </Button>
             <p className="text-xs text-muted-foreground italic text-center">
-              The result might not be 100% accuracy. Use at your own risks.
+              The result might not be 100% accurate. Use at your own risks.
             </p>
           </form>
         </Form>
