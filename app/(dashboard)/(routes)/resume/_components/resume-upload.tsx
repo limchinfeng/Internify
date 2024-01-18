@@ -9,7 +9,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Edit, Pencil, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { File } from "lucide-react";
+import { File as File2 } from "lucide-react";
+
+import { writeFile } from 'fs/promises'
+import { join } from 'path'
+import getCurrentUser from "@/actions/getCurrentUser";
+import { File } from "buffer";
 
 interface ResumeUploadProps {
   currentUser: User;
@@ -40,7 +45,6 @@ export const ResumeUpload = ({
     }
   }
 
-  
   return (  
     <div className="flex justify-center items-center">
       <div className="flex justify-center items-center">
@@ -67,7 +71,7 @@ export const ResumeUpload = ({
                   target="_blank"
                   className="flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-md hover:underline gap-2"
                 >
-                  <File />
+                  <File2 />
                   <p className="line-clamp-1">
                     {currentUser.name}'s resume
                   </p>
@@ -110,6 +114,7 @@ export const ResumeUpload = ({
           </>
         )}    
       </div>
+
     </div>
   );
 }

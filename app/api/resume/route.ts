@@ -1,53 +1,34 @@
+// pages/api/extract-text.ts
 
-import { NextResponse } from "next/server";
-import Configuration from "openai";
-import OpenAI from "openai";
-import ChatCompletionRequestMessage from "openai";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import formidable from 'formidable';
+import fs from 'fs';
+import pdfParse from 'pdf-parse';
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-export async function POST(
-  req: Request
-) {
-  try {
-    
-    const body = await req.json();
-    const { messages  } = body;
-
-    if (!configuration.apiKey) {
-      return new NextResponse("OpenAI API Key not configured.", { status: 500 });
-    }
-
-    if (!messages) {
-      return new NextResponse("Messages are required", { status: 400 });
-    }
-
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: 'system',
-          content: '',
-        },
-        {
-          role: 'user',
-          content: messages
-        }
-      ]
-      // messages: ["", ...messages]
-    });
-
-    return NextResponse.json(response.choices[0].message);
-  } catch (error) {
-    console.log('[CODE_ERROR]', error);
-    return new NextResponse("Internal Error", { status: 500 });
-  }
+export const config = {
+  api: {
+    bodyParser: false,
+  },
 };
 
-//https://stackoverflow.com/questions/77397517/making-api-calls-to-open-ai-using-next-js-and-react
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log("1");
+  const form = new formidable.IncomingForm();
+  console.log("2pdf.");
+  form.parse(req, async (err, fields, files) => {
+    if (err) {
+      res.status(500).json({ error: 'Error parsing the form data.' });
+      return;
+    }
+
+    try {
+      const file = files.file as unknown as formidable.File;
+      const dataBuffer = fs.readFileSync(file.filepath);
+      const data = await pdfParse(dataBuffer);
+
+      res.status(200).json({ text: data.text });
+    } catch (error) {
+      res.status(500).json({ error: 'Error processing the PDF file.' });
+    }
+  });
+};

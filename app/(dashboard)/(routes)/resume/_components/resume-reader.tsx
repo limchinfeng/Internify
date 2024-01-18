@@ -39,7 +39,7 @@ export const ResumeReader = ({
 
   const onGenerate = async () => {
     try {
-      const response = await axios.patch(`/api/resume`);
+      const response = await axios.post(`/api/resume`);
       setResumeText(response.data.value);
       toast.success("Done generating");
     } catch (error) {
