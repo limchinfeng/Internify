@@ -3,7 +3,6 @@ import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 import Configuration from "openai";
 import OpenAI from "openai";
-import ChatCompletionRequestMessage from "openai";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -90,8 +89,8 @@ export async function POST(
   const convertListingsToText = (listings: JobListing[]): string => {
       return listings.map((listing, index) => {
           // Convert HTML to plain text if needed
-          const description = listing.description.replace(/<[^>]+>/g, '');
-          const requirement = listing.requirement.replace(/<[^>]+>/g, '');
+          const description = listing.description.replace(/<[^>]+>/g, ' ');
+          const requirement = listing.requirement.replace(/<[^>]+>/g, ' ');
   
           return [
               `${index + 1}. Job Title: ${listing.title}`,
@@ -134,11 +133,11 @@ export async function POST(
 
     console.log(response.choices[0].message.content)
 
-     // Extract the content from the response
-     const jsonString = response.choices[0].message.content;
+    // Extract the content from the response
+    const jsonString = response.choices[0].message.content;
 
-     // Parse the content to JSON using the function
-     const parsedJSON = parseContentToJSON(jsonString || "");
+    // Parse the content to JSON using the function
+    const parsedJSON = parseContentToJSON(jsonString || "");
     console.log("--" + parsedJSON)
 
     return NextResponse.json(parsedJSON);

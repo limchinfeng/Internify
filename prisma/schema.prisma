@@ -75,6 +75,7 @@ model Listing {
   requirement String?
   location    String?
   state       String?
+  summary     String?
   isPublished Boolean @default(false)
 
   createdAt DateTime @default(now())
