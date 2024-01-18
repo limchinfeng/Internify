@@ -123,6 +123,16 @@ const CompanyListingIdPage = async ({
             isPublished={listing.isPublished}
           />
         </div>
+        {listing.isPublished && (
+          <div className="w-full mt-4 rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
+            <div className="rounded-lg bg-white p-4 flex flex-col gap-2 text-justify ">
+              <p>
+                Remember to republish when you have made a modification to generate a new Internify AI Summary
+              </p>
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div>
             <CompanyListingTitle

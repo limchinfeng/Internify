@@ -16,6 +16,7 @@ import { ListingIdCompanyDetails } from "./_components/listing-id-company-detail
 import { ListingIdDescription } from "./_components/listing-id-description";
 import { ListingIdRequirement } from "./_components/listing-id-requirement";
 import { ListingIdApply } from "./_components/listing-id-apply";
+import { ListingIdSummary } from "./_components/listing-id-summary";
 
 const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
   const currentUser = await getCurrentUser();
@@ -47,6 +48,9 @@ const ListingIdPage =  async ({params} : {params: { listingId: string}}) => {
   
   return (  
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
+      <ListingIdSummary 
+        summary={listing.summary!}
+      />
       <ListingIdHead 
         id={listing.id}
         imageUrl={listing.imageUrl!}
