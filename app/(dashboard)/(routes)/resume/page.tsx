@@ -1,27 +1,30 @@
-import getCurrentUser from "@/actions/getCurrentUser";
+// import getCurrentUser from "@/actions/getCurrentUser";
+// import { redirect } from "next/navigation";
+// import { ResumeUpload } from "./_components/resume-upload";
+// import { ResumeReader } from "./_components/resume-reader";
+// import FileUpload from "./_components/file-upload";
+
 import { redirect } from "next/navigation";
-import { ResumeUpload } from "./_components/resume-upload";
-import { ResumeReader } from "./_components/resume-reader";
-import FileUpload from "./_components/file-upload";
 
 
 
 const ResumePage = async () => {
-  const currentUser = await getCurrentUser();
+  return redirect("/");
+  // const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    return redirect("/");
-  }
+  // if (!currentUser) {
+  //   return redirect("/");
+  // }
   
-  return (  
-    <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
-      <ResumeUpload currentUser={currentUser} />
+  // return (  
+  //   <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
+  //     <ResumeUpload currentUser={currentUser} />
 
-      <ResumeReader currentUser={currentUser} />
+  //     <ResumeReader currentUser={currentUser} />
 
-      <FileUpload />
-    </div>
-  );
+  //     <FileUpload />
+  //   </div>
+  // );
 }
  
 export default ResumePage;

@@ -11,7 +11,7 @@ export const NavbarRoutes = ({
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const containsCompany = pathname?.includes('/company');
+  // const containsCompany = pathname?.includes('/company');
 
   useEffect(() => {
     setIsMounted(true);
