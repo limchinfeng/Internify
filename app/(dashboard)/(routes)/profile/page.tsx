@@ -68,6 +68,7 @@ const ProfilePage = async () => {
     listingId: item.listingId,
     title: item.listing.title,
     company: item.listing.user.name || "",
+    companyId: item.listing.user.id,
   }));
 
   const company_applications = await prismadb.application.findMany({

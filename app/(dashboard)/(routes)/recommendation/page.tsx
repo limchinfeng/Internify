@@ -4,10 +4,10 @@ import { RecommendationInput } from "./_components/recommendation-input";
 import prismadb from "@/lib/prismadb";
 
 const RecommmendationPage = async () => {
-  const currentUser = getCurrentUser();
+  const currentUser = await getCurrentUser();
 
   if(!currentUser) {
-    redirect("/");
+    return redirect("/");
   }
 
   const categories = await prismadb.category.findMany({

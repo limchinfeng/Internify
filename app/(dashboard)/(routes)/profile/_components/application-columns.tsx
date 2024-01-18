@@ -22,6 +22,7 @@ interface ApplicationDataColumnsProps {
   listingId: string;
   title: string;
   company: string;
+  companyId: string;
 }
 
 export const application_columns: ColumnDef<ApplicationDataColumnsProps>[] = [
@@ -66,6 +67,21 @@ export const application_columns: ColumnDef<ApplicationDataColumnsProps>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
+    },
+    cell: ({ row }) => {
+      const { companyId, company } = row.original;
+
+      return (
+        <div>
+          <Link
+            href={`/profile/${companyId}`}
+            target="_blank"
+            className="font-medium text-primary hover:text-blue-800 transition hover:underline"
+          >
+            {company}
+          </Link>
+        </div>
+      );
     },
   },
   {
