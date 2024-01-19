@@ -81,7 +81,7 @@ export const ListingSearchInput = () => {
   }, [debouncedValue, currentCategoryId,router, pathname, stateValue])
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center flex-row gap-2">
       <div className="relative">
         <Search className="h-4 w-4 absolute top-3 left-3 text-slate-600" />
         <Input 
