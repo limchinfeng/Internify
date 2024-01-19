@@ -92,7 +92,7 @@ export const RecommendationInput = ({
                   <FormControl className="m-0 p-0">
                     <Textarea
                       placeholder="I'm interested in computer science field, specifically in software engineering"
-                      className="resize-none w-full"
+                      className="resize-none w-full p-2"
                       disabled={isSubmitting}
                       {...field}
                     />

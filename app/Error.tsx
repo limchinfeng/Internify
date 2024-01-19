@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 
 interface ErrorStateProps {
@@ -13,6 +15,8 @@ const Error: React.FC<ErrorStateProps> = ({
         console.error(error);
     }, [error]);
 
+    const router = useRouter();
+
     return (
         <div className='h-full w-full flex flex-col items-center justify-center gap-3'>
             <div>
@@ -21,6 +25,11 @@ const Error: React.FC<ErrorStateProps> = ({
             <div>
                 Something went wrong!Try Again later.
             </div>
+            <Button
+                onClick={() => router.push("/")}
+            >
+                Home Page
+            </Button>
         </div>
     )
 }
