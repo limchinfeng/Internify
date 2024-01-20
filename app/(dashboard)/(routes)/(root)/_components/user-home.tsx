@@ -37,7 +37,7 @@ export const UserHome = ({
 
   const handleClickResume = () => {
     setButtonClicked(true);
-    router.push('/resume');
+    router.push('/recommendation');
   }
 
   const handleClickFavorite = () => {
@@ -108,7 +108,7 @@ export const UserHome = ({
               disabled={buttonClicked}
             >
               <ScrollText className={iconStyle} />
-              Resume Upload
+              Recommendation
             </Button>
           </div>
           <div>
