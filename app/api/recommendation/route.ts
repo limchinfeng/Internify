@@ -114,7 +114,7 @@ export async function POST(
       messages: [
         {
           "role": "system",
-          "content": `Find the requirement "${messages}" that match with the job below: ${jobListingsText}
+          "content": `Find the requirement "${messages}" that match the most with the job below: ${jobListingsText}
           
           return only 1 job and the result in this JSON format without any other text:
           {
