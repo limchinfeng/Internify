@@ -60,7 +60,7 @@ export async function GET(
 
 
 
-        return NextResponse.redirect('https://internify-deploy.vercel.app/login');
+        return NextResponse.redirect(`http://localhost:3000/login`);
 
 
     } catch (error) {
