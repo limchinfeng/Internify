@@ -56,7 +56,7 @@ const RegisterPage = () => {
     setIsLoading(true);
     try {
       await axios.post("/api/register", values);
-      toast.success('Registered successfully!');
+      toast.success('Registered successfully! Check your email to activate your account');
       router.refresh();
       router.push("/login");
 
