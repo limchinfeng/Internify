@@ -249,9 +249,6 @@ export const RecommendationInput = ({
             </Button>
           </Link>
           </div>
-          <div>
-            {/* {responseData} */}
-          </div>
         </div>
       )}
 
@@ -268,6 +265,39 @@ export const RecommendationInput = ({
           </div>
         </div>
       )}
-    </div>
+
+      
+      {!isSubmitting && isShowing && method==="2" && responseData2 && responseData2.length>0 && responseData2.map((response) => (
+        <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% w-4/5">  
+            <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+              <div className="flex flex-col">
+                <p className="text-lg font-bold">
+                  {response.title} 
+                </p>
+              </div>
+              <div className="flex flex-col text-left pt-2">
+                <p className="font-bold">Suitability</p>
+                <p> 
+                  {response.suitable} 
+                </p>
+              </div>  
+              <div className="flex flex-col text-left pt-2 pb-4">
+                <p className="font-bold">Internify AI Explanation</p>
+                <p> 
+                  {response.reason}  
+                </p>
+              </div>
+              <Link
+                href={`/listing/${response.id}`}
+                target="_blank"
+              >
+                <Button variant="default" className="w-full">
+                  View Job 
+                </Button>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
   )
 }

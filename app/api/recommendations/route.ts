@@ -117,7 +117,13 @@ export async function POST(
           "role": "system",
           "content": `Based on the requirement "${messages}" ,justify whether the job suit the requirement and give reason for each job below: ${jobListingsText}
           
-          return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON format in string without any other text:
+          Without additional text, return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON objects and then convert to string. Example for 2 job:
+          {
+            id: 'ID',
+            title: 'Job Title',
+            suitable: 'True or False'
+            reason: 'Write down the reason'
+          },
           {
             id: 'ID',
             title: 'Job Title',
@@ -151,8 +157,10 @@ function parseContentToJSON(jsonString: string) {
   let trimmedString = jsonString.trim();
 
   // Replace line breaks and ensure it starts with '[' and ends with ']'
-  trimmedString = trimmedString.replace(/\}\s*,\s*\{/g, '},{');
-  trimmedString = '[' + trimmedString + ']';
+  if (!trimmedString.startsWith('[') || !trimmedString.endsWith(']')) {
+    trimmedString = trimmedString.replace(/\}\s*,\s*\{/g, '},{');
+    trimmedString = '[' + trimmedString + ']';
+  }
 
   try {
     // Parse the string as JSON
