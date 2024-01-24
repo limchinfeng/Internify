@@ -22,10 +22,10 @@ interface ComboboxProps {
   options: {label: string, value: string}[];
   value?: string;
   onChange: (value: string) => void;
-  onLabel?: (value: string) => void;
+  onLabel: (value: string) => void;
 }
 
-export const Combobox = ({
+export const Combobox2 = ({
   options, value, onChange, onLabel
 }: ComboboxProps)  => {
   const [open, setOpen] = React.useState(false)
@@ -55,6 +55,7 @@ export const Combobox = ({
                 key={option.value}
                 onSelect={() => {
                   onChange(option.value === value ? "" : option.value)
+                  onLabel(option.value === value ? "" : option.label)
                   setOpen(false)
                 }}
               >
