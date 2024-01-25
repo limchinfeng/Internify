@@ -117,9 +117,9 @@ export async function POST(
           "role": "system",
           "content": `Based on the requirement "${messages}" ,justify whether the job suit the requirement and give reason for each job below: ${jobListingsText}
           
-          Given the specific job requirements outlined in the user's input, evaluate each job listing provided and determine its suitability.For each job,return the result in this JSON objects and then convert to string with the job's ID, title, suitability (True/False), and a brief explanation (no more than 50 words) for the suitability decision.The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (like machine learning), it should be marked as unsuitable.Provide a concise and clear rationale for each decision.
+          Given the specific job requirements outlined in the user's input, evaluate each job listing provided and determine its suitability. The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (like machine learning), it should be marked as unsuitable.Provide a concise and clear rationale for each decision.
 
-          Example for 2 job:
+          For each job,return the result in this JSON objects and convert to string with the job's ID, title, suitability (True/False), and a brief explanation(no more than 50 words) for the suitability decision:
           {
             id: 'ID',
             title: 'Job Title',
@@ -146,7 +146,7 @@ export async function POST(
 
     // Parse the content to JSON using the function
     const parsedJSON = parseContentToJSON(jsonString || "");
-
+    console.log("--" + parsedJSON)
     return NextResponse.json(parsedJSON);
     // return NextResponse.json(response.choices[0].message.content);
   } catch (error) {
