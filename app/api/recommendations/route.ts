@@ -34,7 +34,7 @@ export async function POST(
 ) {
   try {
     const body = await req.json();
-    const { messages, categoryId  } = body;
+    const { messages, categoryId } = body;
 
     if (!configuration.apiKey) {
       return new NextResponse("OpenAI API Key not configured.", { status: 500 });
@@ -73,7 +73,7 @@ export async function POST(
       }
     })
 
-    if(listings.length === 0) {
+    if (listings.length === 0) {
       return NextResponse.json([]);
     }
 
@@ -86,25 +86,25 @@ export async function POST(
       category: listing.category ? listing.category.name : "",
     }));
 
-  
-  const convertListingsToText = (listings: JobListing[]): string => {
+
+    const convertListingsToText = (listings: JobListing[]): string => {
       return listings.map((listing, index) => {
-          // Convert HTML to plain text if needed
-          const description = listing.description.replace(/<[^>]+>/g, ' ');
-          const requirement = listing.requirement.replace(/<[^>]+>/g, ' ');
-  
-          return [
-              `${index + 1}. Job Title: ${listing.title}`,
-              `   ID: ${listing.id}`,
-              `   Location: ${listing.state}`,
-              `   Category: ${listing.category}`,
-              `   Description:`,
-              `     - ${description}`,
-              `   Requirements:`,
-              `     - ${requirement}`,
-          ].join('\n');
+        // Convert HTML to plain text if needed
+        const description = listing.description.replace(/<[^>]+>/g, ' ');
+        const requirement = listing.requirement.replace(/<[^>]+>/g, ' ');
+
+        return [
+          `${index + 1}. Job Title: ${listing.title}`,
+          `   ID: ${listing.id}`,
+          `   Location: ${listing.state}`,
+          `   Category: ${listing.category}`,
+          `   Description:`,
+          `     - ${description}`,
+          `   Requirements:`,
+          `     - ${requirement}`,
+        ].join('\n');
       }).join('\n\n');
-  };
+    };
 
     // console.log(internListing);
     const jobListingsText = convertListingsToText(internListing);
@@ -117,10 +117,8 @@ export async function POST(
           "role": "system",
           "content": `Based on the requirement "${messages}" ,justify whether the job suit the requirement and give reason for each job below: ${jobListingsText}
           
-          .If the job is suitable with the requirement, suitable is true and provide reason, else suitable is false and give reason why not suitable. For example, fishing is not related to computer sciences, hence return false. If there is not machine learning in the job details but the requirement contain machine learning, return false.
+          Given the specific job requirements outlined in the user's input, evaluate each job listing provided and determine its suitability.For each job,return the result in this JSON objects and then convert to string with the job's ID, title, suitability (True/False), and a brief explanation (no more than 50 words) for the suitability decision.The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (like machine learning), it should be marked as unsuitable.Provide a concise and clear rationale for each decision.
 
-          Without additional text, return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON objects and then convert to string. Reason should no more than 50 words. 
-          
           Example for 2 job:
           {
             id: 'ID',
@@ -134,9 +132,10 @@ export async function POST(
             suitable: 'True or False',
             reason: 'Write down the reason'
           }
-          
+          Ensure the reasons are specific to the job's relevance to the stated requirements and succinctly justify the suitability decision.
+
           `
-        },  
+        },
       ]
     });
 
@@ -147,7 +146,7 @@ export async function POST(
 
     // Parse the content to JSON using the function
     const parsedJSON = parseContentToJSON(jsonString || "");
-    
+
     return NextResponse.json(parsedJSON);
     // return NextResponse.json(response.choices[0].message.content);
   } catch (error) {
