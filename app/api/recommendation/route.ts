@@ -26,7 +26,7 @@ export async function POST(
 ) {
   try {
     const body = await req.json();
-    const { messages, categoryId  } = body;
+    const { messages, categoryId } = body;
 
     if (!configuration.apiKey) {
       return new NextResponse("OpenAI API Key not configured.", { status: 500 });
@@ -65,7 +65,7 @@ export async function POST(
       }
     })
 
-    if(listings.length === 0) {
+    if (listings.length === 0) {
       return NextResponse.json({
         id: '',
         title: '',
@@ -85,25 +85,25 @@ export async function POST(
       category: listing.category ? listing.category.name : "",
     }));
 
-  
-  const convertListingsToText = (listings: JobListing[]): string => {
+
+    const convertListingsToText = (listings: JobListing[]): string => {
       return listings.map((listing, index) => {
-          // Convert HTML to plain text if needed
-          const description = listing.description.replace(/<[^>]+>/g, ' ');
-          const requirement = listing.requirement.replace(/<[^>]+>/g, ' ');
-  
-          return [
-              `${index + 1}. Job Title: ${listing.title}`,
-              `   ID: ${listing.id}`,
-              `   Location: ${listing.state}`,
-              `   Category: ${listing.category}`,
-              `   Description:`,
-              `     - ${description}`,
-              `   Requirements:`,
-              `     - ${requirement}`,
-          ].join('\n');
+        // Convert HTML to plain text if needed
+        const description = listing.description.replace(/<[^>]+>/g, ' ');
+        const requirement = listing.requirement.replace(/<[^>]+>/g, ' ');
+
+        return [
+          `${index + 1}. Job Title: ${listing.title}`,
+          `   ID: ${listing.id}`,
+          `   Location: ${listing.state}`,
+          `   Category: ${listing.category}`,
+          `   Description:`,
+          `     - ${description}`,
+          `   Requirements:`,
+          `     - ${requirement}`,
+        ].join('\n');
       }).join('\n\n');
-  };
+    };
 
     console.log(internListing);
     const jobListingsText = convertListingsToText(internListing);
@@ -116,7 +116,7 @@ export async function POST(
           "role": "system",
           "content": `Find the requirement "${messages}" that match the most with the job below: ${jobListingsText}
           
-          .If the job is suitable with the requirement, suitable is true and provide reason, else suitable is false and give reason why not suitable. For example, fishing is not related to computer sciences, hence return false.
+          Given the specific job requirements outlined in the user's input, evaluate each job listing provided and determine its suitability.The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (like machine learning), it should be marked as unsuitable.Provide a concise and clear rationale for each decision.
 
           return only 1 job and the result in this JSON format without any other text:
           {
@@ -126,11 +126,12 @@ export async function POST(
             requirement: 'Requirements',
             state: 'Location',
             suitable: 'True or False',
-            reason: 'Write down the reason'
+            reason: 'Write down the Brief Explanation as the reason'
           }
           
+          Ensure the reasons are specific to the job's relevance to the stated requirements and succinctly justify the suitability decision.
           `
-        },  
+        },
       ]
     });
 
