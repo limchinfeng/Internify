@@ -9,12 +9,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea"
 import toast from "react-hot-toast";
-import { Combobox } from "@/components/ui/combobox";
 import { useState } from "react";
 import Link from "next/link";
 import Image from 'next/image';
 import logo from "@/public/images/logo.png"
 import { Combobox2 } from "@/components/ui/combobox2";
+import { cn } from "@/lib/utils";
 
 interface RecommendationInputProps {
   options: {
@@ -29,6 +29,7 @@ interface ApiResponse {
   description: string;
   requirement: string;
   state: string;
+  suitable: string;
   reason: string;
 }
 
@@ -209,8 +210,8 @@ export const RecommendationInput = ({
         </div>
       )}
 
-      {/* Result method 2*/}
-      {!isSubmitting && isShowing && method==="1" && responseData && responseData.id !=="" && (
+      {/* Result method 1 with suitable job*/}
+      {!isSubmitting && isShowing && method==="1" && responseData && responseData.id !=="" && responseData.suitable==="True" && (
         <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% w-4/5">  
           <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
             <div className="flex flex-col">
@@ -220,7 +221,13 @@ export const RecommendationInput = ({
               <p>
               {responseData.state} 
             </p>
-            </div>  
+            </div> 
+            <div className="flex flex-row text-left pt-2 gap-2">
+              <p className="font-bold">Suitability:</p> 
+              <p className="font-bold text-emerald-600">
+                {responseData.suitable} 
+              </p>
+            </div> 
             <div className="flex flex-col text-left pt-2">
               <p className="font-bold">Description</p>
               <p>
@@ -252,32 +259,92 @@ export const RecommendationInput = ({
         </div>
       )}
 
-      {/* No Result method 2*/}
-      {!isSubmitting && isShowing && method==="2" && responseData2 && responseData2.length===0 && (
-        <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
-          <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
-            <p>
-              No job listing in {category} category
+    {/* Result method 1 with no suitable job*/}
+    {!isSubmitting && isShowing && method==="1" && responseData && responseData.id !=="" && responseData.suitable==="False" && (
+      <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% w-4/5 flex flex-col gap-2">
+        
+        <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+          <p>
+            Oops! Seems like the requirement didnt match the job in <span className="font-bold">{category}</span> category. However, we still recommend one job for you.
+          </p>
+          <p className="text-slate-500 italic text-sm">
+            Please try another category or change requirement
+          </p>
+        </div>
+
+        <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+          <div className="flex flex-col">
+            <p className="text-lg font-bold">
+              {responseData.title} 
             </p>
-            <p className="text-slate-500 italic text-sm">
-              Please try another category
+            <p>
+            {responseData.state} 
+          </p>
+          </div> 
+          <div className="flex flex-row text-left pt-2 gap-2">
+            <p className="font-bold">Suitability:</p> 
+            <p className="font-bold text-red-600">
+              {responseData.suitable} 
+            </p>
+          </div> 
+          <div className="flex flex-col text-left pt-2">
+            <p className="font-bold">Description</p>
+            <p>
+              {responseData.description} 
             </p>
           </div>
+          <div className="flex flex-col text-left pt-2">
+            <p className="font-bold">Requirement</p>
+            <p> 
+              {responseData.requirement} 
+            </p>
+          </div>
+          <div className="flex flex-col text-left pt-2 pb-4">
+            <p className="font-bold">Internify AI Explanation</p>
+            <p> 
+              {responseData.reason}  
+            </p>
+          </div>
+          
+        <Link
+          href={`/listing/${responseData.id}`}
+          target="_blank"
+        >
+          <Button variant="default" className="w-full">
+            View Job 
+          </Button>
+        </Link>
         </div>
-      )}
+      </div>
+    )}
 
-      
+    {/* No Result method 2*/}
+    {!isSubmitting && isShowing && method==="2" && responseData2 && responseData2.length===0 && (
+      <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
+        <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+          <p>
+            No job listing in {category} category
+          </p>
+          <p className="text-slate-500 italic text-sm">
+            Please try another category
+          </p>
+        </div>
+      </div>
+    )}
+
+    {/* Result method 2*/}
+    <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
       {!isSubmitting && isShowing && method==="2" && responseData2 && responseData2.length>0 && responseData2.map((response) => (
-        <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% w-4/5">  
-            <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+        <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% col-span-1">  
+            <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center h-full">
               <div className="flex flex-col">
                 <p className="text-lg font-bold">
                   {response.title} 
                 </p>
               </div>
-              <div className="flex flex-col text-left pt-2">
+              <div className="flex flex-row text-left gap-2">
                 <p className="font-bold">Suitability</p>
-                <p> 
+                <p className={cn(response.suitable==="True" ? "text-emerald-600" : "text-red-600")}> 
                   {response.suitable} 
                 </p>
               </div>  
@@ -299,5 +366,6 @@ export const RecommendationInput = ({
           </div>
         ))}
       </div>
+    </div>
   )
 }

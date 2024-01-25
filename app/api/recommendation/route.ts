@@ -116,6 +116,8 @@ export async function POST(
           "role": "system",
           "content": `Find the requirement "${messages}" that match the most with the job below: ${jobListingsText}
           
+          .If the job is suitable with the requiremet, suitable is true and provide reason, else suitable is false and give reason why not suitable. For example, fishing is not related to computer sciences, hence return false.
+
           return only 1 job and the result in this JSON format without any other text:
           {
             id: 'ID',
@@ -123,6 +125,7 @@ export async function POST(
             description: 'Description',
             requirement: 'Requirements',
             state: 'Location',
+            suitable: 'True or False',
             reason: 'Write down the reason'
           }
           
