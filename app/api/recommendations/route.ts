@@ -117,8 +117,8 @@ export async function POST(
           "role": "system",
           "content": `Based on the requirement "${messages}" ,justify whether the job suit the requirement and give reason for each job below: ${jobListingsText}
           
-          Without additional text, return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON objects and then convert to string. Reason should no more than 50 words. Example for 2 job:
-
+          Without additional text, return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON objects and then convert to string. Reason should no more than 50 words. 
+          
           Example of 2 jobs:
           {
             id: 'ID',
