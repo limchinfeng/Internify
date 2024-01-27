@@ -93,7 +93,7 @@
             }
         }
 
-        .physical {
+        .student {
             grid-area: 0/2/0/3;
             margin-right: 5%;
 
@@ -108,7 +108,7 @@
             }
         }
 
-        .online {
+        .company {
             grid-area: 0/3/0/4;
 
             @media screen and (max-width: 780px) {
