@@ -202,12 +202,12 @@ export const UserHome = ({
 
 
           <div className="flex flex-col justify-center items-center my-10 mx-auto">
-            <h2>Internify: Your Gateway to  </h2>
+            <h2 className="text-4xl">Internify: Your Gateway to  </h2>
             <div className="flex-row flex">
               <div className='text-transparent bg-clip-text bg-gradient-to-r pb-4
                 from-purple-400 to-pink-600
             '>
-                <h2>
+                <h2 className="text-4xl">
                   <TypewriteroComponent
                     options={{
                       strings: [
@@ -224,13 +224,13 @@ export const UserHome = ({
                 </h2>
               </div>
               <div>
-                <h2>Internship</h2>
+                <h2 className="text-4xl">Internship</h2>
               </div>
             </div>
 
-            <p>Where Internships and Simplicity at a place</p>
+            <h3 className="font-normal">Where Internships and Simplicity at a place</h3>
 
-            <div className="my-10 grid sm:grid-cols-2 gap-8 grid-cols-1">
+            <div className="my-10 grid sm:grid-cols-2 gap-12 grid-cols-1">
               <div>
                 <Button
                   className={buttonSize}
