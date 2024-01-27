@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NavbarImage } from "./navbar-image";
 import { User } from "@prisma/client";
+import Image from 'next/image'
 
 export const NavbarRoutes = ({
   currentUser
@@ -28,6 +29,14 @@ export const NavbarRoutes = ({
           onClick={() => router.push("/")}
           className="md:text-4xl text-3xl font-bold text-primary cursor-pointer flex items-center justify-center flex-row"
         >
+          <div className="pr-3">
+            <Image
+              src="/Internify-logo.png"
+              width={70}
+              height={45}
+              alt="logo"
+            />
+          </div>
           <div>
             Internify
           </div>
@@ -36,11 +45,22 @@ export const NavbarRoutes = ({
           </p>
         </div>
       </> : <>
+
         <div
           onClick={() => router.push("/")}
           className="md:text-4xl text-3xl font-bold text-primary cursor-pointer"
         >
-          Internify
+          <div className="pr-3">
+            <Image
+              src="/Internify-logo.png"
+              width={70}
+              height={45}
+              alt="logo"
+            />
+          </div>
+          <div>
+            Internify
+          </div>
         </div>
       </>}
 
