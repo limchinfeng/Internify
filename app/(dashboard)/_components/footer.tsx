@@ -37,7 +37,7 @@ const Footer = () => {
                             />
                         </div>
                     </div>
-                    <div className={styles["physical"]}>
+                    <div className={styles["student"]}>
                         <div className={styles["title"]}>
                             <h2>Students</h2>
                         </div>
@@ -48,7 +48,7 @@ const Footer = () => {
 
                         </div>
                     </div>
-                    <div className={styles["online"]}>
+                    <div className={styles["company"]}>
                         <div className={styles["title"]}>
                             <h2>Company</h2>
                         </div>
