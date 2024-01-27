@@ -116,8 +116,7 @@ export async function POST(
           "role": "system",
           "content": `Find the requirement "${messages}" that match the most with the job below: ${jobListingsText}
           
-          Given the specific job requirements outlined in the user's input, evaluate each job listing provided and determine its suitability.The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (like machine learning), it should be marked as unsuitable.Provide a concise and clear rationale for each decision.
-
+          .If the job is suitable with the requirement, suitable is true and provide reason, else suitable is false and give reason why not suitable. For example, fishing is not related to computer sciences, hence return false.
           return only 1 job and the result in this JSON format without any other text:
           {
             id: 'ID',
@@ -126,10 +125,10 @@ export async function POST(
             requirement: 'Requirements',
             state: 'Location',
             suitable: 'True or False',
-            reason: 'Write down the Brief Explanation as the reason'
+            reason: 'Write down the reason'
           }
           
-          Ensure the reasons are specific to the job's relevance to the stated requirements and succinctly justify the suitability decision.
+          
           `
         },
       ]
