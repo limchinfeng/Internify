@@ -212,7 +212,17 @@ export const UserHome = ({
           </div>
         </div>
 
-        <h2>Testimonials</h2>
+        <div className="flex flex-row">
+          <h2 className="pr-4 pt-4">Testimonials</h2>
+          <Image
+            className='rounded-full cursor-pointer w-15 h-15 pb-4 '
+            height='60'
+            width='60'
+            alt='Testimonials'
+            src="/Testimonials.png"
+          />
+
+        </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
             lg:grid-cols-4 gap-8 mt-10
         '>
