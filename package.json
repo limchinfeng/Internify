@@ -52,10 +52,12 @@
     "react-pdf": "^7.6.0",
     "react-quill": "^2.0.0",
     "react-spinners": "^0.13.8",
+    "sass": "^1.70.0",
     "tailwind-merge": "^1.14.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-content-visibility": "^0.1.0",
+    "typewriter-effect": "^2.21.0",
     "uploadthing": "^5.7.4",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
