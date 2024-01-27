@@ -63,32 +63,32 @@ const Footer = () => {
                         <div className={styles["social-media"]}>
                             <a
                                 target="_blank"
-                                href="https://www.instagram.com/odyssey_hackfest/" rel="noreferrer"
+                                href="https://www.instagram.com/usmofficial1969/" rel="noreferrer"
                                 className="a"
                             >
                                 <AiFillInstagram className={styles["icons"]} />
                             </a>
                             <a
                                 target="_blank"
-                                href="https://www.facebook.com/Odyssey-Hackfest-2022-110097031700097" rel="noreferrer"
+                                href="https://www.facebook.com/USMOfficial1969" rel="noreferrer"
                             >
                                 <AiFillFacebook className={styles["icons"]} />
                             </a>
                             <a
                                 target="_blank"
-                                href="https://www.linkedin.com/company/odyssey-hackfest-2022/" rel="noreferrer"
+                                href="https://www.linkedin.com/school/universiti-sains-malaysia-official/" rel="noreferrer"
                             >
                                 <AiFillLinkedin className={styles["icons"]} />
                             </a>
                             <a
                                 target="_blank"
-                                href="https://www.youtube.com/channel/UC-D91b8qZv_-xZan_p_CzzQ/featured" rel="noreferrer"
+                                href="https://www.youtube.com/@usmcast" rel="noreferrer"
                             >
                                 <AiFillYoutube className={styles["icons"]} />
                             </a>
                             <a
                                 target="_blank"
-                                href="https://discord.gg/M9V2SFmwW8" rel="noreferrer"
+                                href="https://discord.gg/8wR2gU6B" rel="noreferrer"
                             >
                                 <SiDiscord className={styles["icons"]} />
                             </a>

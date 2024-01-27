@@ -218,13 +218,15 @@ export const UserHome = ({
         '>
           {testimonials.map((item) => (
             <Card key={item.description}
-              className='bg-[#788DAA] border-none text-b'
+              className='bg-[#1A374F] border-none text-white'
             >
               <CardHeader>
                 <CardTitle className='flex items-center gap-x-2'>
                   <div>
-                    <h2 className='text-lg'>{item.name}</h2>
-                    <p className='text-zinc-800 text-sm'>{item.title}</p>
+                    <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4
+                from-purple-400 to-pink-600
+            '>{item.name}</h2>
+                    <p className='text-zinc-300 text-sm'>{item.title}</p>
                   </div>
                 </CardTitle>
               </CardHeader>
