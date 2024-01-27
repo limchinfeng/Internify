@@ -153,7 +153,7 @@ export const UserHome = ({
 
   return (
     <AnimatePresence>
-      <motion.div className={styles.firstLanding}>
+      <motion.div className={styles.LandingContainer}>
         <div className={styles["movableContainer"]}>
           <motion.div
             className={styles["imageContainer"]}
