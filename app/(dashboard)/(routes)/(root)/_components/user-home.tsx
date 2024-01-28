@@ -9,6 +9,7 @@ import avatar from "@/public/images/placeholder.jpg"
 import { User2 } from "lucide-react";
 import { GraduationCap, ScrollText, Rocket, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Fade } from "react-reveal";
 import TypewriteroComponent from "typewriter-effect"
 import {
   Card,
@@ -26,6 +27,7 @@ import {
   AnimatePresence,
   AnimationControls,
 } from "framer-motion";
+
 
 
 
@@ -288,30 +290,35 @@ export const UserHome = ({
                   src="/Testimonials.png"
                 />
               </div>
+              <Fade bottom delay={70}>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8 p-12'>
 
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8 p-12'>
-                {testimonials.map((item) => (
-                  <Card key={item.description}
-                    className='border-[#1A374F] border-2 '
-                  >
-                    <CardHeader>
-                      <CardTitle className='flex items-center gap-x-2 justify-center	'>
-                        <div>
-                          <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
-                            {item.name}
-                          </h2>
-                          <p className=' text-sm font-bold'>
-                            {item.title}
-                          </p>
-                        </div>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className='pt-2 justify-center items-center space-y-2'>
-                      <p className="text-center text-base leading-relaxed ">{item.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                  {testimonials.map((item) => (
+
+                    <Card key={item.description}
+                      className='border-[#1A374F] border-2 '
+                    >
+
+                      <CardHeader>
+                        <CardTitle className='flex items-center gap-x-2 justify-center	'>
+                          <div>
+                            <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
+                              {item.name}
+                            </h2>
+                            <p className=' text-sm font-bold'>
+                              {item.title}
+                            </p>
+                          </div>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className='pt-2 justify-center items-center space-y-2'>
+                        <p className="text-center text-base leading-relaxed ">{item.description}</p>
+                      </CardContent>
+                    </Card>
+
+                  ))}
+                </div>
+              </Fade>
             </div>
           </div>
         </motion.div>
