@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { NavbarImage } from "./navbar-image";
 import { User } from "@prisma/client";
 import Image from 'next/image'
+import ThemeSwitch from '../../../components/theme-switch'
+import { useTheme } from 'next-themes'
+
 
 export const NavbarRoutes = ({
   currentUser
@@ -12,6 +15,7 @@ export const NavbarRoutes = ({
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { resolvedTheme } = useTheme()
   // const containsCompany = pathname?.includes('/company');
 
   useEffect(() => {
@@ -22,6 +26,7 @@ export const NavbarRoutes = ({
     return null;
   }
 
+
   return (
     <>
       {currentUser?.isCompany ? <>
@@ -30,17 +35,28 @@ export const NavbarRoutes = ({
           className="md:text-4xl text-3xl font-bold text-primary cursor-pointer flex items-center justify-center flex-row"
         >
           <div className="pr-3">
-            <Image
-              src="/Internify-logo.png"
-              width={70}
-              height={45}
-              alt="logo"
-            />
+            <>
+              {resolvedTheme === 'light' ? (
+                <Image
+                  src="/Internify-logo.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              ) : (
+                <Image
+                  src="/Internify-logo-dark.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              )}
+            </>
           </div>
           <div>
             Internify
           </div>
-          <p className='font-light text-base text-gray-600 mt-5'>
+          <p className='font-light text-base mt-5'>
             company
           </p>
         </div>
@@ -81,6 +97,7 @@ export const NavbarRoutes = ({
             Go to Company
           </div>
         )} */}
+        <ThemeSwitch />
         <NavbarImage currentUser={currentUser} />
       </div>
     </>

@@ -9,15 +9,15 @@ import { User } from "@prisma/client";
 
 export const Sidebar = ({
   currentUser
-}: {currentUser?: User | null}) => {
+}: { currentUser?: User | null }) => {
   const pathname = usePathname();
   const router = useRouter();
-  
-  const isActive = pathname === "/profile" || pathname?.includes("/profile"); 
+
+  const isActive = pathname === "/profile" || pathname?.includes("/profile");
 
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm md:mt-5">
-      <div 
+    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm md:mt-5">
+      <div
         onClick={() => router.push("/profile")}
         className={cn("p-6 text-2xl font-bold hover:cursor-pointer", isActive && "text-primary")}
       >
@@ -26,14 +26,14 @@ export const Sidebar = ({
       <div className="flex flex-col w-full">
         <SidebarRoutes />
       </div>
-      {currentUser && 
-        <Button 
+      {currentUser &&
+        <Button
           onClick={() => signOut()}
           className="mt-auto mb-6 mx-4"
         >
           Sign Out
         </Button>
       }
-    </div>    
+    </div>
   )
 }

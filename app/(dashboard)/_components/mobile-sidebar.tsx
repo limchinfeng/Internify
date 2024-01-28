@@ -5,14 +5,14 @@ import { User } from "@prisma/client"
 
 export const MobileSidebar = ({
   currentUser
-}: {currentUser?: User | null}) => {
+}: { currentUser?: User | null }) => {
   return (
     <Sheet>
       <SheetTrigger className="md:hidden pr-4 hover:opacity-75 transition">
         <Menu />
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 bg-white">
-        <Sidebar currentUser={currentUser}/>
+      <SheetContent side="left" className="p-0 ">
+        <Sidebar currentUser={currentUser} />
       </SheetContent>
     </Sheet>
   )
