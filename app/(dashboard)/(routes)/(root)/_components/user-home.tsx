@@ -292,7 +292,7 @@ export const UserHome = ({
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8'>
                 {testimonials.map((item) => (
                   <Card key={item.description}
-                    className='border-[#1A374F]  text-black'
+                    className='border-[#1A374F] border-2 text-black'
                   >
                     <CardHeader>
                       <CardTitle className='flex items-center gap-x-2'>
