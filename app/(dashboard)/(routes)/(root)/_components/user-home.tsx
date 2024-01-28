@@ -208,7 +208,7 @@ export const UserHome = ({
               <p className="text-2xl">
                 Your Gateway to 
               </p>
-              <div className='text-transparent bg-clip-text bg-gradient-to-rfrom-purple-400 to-pink-600'>
+              <div className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
                 <h2 className="text-3xl font-extrabold">
                   <TypewriteroComponent
                     options={{
@@ -277,41 +277,42 @@ export const UserHome = ({
               </div>
             </div>
 
-            <div className="flex flex-row">
-              <h2 className="pr-4 pt-4">Testimonials</h2>
-              <Image
-                className='rounded-full cursor-pointer w-15 h-15 pb-4 '
-                height='60'
-                width='60'
-                alt='Testimonials'
-                src="/Testimonials.png"
-              />
+            <div className="flex flex-col items-center justify-center mt-8">
+              <div className="flex flex-row items-center justify-center gap-3">
+                <h2>Testimonials</h2>
+                <Image
+                  className='rounded-full cursor-pointer w-15 h-15'
+                  height='60'
+                  width='60'
+                  alt='Testimonials'
+                  src="/Testimonials.png"
+                />
+              </div>
 
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8'>
+                {testimonials.map((item) => (
+                  <Card key={item.description}
+                    className='border-[#1A374F]  text-black'
+                  >
+                    <CardHeader>
+                      <CardTitle className='flex items-center gap-x-2'>
+                        <div>
+                          <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
+                            {item.name}
+                          </h2>
+                          <p className='text-[#1A374F] text-sm'>
+                            {item.title}
+                          </p>
+                        </div>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className='pt-2'>
+                      {item.description}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
-            lg:grid-cols-4 gap-8 mt-10
-        '>
-              {testimonials.map((item) => (
-                <Card key={item.description}
-                  className='bg-[#1A374F] border-none text-white'
-                >
-                  <CardHeader>
-                    <CardTitle className='flex items-center gap-x-2'>
-                      <div>
-                        <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4
-                from-purple-400 to-pink-600
-            '>{item.name}</h2>
-                        <p className='text-zinc-300 text-sm'>{item.title}</p>
-                      </div>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className='pt-4'>
-                    {item.description}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
           </div>
         </motion.div>
       </motion.div>

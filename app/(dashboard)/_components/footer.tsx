@@ -45,7 +45,7 @@ const Footer = () => {
                             <Link href="/profile" ><p>Profile</p></Link>
                             <Link href="/listing"><p>Intern Listing</p></Link>
                             <Link href="/recommendation"><p>Recommendation</p></Link>
-
+                            <Link href="/favorite"><p>Favorite</p></Link>
                         </div>
                     </div>
                     <div className={styles["company"]}>
