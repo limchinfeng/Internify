@@ -206,7 +206,7 @@ export const UserHome = ({
             <h3 className="font-normal pb-5">Where Internships and Simplicity at a place</h3>
             <div className="flex-col flex">
               <p className="text-2xl">
-                Your Gateway to 
+                Your Gateway to
               </p>
               <div className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
                 <h2 className="text-3xl font-extrabold">
@@ -292,7 +292,7 @@ export const UserHome = ({
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8'>
                 {testimonials.map((item) => (
                   <Card key={item.description}
-                    className='border-[#1A374F] border-2 text-black'
+                    className='border-[#1A374F] border-2 '
                   >
                     <CardHeader>
                       <CardTitle className='flex items-center gap-x-2'>
@@ -300,14 +300,14 @@ export const UserHome = ({
                           <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
                             {item.name}
                           </h2>
-                          <p className='text-[#1A374F] text-sm'>
+                          <p className=' text-sm'>
                             {item.title}
                           </p>
                         </div>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className='pt-2'>
-                      {item.description}
+                      <p>{item.description}</p>
                     </CardContent>
                   </Card>
                 ))}
