@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
+"use client"
+
 import React from "react";
 import styles from "./../../../styles/Footer.module.scss";
 import { AiFillYoutube } from "react-icons/ai";
@@ -9,13 +11,15 @@ import { AiFillLinkedin } from "react-icons/ai";
 import Link from "next/link";
 import { SiDiscord } from "react-icons/si";
 import Image from 'next/image'
+import { useTheme } from 'next-themes'
 
 
 const Footer = () => {
+    const { resolvedTheme } = useTheme()
 
     return (
         <>
-            <div className={styles["footer-container"]}>
+            <div className={resolvedTheme === 'light' ? styles["footer-container"] : styles["footer-dark-container"]}>
                 <div className={styles["content-container"]}>
                     <div className={styles["about"]}>
 
@@ -29,12 +33,21 @@ const Footer = () => {
                             <p>©2024 Internify. All rights reserved.</p>
                         </div>
                         <div className="py-2">
-                            <Image
-                                src="/Internify-logo.png"
-                                width={80}
-                                height={50}
-                                alt="logo"
-                            />
+                            <>
+                                {resolvedTheme === 'light'
+                                    ? (
+                                        <Image
+                                            src="/Internify-logo.png"
+                                            width={80}
+                                            height={50}
+                                            alt="logo" />)
+                                    : (
+                                        <Image
+                                            src="/Internify-logo-dark.png"
+                                            width={80}
+                                            height={50}
+                                            alt="logo" />)}
+                            </>
                         </div>
                     </div>
                     <div className={styles["student"]}>
