@@ -204,80 +204,83 @@ export const UserHome = ({
 
 
           <div className="flex flex-col justify-center items-center my-10 mx-auto">
-            <h2 className="text-5xl pb-2">Internify</h2>
-            <h3 className="font-normal pb-5">Where Internships and Simplicity at a place</h3>
-            <div className="flex-col flex">
-              <p className="text-2xl">
-                Your Gateway to
-              </p>
-              <div className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
-                <h2 className="text-3xl font-extrabold">
-                  <TypewriteroComponent
-                    options={{
-                      strings: [
-                        "Discover",
-                        "Connect",
-                        "Land",
-                        "Succeed",
-                      ],
-                      autoStart: true,
-                      loop: true
-                    }}
+            <Fade duration={4000} delay={300}>
+              <h2 className="text-5xl pb-2">Internify</h2>
+              <h3 className="font-normal pb-5">Where Internships and Simplicity at a place</h3>
+              <div className="flex-col flex">
+                <p className="text-2xl">
+                  Your Gateway to
+                </p>
+                <div className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
+                  <h2 className="text-3xl font-extrabold">
+                    <TypewriteroComponent
+                      options={{
+                        strings: [
+                          "Discover",
+                          "Connect",
+                          "Land",
+                          "Succeed",
+                        ],
+                        autoStart: true,
+                        loop: true
+                      }}
 
-                  />
-                </h2>
+                    />
+                  </h2>
+                </div>
+                <div>
+                  <p className="text-2xl">Internship</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl">Internship</p>
-              </div>
-            </div>
 
-            <div className="my-10 grid sm:grid-cols-2 md:gap-12 gap-5 grid-cols-1">
-              <div>
-                <Button
-                  className={buttonSize}
-                  variant="outline"
-                  onClick={handleClickListing}
-                  disabled={buttonClicked}
-                >
-                  <GraduationCap className={iconStyle} />
-                  Internship Listing
-                </Button>
+
+              <div className="my-10 grid sm:grid-cols-2 md:gap-12 gap-5 grid-cols-1">
+                <div>
+                  <Button
+                    className={buttonSize}
+                    variant="outline"
+                    onClick={handleClickListing}
+                    disabled={buttonClicked}
+                  >
+                    <GraduationCap className={iconStyle} />
+                    Internship Listing
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    className={buttonSize}
+                    variant="outline"
+                    onClick={handleClickProject}
+                    disabled={buttonClicked}
+                  >
+                    <Rocket className={iconStyle} />
+                    Project Showcase
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    className={buttonSize}
+                    variant="outline"
+                    onClick={handleClickResume}
+                    disabled={buttonClicked}
+                  >
+                    <ScrollText className={iconStyle} />
+                    Recommendation
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    className={buttonSize}
+                    variant="outline"
+                    onClick={handleClickFavorite}
+                    disabled={buttonClicked}
+                  >
+                    <Heart className={iconStyle} />
+                    Favorite
+                  </Button>
+                </div>
               </div>
-              <div>
-                <Button
-                  className={buttonSize}
-                  variant="outline"
-                  onClick={handleClickProject}
-                  disabled={buttonClicked}
-                >
-                  <Rocket className={iconStyle} />
-                  Project Showcase
-                </Button>
-              </div>
-              <div>
-                <Button
-                  className={buttonSize}
-                  variant="outline"
-                  onClick={handleClickResume}
-                  disabled={buttonClicked}
-                >
-                  <ScrollText className={iconStyle} />
-                  Recommendation
-                </Button>
-              </div>
-              <div>
-                <Button
-                  className={buttonSize}
-                  variant="outline"
-                  onClick={handleClickFavorite}
-                  disabled={buttonClicked}
-                >
-                  <Heart className={iconStyle} />
-                  Favorite
-                </Button>
-              </div>
-            </div>
+            </Fade>
 
             <div className="flex flex-col items-center justify-center mt-8">
               <div className="flex flex-row items-center justify-center gap-3">
@@ -290,7 +293,7 @@ export const UserHome = ({
                   src="/Testimonials.png"
                 />
               </div>
-              <Fade bottom delay={70}>
+              <Fade bottom duration={1300} delay={50}>
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8 p-12'>
 
                   {testimonials.map((item) => (
