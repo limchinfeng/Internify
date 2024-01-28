@@ -101,55 +101,55 @@ export const UserHome = ({
 
   const testimonials = [
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "Jane Doe",
+      avatar: "JD",
+      title: "Data Analyst Intern",
+      description: "Internify was a game-changer in my internship search. It matched me with a role that was a perfect fit for my skills."
     },
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "John Smith",
+      avatar: "JS",
+      title: "Marketing Intern",
+      description: "The project showcase feature helped me stand out and land an amazing internship at a top marketing firm!"
     },
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "Alice Johnson",
+      avatar: "AJ",
+      title: "HR Coordinator",
+      description: "We found our star intern through Internify. Their AI recommendations really do bring the best candidates to you."
     },
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "Omar Faruk",
+      avatar: "OF",
+      title: "Tech Startup CEO",
+      description: "Internify's talent pool is impressive. We hired interns with cutting-edge skills that added value from day one."
     },
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "Emma Brown",
+      avatar: "EB",
+      title: "Graphic Design Intern",
+      description: "Landing my dream internship was seamless with Internify. Their user interface made the process incredibly easy."
     },
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "Liu Wei",
+      avatar: "LW",
+      title: "Research Intern",
+      description: "Thanks to Internify, I connected with a research team that was the perfect match for my thesis topic."
     },
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "Sophia Taylor",
+      avatar: "ST",
+      title: "Product Manager",
+      description: "Internify streamlined our search for a product management intern and we were thrilled with the quick and quality matches."
     },
     {
-      name: "Supershuaifeng",
-      avatar: "F",
-      title: "Software Engineer",
-      description: "Best application ever!"
+      name: "Carlos Rodriguez",
+      avatar: "CR",
+      title: "Engineering Intern",
+      description: "I never knew finding an internship could be so tailored to my interests until I used Internify. Highly recommend!"
     },
+  ];
 
-  ]
 
   return (
     <AnimatePresence>
@@ -289,13 +289,13 @@ export const UserHome = ({
                 />
               </div>
 
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8 p-12'>
                 {testimonials.map((item) => (
                   <Card key={item.description}
                     className='border-[#1A374F] border-2 '
                   >
                     <CardHeader>
-                      <CardTitle className='flex items-center gap-x-2'>
+                      <CardTitle className='flex items-center gap-x-2 justify-center	'>
                         <div>
                           <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
                             {item.name}
@@ -306,8 +306,8 @@ export const UserHome = ({
                         </div>
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className='pt-2'>
-                      <p>{item.description}</p>
+                    <CardContent className='pt-2 justify-center items-center space-y-2'>
+                      <p className="text-center text-base leading-relaxed ">{item.description}</p>
                     </CardContent>
                   </Card>
                 ))}
