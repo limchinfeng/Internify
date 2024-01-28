@@ -34,7 +34,7 @@ export const UserHome = ({
 }: {
   currentUser: User
 }) => {
-  var buttonSize = "w-56 h-16";
+  var buttonSize = "w-56 h-16 bg-white/60 border-black font-bold";
   var iconStyle = "mr-2 h-4 w-4";
   const router = useRouter();
   const [buttonClickedProfile, setButtonClickedProfile] = useState(false);
@@ -175,7 +175,7 @@ export const UserHome = ({
             x: xStiffMotion,
             y: yStiffMotion,
           }}>
-          <div className="border-4 shadow-md flex md:flex-row flex-col items-center justify-center w-2/3 mt-10 py-8 gap-4 	">
+          {/* <div className="border-4 shadow-md flex md:flex-row flex-col items-center justify-center w-2/3 mt-10 py-8 gap-4 	">
             <div>
               <Image
                 className='rounded-full cursor-pointer w-15 h-15'
@@ -198,16 +198,18 @@ export const UserHome = ({
                 Profile
               </Button>
             </div>
-          </div>
+          </div> */}
 
 
           <div className="flex flex-col justify-center items-center my-10 mx-auto">
-            <h2 className="text-4xl">Internify: Your Gateway to  </h2>
-            <div className="flex-row flex">
-              <div className='text-transparent bg-clip-text bg-gradient-to-r pb-4
-                from-purple-400 to-pink-600
-            '>
-                <h2 className="text-4xl">
+            <h2 className="text-5xl pb-2">Internify</h2>
+            <h3 className="font-normal pb-5">Where Internships and Simplicity at a place</h3>
+            <div className="flex-col flex">
+              <p className="text-2xl">
+                Your Gateway to 
+              </p>
+              <div className='text-transparent bg-clip-text bg-gradient-to-rfrom-purple-400 to-pink-600'>
+                <h2 className="text-3xl font-extrabold">
                   <TypewriteroComponent
                     options={{
                       strings: [
@@ -224,11 +226,9 @@ export const UserHome = ({
                 </h2>
               </div>
               <div>
-                <h2 className="text-4xl">Internship</h2>
+                <p className="text-2xl">Internship</p>
               </div>
             </div>
-
-            <h3 className="font-normal">Where Internships and Simplicity at a place</h3>
 
             <div className="my-10 grid sm:grid-cols-2 gap-12 grid-cols-1">
               <div>
