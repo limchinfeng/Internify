@@ -230,7 +230,7 @@ export const UserHome = ({
               </div>
             </div>
 
-            <div className="my-10 grid sm:grid-cols-2 gap-12 grid-cols-1">
+            <div className="my-10 grid sm:grid-cols-2 md:gap-12 gap-5 grid-cols-1">
               <div>
                 <Button
                   className={buttonSize}
@@ -289,7 +289,7 @@ export const UserHome = ({
                 />
               </div>
 
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8'>
                 {testimonials.map((item) => (
                   <Card key={item.description}
                     className='border-[#1A374F] border-2 text-black'
