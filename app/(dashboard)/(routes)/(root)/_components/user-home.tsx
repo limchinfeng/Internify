@@ -300,7 +300,7 @@ export const UserHome = ({
                           <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
                             {item.name}
                           </h2>
-                          <p className=' text-sm'>
+                          <p className=' text-sm font-bold'>
                             {item.title}
                           </p>
                         </div>
