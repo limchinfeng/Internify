@@ -80,7 +80,7 @@ export const NavbarRoutes = ({
         </div>
       </>}
 
-      <div className="ml-auto flex flex-row items-center gap-3">
+      <div className="ml-auto flex flex-row items-center gap-6 ">
         {/* {currentUser?.isCompany && containsCompany &&  (
           <div 
             className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
