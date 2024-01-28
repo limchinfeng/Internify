@@ -282,8 +282,8 @@ export const UserHome = ({
               </div>
             </Fade>
 
-            <div className="flex flex-col items-center justify-center mt-8">
-              <div className="flex flex-row items-center justify-center gap-3">
+            <div className="flex flex-col items-center justify-center mt-10">
+              <div className="flex flex-row items-center justify-center gap-3 pt-6">
                 <h2>Testimonials</h2>
                 <Image
                   className='rounded-full cursor-pointer w-15 h-15'
@@ -294,7 +294,7 @@ export const UserHome = ({
                 />
               </div>
               <Fade bottom duration={1300} delay={50}>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8 p-12'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8  p-12'>
 
                   {testimonials.map((item) => (
 
