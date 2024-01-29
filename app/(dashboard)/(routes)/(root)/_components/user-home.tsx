@@ -9,7 +9,6 @@ import avatar from "@/public/images/placeholder.jpg"
 import { User2 } from "lucide-react";
 import { GraduationCap, ScrollText, Rocket, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Fade } from "react-reveal";
 import TypewriteroComponent from "typewriter-effect"
 import {
   Card,
@@ -204,83 +203,81 @@ export const UserHome = ({
 
 
           <div className="flex flex-col justify-center items-center my-10 mx-auto">
-            <Fade duration={4000} delay={300}>
-              <h2 className="text-5xl pb-2">Internify</h2>
-              <h3 className="font-normal pb-5">Where Internships and Simplicity at a place</h3>
-              <div className="flex-col flex">
-                <p className="text-2xl">
-                  Your Gateway to
-                </p>
-                <div className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
-                  <h2 className="text-3xl font-extrabold">
-                    <TypewriteroComponent
-                      options={{
-                        strings: [
-                          "Discover",
-                          "Connect",
-                          "Land",
-                          "Succeed",
-                        ],
-                        autoStart: true,
-                        loop: true
-                      }}
+            <h2 className="text-5xl pb-2">Internify</h2>
+            <h3 className="font-normal pb-5">Where Internships and Simplicity at a place</h3>
+            <div className="flex-col flex">
+              <p className="text-2xl">
+                Your Gateway to
+              </p>
+              <div className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
+                <h2 className="text-3xl font-extrabold">
+                  <TypewriteroComponent
+                    options={{
+                      strings: [
+                        "Discover",
+                        "Connect",
+                        "Land",
+                        "Succeed",
+                      ],
+                      autoStart: true,
+                      loop: true
+                    }}
 
-                    />
-                  </h2>
-                </div>
-                <div>
-                  <p className="text-2xl">Internship</p>
-                </div>
+                  />
+                </h2>
               </div>
-
-
-              <div className="my-10 grid sm:grid-cols-2 md:gap-12 gap-5 grid-cols-1">
-                <div>
-                  <Button
-                    className={buttonSize}
-                    variant="outline"
-                    onClick={handleClickListing}
-                    disabled={buttonClicked}
-                  >
-                    <GraduationCap className={iconStyle} />
-                    Internship Listing
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    className={buttonSize}
-                    variant="outline"
-                    onClick={handleClickProject}
-                    disabled={buttonClicked}
-                  >
-                    <Rocket className={iconStyle} />
-                    Project Showcase
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    className={buttonSize}
-                    variant="outline"
-                    onClick={handleClickResume}
-                    disabled={buttonClicked}
-                  >
-                    <ScrollText className={iconStyle} />
-                    Recommendation
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    className={buttonSize}
-                    variant="outline"
-                    onClick={handleClickFavorite}
-                    disabled={buttonClicked}
-                  >
-                    <Heart className={iconStyle} />
-                    Favorite
-                  </Button>
-                </div>
+              <div>
+                <p className="text-2xl">Internship</p>
               </div>
-            </Fade>
+            </div>
+
+
+            <div className="my-10 grid sm:grid-cols-2 md:gap-12 gap-5 grid-cols-1">
+              <div>
+                <Button
+                  className={buttonSize}
+                  variant="outline"
+                  onClick={handleClickListing}
+                  disabled={buttonClicked}
+                >
+                  <GraduationCap className={iconStyle} />
+                  Internship Listing
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className={buttonSize}
+                  variant="outline"
+                  onClick={handleClickProject}
+                  disabled={buttonClicked}
+                >
+                  <Rocket className={iconStyle} />
+                  Project Showcase
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className={buttonSize}
+                  variant="outline"
+                  onClick={handleClickResume}
+                  disabled={buttonClicked}
+                >
+                  <ScrollText className={iconStyle} />
+                  Recommendation
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className={buttonSize}
+                  variant="outline"
+                  onClick={handleClickFavorite}
+                  disabled={buttonClicked}
+                >
+                  <Heart className={iconStyle} />
+                  Favorite
+                </Button>
+              </div>
+            </div>
 
             <div className="flex flex-col items-center justify-center mt-10">
               <div className="flex flex-row items-center justify-center gap-3 pt-6">
@@ -293,35 +290,33 @@ export const UserHome = ({
                   src="/Testimonials.png"
                 />
               </div>
-              <Fade bottom duration={1300} delay={50}>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8  p-12'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8  p-12'>
 
-                  {testimonials.map((item) => (
+                {testimonials.map((item) => (
 
-                    <Card key={item.description}
-                      className='border-[#1A374F] border-2 '
-                    >
+                  <Card key={item.description}
+                    className='border-[#1A374F] border-2 '
+                  >
 
-                      <CardHeader>
-                        <CardTitle className='flex items-center gap-x-2 justify-center	'>
-                          <div>
-                            <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
-                              {item.name}
-                            </h2>
-                            <p className=' text-sm font-bold'>
-                              {item.title}
-                            </p>
-                          </div>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className='pt-2 justify-center items-center space-y-2'>
-                        <p className="text-center text-base leading-relaxed ">{item.description}</p>
-                      </CardContent>
-                    </Card>
+                    <CardHeader>
+                      <CardTitle className='flex items-center gap-x-2 justify-center	'>
+                        <div>
+                          <h2 className='text-transparent bg-clip-text bg-gradient-to-r pb-4 from-purple-600 to-pink-600'>
+                            {item.name}
+                          </h2>
+                          <p className=' text-sm font-bold'>
+                            {item.title}
+                          </p>
+                        </div>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className='pt-2 justify-center items-center space-y-2'>
+                      <p className="text-center text-base leading-relaxed ">{item.description}</p>
+                    </CardContent>
+                  </Card>
 
-                  ))}
-                </div>
-              </Fade>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>
