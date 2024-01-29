@@ -19,7 +19,7 @@ const Footer = () => {
 
     return (
         <>
-            <div className={resolvedTheme === 'light' ? styles["footer-container"] : styles["footer-dark-container"]}>
+            <div className={resolvedTheme === 'dark' ? styles["footer-dark-container"] : styles["footer-container"]}>
                 <div className={styles["content-container"]}>
                     <div className={styles["about"]}>
 
