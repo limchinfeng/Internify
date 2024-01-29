@@ -111,13 +111,13 @@ export async function POST(
     console.log(jobListingsText);
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-0613",
       messages: [
         {
           "role": "system",
           "content": `Based on the requirement "${messages}" ,justify whether the job suit the requirement and give reason for each job below: ${jobListingsText}
           
-          Without additional text, return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON objects and then convert to string. Reason should no more than 50 words. 
+          Without additional text, return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON objects and then convert to string. Reason should no more than 50 words. The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (like machine learning), it should be marked as unsuitable.Provide a concise and clear rationale for each decision.
           
           Example of 2 jobs:
           {
@@ -132,11 +132,11 @@ export async function POST(
             suitable: 'True or False',
             reason: 'Write down the reason'
           }
-
+          Ensure the true or false in suitable.
           `
         },
       ]
-    });
+    });   
 
     // console.log(response.choices[0].message.content)
 
