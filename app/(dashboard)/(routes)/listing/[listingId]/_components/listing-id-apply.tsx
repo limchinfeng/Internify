@@ -5,6 +5,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
 interface ListingIdApplyProps {
   listingId: string;
@@ -16,8 +18,8 @@ interface ListingIdApplyProps {
 export const ListingIdApply = ({
   listingId, isApply, disabled, isCompany
 }: ListingIdApplyProps) => {
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const {resolvedTheme} = useTheme();
 
   const onSubmit = async () => {
     try {
@@ -46,7 +48,7 @@ export const ListingIdApply = ({
         disabled={disabled}
         variant="outline"
         size="lg"
-        className="border-black hover:border-gray-600 transition hover:bg-transparent hover:text-gray-600 w-full"
+        className={cn("transition w-full hover:border-gray-600 hover:bg-transparent", resolvedTheme==="light" ? "border-black hover:text-gray-600" : "border-white hover:text-gray-400")}
         >
         Apply Now 
       </Button>}
@@ -55,13 +57,13 @@ export const ListingIdApply = ({
         disabled={disabled}
         variant="outline"
         size="lg"
-        className="border-black hover:border-gray-600 transition hover:bg-transparent hover:text-gray-600 w-full"
+        className={cn("transition w-full hover:border-gray-600 hover:bg-transparent", resolvedTheme==="light" ? "border-black hover:text-gray-600" : "border-white hover:text-gray-400")}
         >
           Cancel application
         </Button>}
-      {disabled && isCompany && <p className="text-red-600 text-sm italic">You are the author of this listing</p>}
-      {!disabled && isCompany && <p className="text-red-600 text-sm italic">Company account is not allowed to apply</p>}
-      {isApply && <p className="text-primary text-sm italic">You have applied this listing.</p>}
+      {disabled && isCompany && <p className="text-red-600 text-sm italic text-center mt-1">You are the author of this listing</p>}
+      {!disabled && isCompany && <p className="text-red-600 text-sm italic  text-center mt-1">Company account is not allowed to apply</p>}
+      {isApply && <p className="text-primary text-sm italic  text-center mt-1">You have applied this listing.</p>}
     </>
   )
 }

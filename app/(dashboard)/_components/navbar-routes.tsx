@@ -32,9 +32,9 @@ export const NavbarRoutes = ({
       {currentUser?.isCompany ? <>
         <div
           onClick={() => router.push("/")}
-          className="md:text-4xl text-3xl font-bold text-primary cursor-pointer flex items-center justify-center flex-row"
+          className="cursor-pointer flex items-center justify-center flex-row gap-2"
         >
-          <div className="pr-3">
+          <div className="">
             <>
               {resolvedTheme === 'light' ? (
                 <Image
@@ -53,50 +53,48 @@ export const NavbarRoutes = ({
               )}
             </>
           </div>
-          <div>
-            Internify
+
+          <div className="md:text-4xl text-3xl font-bold text-primary flex flex-row">
+            <div>
+              Internify
+            </div>
+            <p className='font-light text-base mt-5'>
+              company
+            </p>
           </div>
-          <p className='font-light text-base mt-5'>
-            company
-          </p>
         </div>
       </> : <>
 
         <div
           onClick={() => router.push("/")}
-          className="md:text-4xl text-3xl font-bold text-primary cursor-pointer"
+          className="cursor-pointer flex items-center justify-center flex-row gap-2"
         >
-          <div className="pr-3">
-            <Image
-              src="/Internify-logo.png"
-              width={70}
-              height={45}
-              alt="logo"
-            />
+          <div className="">
+            <>
+              {resolvedTheme === 'light' ? (
+                <Image
+                  src="/Internify-logo.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              ) : (
+                <Image
+                  src="/Internify-logo-dark.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              )}
+            </>
           </div>
-          <div>
+          <div className="md:text-4xl text-3xl font-bold text-primary flex flex-row">
             Internify
           </div>
         </div>
       </>}
 
       <div className="ml-auto flex flex-row items-center gap-6 ">
-        {/* {currentUser?.isCompany && containsCompany &&  (
-          <div 
-            className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-            onClick={() => router.push("/profile")}
-          >
-            Go to Profile
-          </div>
-        )} */}
-        {/* {currentUser?.isCompany && (
-          <div
-            className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-            onClick={() => router.push("/company/profile")}
-          >
-            Go to Company
-          </div>
-        )} */}
         <ThemeSwitch />
         <NavbarImage currentUser={currentUser} />
       </div>

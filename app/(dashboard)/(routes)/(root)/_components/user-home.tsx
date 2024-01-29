@@ -26,8 +26,8 @@ import {
   AnimatePresence,
   AnimationControls,
 } from "framer-motion";
-
-
+import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
 
 
 export const UserHome = ({
@@ -35,11 +35,13 @@ export const UserHome = ({
 }: {
   currentUser: User
 }) => {
-  var buttonSize = "w-56 h-16 bg-white/60 border-black font-bold";
+  var buttonSize = `w-56 h-16 bg-transparent border-black font-bold`;
+  var buttonSizeDark = `w-56 h-16 bg-transparent border-white font-bold`;
   var iconStyle = "mr-2 h-4 w-4";
   const router = useRouter();
   const [buttonClickedProfile, setButtonClickedProfile] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
+  const {resolvedTheme} = useTheme();
 
   const handleClickProfile = () => {
     setButtonClickedProfile(true);
@@ -176,31 +178,6 @@ export const UserHome = ({
             x: xStiffMotion,
             y: yStiffMotion,
           }}>
-          {/* <div className="border-4 shadow-md flex md:flex-row flex-col items-center justify-center w-2/3 mt-10 py-8 gap-4 	">
-            <div>
-              <Image
-                className='rounded-full cursor-pointer w-15 h-15'
-                height='60'
-                width='60'
-                alt='Avatar'
-                src={currentUser?.imageUrl || avatar}
-              />
-            </div>
-            <div>
-              <p >{currentUser.email}</p>
-            </div>
-            <div>
-              <Button
-                className="lg:w-48 lg:h-12 w-32 h-9 p-5"
-                onClick={handleClickProfile}
-                disabled={buttonClickedProfile}
-              >
-                <User2 className="mr-2 h-4 w-4" />
-                Profile
-              </Button>
-            </div>
-          </div> */}
-
 
           <div className="flex flex-col justify-center items-center my-10 mx-auto">
             <h2 className="text-5xl pb-2">Internify</h2>
@@ -222,7 +199,6 @@ export const UserHome = ({
                       autoStart: true,
                       loop: true
                     }}
-
                   />
                 </h2>
               </div>
@@ -235,7 +211,7 @@ export const UserHome = ({
             <div className="my-10 grid sm:grid-cols-2 md:gap-12 gap-5 grid-cols-1">
               <div>
                 <Button
-                  className={buttonSize}
+                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickListing}
                   disabled={buttonClicked}
@@ -246,7 +222,7 @@ export const UserHome = ({
               </div>
               <div>
                 <Button
-                  className={buttonSize}
+                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickProject}
                   disabled={buttonClicked}
@@ -257,7 +233,7 @@ export const UserHome = ({
               </div>
               <div>
                 <Button
-                  className={buttonSize}
+                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickResume}
                   disabled={buttonClicked}
@@ -268,7 +244,7 @@ export const UserHome = ({
               </div>
               <div>
                 <Button
-                  className={buttonSize}
+                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickFavorite}
                   disabled={buttonClicked}

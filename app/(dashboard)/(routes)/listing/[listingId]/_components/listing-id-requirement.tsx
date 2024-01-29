@@ -11,7 +11,7 @@ export const ListingIdRequirement = ({
 }: ListingIdRequirementProps) => {
   return (
     <div>
-      <div className="text-black text-2xl font-bold">
+      <div className="text-2xl font-bold">
         Requirement
       </div>
       <Preview 
