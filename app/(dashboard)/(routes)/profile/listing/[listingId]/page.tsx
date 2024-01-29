@@ -58,6 +58,9 @@ const CompanyListingIdPage = async ({
     {
       label: "Terengganu"
     },
+    {
+      label: "Kuala Lumpur"
+    },
   ]
   const currentUser = await getCurrentUser();
 

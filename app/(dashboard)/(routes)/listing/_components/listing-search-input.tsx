@@ -49,6 +49,9 @@ export const states = [
   {
     label: "Terengganu"
   },
+  {
+    label: "Kuala Lumpur"
+  },
 ]
 
 export const ListingSearchInput = () => {
@@ -78,21 +81,21 @@ export const ListingSearchInput = () => {
     }, { skipEmptyString: true, skipNull: true });
 
     router.push(url);
-  }, [debouncedValue, currentCategoryId,router, pathname, stateValue])
+  }, [debouncedValue, currentCategoryId, router, pathname, stateValue])
 
   return (
     <div className="flex items-center justify-center flex-row gap-2">
       <div className="relative">
         <Search className="h-4 w-4 absolute top-3 left-3 text-slate-600" />
-        <Input 
-          onChange={(e:any) => setValue(e.target.value)}
+        <Input
+          onChange={(e: any) => setValue(e.target.value)}
           value={value}
-          className="w-full md:w-[500px] pl-9 rounded-full focus-visible:ring-slate-400" 
+          className="w-full md:w-[500px] pl-9 rounded-full focus-visible:ring-slate-400"
           placeholder="Search for a listing"
-          />
+        />
       </div>
       <div>
-        <Combobox 
+        <Combobox
           value={stateValue}
           onChange={(selectedState) => setStateValue(selectedState)}
           options={states.map((state) => ({
