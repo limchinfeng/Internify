@@ -160,7 +160,7 @@ const RegisterPage = () => {
             <p>Already have an account?&nbsp;
               <span
                 onClick={() => router.push("/login")}
-                className="text-neutral-800 cursor-pointer hover:underline
+                className="text-primary cursor-pointer underline
               ">
                 Log in
               </span>
