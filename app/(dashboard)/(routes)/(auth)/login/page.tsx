@@ -139,21 +139,21 @@ const LoginPage = () => {
             </div>
           </form>
         </Form>
-        <div className="text-neutral-500 text-center font-light pt-4">
+        <div className="text-primary text-center font-light pt-4">
           <span
             onClick={() => router.push("/forgotpw")}
-            className="text-neutral-800 cursor-pointer hover:underline"
+            className="text-primary cursor-pointer underline"
           >
             Forgot your password?
           </span>
         </div>
         <div className="flex flex-col gap-4 mt-5 w-full">
           <hr />
-          <div className="text-neutral-500 text-center font-light">
+          <div className="text-center font-light">
             <p>First time using Internify?&nbsp;
               <span
                 onClick={() => router.push("/register")}
-                className="text-neutral-800 cursor-pointer hover:underline"
+                className="text-primary cursor-pointer underline"
               >
                 Create an account
               </span>

@@ -57,7 +57,7 @@ const ProjectDetails = ({
       </div>
 
       <div>
-        <h1 className="text-black text-xl">User Details</h1>
+        <h1 className="text-xl">User Details</h1>
 
         <div className="flex flex-col gap-3 mt-2">
           <div className="flex flex-col gap-2">

@@ -15,6 +15,7 @@ import Image from 'next/image';
 import logo from "@/public/images/logo.png"
 import { Combobox2 } from "@/components/ui/combobox2";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 interface RecommendationInputProps {
   options: {
@@ -61,6 +62,7 @@ export const RecommendationInput = ({
   const [isShowing, setIsShowing] = useState(false);
   const [method, setMethod] = useState<String | null>(null);
   const [category, setCategory] = useState("");
+  const {resolvedTheme} = useTheme();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -170,11 +172,11 @@ export const RecommendationInput = ({
                 </FormItem>
               )}
             />
-            <Button className="col-span-12 lg:col-span-2 w-full transition bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:bg-gradient-to-r hover:from-indigo-400 hover:from-10% hover:via-sky-400 hover:via-30% hover:to-emerald-400 hover:to-90%" type="submit" disabled={!isValid || isSubmitting} size="icon">
+            <Button className="col-span-12 lg:col-span-2 w-full transition bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:bg-gradient-to-r hover:from-indigo-400 hover:from-10% hover:via-sky-400 hover:via-30% hover:to-emerald-400 hover:to-90% hover:text-white" type="submit" disabled={!isValid || isSubmitting} size="icon">
               Generate
             </Button>
             <p className="text-xs text-muted-foreground italic text-center">
-              The result might not be 100% accurate. Use at your own risks.
+              The result might not be 100% accurate. Use as your reference.
             </p>
           </form>
         </Form>
@@ -199,7 +201,7 @@ export const RecommendationInput = ({
       {/* No Result method 1*/}
       {!isSubmitting && isShowing && method==="1" && responseData && responseData.id ==='' && (
         <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
-          <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+          <div className={cn("rounded-lg p-6 flex flex-col gap-2 text-center", resolvedTheme==="light" ? "bg-white text-black" : "bg-background text-white")}>
             <p>
               {responseData.reason} 
             </p>
@@ -213,7 +215,7 @@ export const RecommendationInput = ({
       {/* Result method 1 with suitable job*/}
       {!isSubmitting && isShowing && method==="1" && responseData && responseData.id !=="" && responseData.suitable==="True" && (
         <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% w-4/5">  
-          <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+          <div className={cn("rounded-lg p-6 flex flex-col gap-2 text-center", resolvedTheme==="light" ? "bg-white text-black" : "bg-background text-white")}>
             <div className="flex flex-col">
               <p className="text-lg font-bold">
                 {responseData.title} 
@@ -321,7 +323,7 @@ export const RecommendationInput = ({
     {/* No Result method 2*/}
     {!isSubmitting && isShowing && method==="2" && responseData2 && responseData2.length===0 && (
       <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
-        <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center">
+        <div className={cn("rounded-lg p-6 flex flex-col gap-2 text-center", resolvedTheme==="light" ? "bg-white text-black" : "bg-background text-white")}>
           <p>
             No job listing in {category} category
           </p>
@@ -336,7 +338,7 @@ export const RecommendationInput = ({
     <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
       {!isSubmitting && isShowing && method==="2" && responseData2 && responseData2.length>0 && responseData2.map((response) => (
         <div className="rounded-xl p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% col-span-1">  
-            <div className="rounded-lg bg-white p-6 flex flex-col gap-2 text-center h-full">
+            <div className={cn("rounded-lg p-6 flex flex-col gap-2 text-center h-full", resolvedTheme==="light" ? "bg-white text-black" : "bg-background text-white")}>
               <div className="flex flex-col">
                 <p className="text-lg font-bold">
                   {response.title} 

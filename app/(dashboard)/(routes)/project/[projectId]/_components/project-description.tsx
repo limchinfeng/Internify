@@ -9,7 +9,7 @@ interface ProjectDescriptionProps {
 const ProjectDescription = ({ description }: ProjectDescriptionProps) => {
   return (
     <div>
-      <h1 className="text-black text-xl">Project Description</h1>
+      <h1 className="text-xl">Project Description</h1>
       <div><Preview value={description} /></div>
     </div>
   );
