@@ -41,7 +41,7 @@ export const UserHome = ({
   const router = useRouter();
   const [buttonClickedProfile, setButtonClickedProfile] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
-  const {resolvedTheme} = useTheme();
+  const { resolvedTheme } = useTheme();
 
   const handleClickProfile = () => {
     setButtonClickedProfile(true);
@@ -206,12 +206,10 @@ export const UserHome = ({
                 <p className="text-2xl">Internship</p>
               </div>
             </div>
-
-
             <div className="my-10 grid sm:grid-cols-2 md:gap-12 gap-5 grid-cols-1">
               <div>
                 <Button
-                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
+                  className={cn(resolvedTheme === "light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickListing}
                   disabled={buttonClicked}
@@ -222,7 +220,7 @@ export const UserHome = ({
               </div>
               <div>
                 <Button
-                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
+                  className={cn(resolvedTheme === "light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickProject}
                   disabled={buttonClicked}
@@ -233,7 +231,7 @@ export const UserHome = ({
               </div>
               <div>
                 <Button
-                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
+                  className={cn(resolvedTheme === "light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickResume}
                   disabled={buttonClicked}
@@ -244,7 +242,7 @@ export const UserHome = ({
               </div>
               <div>
                 <Button
-                  className={cn(resolvedTheme==="light" ? buttonSize : buttonSizeDark)}
+                  className={cn(resolvedTheme === "light" ? buttonSize : buttonSizeDark)}
                   variant="outline"
                   onClick={handleClickFavorite}
                   disabled={buttonClicked}
@@ -267,13 +265,10 @@ export const UserHome = ({
                 />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8  p-12'>
-
                 {testimonials.map((item) => (
-
                   <Card key={item.description}
                     className='border-[#1A374F] border-2 '
                   >
-
                     <CardHeader>
                       <CardTitle className='flex items-center gap-x-2 justify-center	'>
                         <div>
@@ -290,7 +285,6 @@ export const UserHome = ({
                       <p className="text-center text-base leading-relaxed ">{item.description}</p>
                     </CardContent>
                   </Card>
-
                 ))}
               </div>
             </div>
