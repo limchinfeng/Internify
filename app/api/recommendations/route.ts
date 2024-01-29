@@ -132,7 +132,7 @@ export async function POST(
             suitable: 'True or False',
             reason: 'Write down the reason'
           }
-          Ensure the true or false in suitable.
+          Ensure the true or false is pass to the suitable variable.
           `
         },
       ]
