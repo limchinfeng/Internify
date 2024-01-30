@@ -111,7 +111,7 @@ export async function POST(
     console.log(jobListingsText);
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-0613",
+      model: "gpt-4-0613",
       messages: [
         {
           "role": "system",
@@ -132,11 +132,11 @@ export async function POST(
             suitable: 'True or False',
             reason: 'Write down the reason'
           }
-          Ensure the true or false is pass to the suitable variable.
+
           `
         },
       ]
-    });   
+    });
 
     // console.log(response.choices[0].message.content)
 
