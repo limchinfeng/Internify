@@ -83,11 +83,11 @@ export const ProjectDescription = ({
       {!isEditing && (
         <p className={cn("text-xl font-medium", !initialData.description && "text-slate-500 italic text-sm")}>
           {!initialData.description && "No description"}
-          {initialData.description && (
+
             <Preview 
-              value={initialData.description}
+              value={initialData.description!}
             />
-          )}
+          
         </p>
       )}
       {isEditing && (

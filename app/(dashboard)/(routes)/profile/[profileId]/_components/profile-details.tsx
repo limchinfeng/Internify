@@ -95,7 +95,7 @@ export const ProfileDetails = ({
               {description === "" ? <>
                 <p className="mx-10 text-slate-500 italic text-sm">No description</p>
               </> : <>
-                (<Preview value={description} />)
+                <Preview value={description} />
               </>}
             </>
           </div>
