@@ -27,10 +27,11 @@ export async function POST(
       throw new Error('Invalid Listing ID');
     }
 
+    const unique = currentUser.id + params.listingId;
+
     const application_verification = await prismadb.application.findUnique({
       where: {
-        userId: currentUser.id,
-        listingId,
+        unique
       }
     });
 
@@ -42,6 +43,7 @@ export async function POST(
       data: {
         userId: currentUser.id,
         listingId,
+        unique
       }
     })
 
@@ -73,10 +75,11 @@ export async function DELETE(
       throw new Error('Invalid Listing ID');
     }
 
+    const unique = currentUser.id + params.listingId;
+
     const application = await prismadb.application.findUnique({
       where: {
-        userId: currentUser.id,
-        listingId,
+        unique
       }
     });
 
@@ -86,8 +89,7 @@ export async function DELETE(
 
     const deletedApplication = await prismadb.application.delete({
       where: {
-        userId: currentUser.id,
-        listingId,
+        unique
       }
     });
 
