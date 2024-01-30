@@ -110,7 +110,7 @@ export async function POST(
     console.log(jobListingsText);
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4-0613",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           "role": "system",
