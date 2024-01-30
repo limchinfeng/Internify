@@ -19,24 +19,31 @@ export const ListingIdApply = ({
   listingId, isApply, disabled, isCompany
 }: ListingIdApplyProps) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const {resolvedTheme} = useTheme();
 
   const onSubmit = async () => {
     try {
+      setIsLoading(true);
       await axios.post(`/api/listing/${listingId}`);
       toast.success("Application requested");
+      setIsLoading(false);
       router.refresh();
     } catch {
+      setIsLoading(false);
       toast.error("Something went wrong");
     }
   }
 
   const onDelete = async () => {
     try {
+      setIsLoading(true);
       await axios.delete(`/api/listing/${listingId}`);
       toast.success("Application deleted");
+      setIsLoading(false);
       router.refresh();
     } catch {
+      setIsLoading(false);
       toast.error("Something went wrong");
     }
   }
@@ -45,7 +52,7 @@ export const ListingIdApply = ({
     <>
       {!isApply && <Button
         onClick={onSubmit}
-        disabled={disabled}
+        disabled={disabled || isLoading}
         variant="outline"
         size="lg"
         className={cn("transition w-full hover:border-gray-600 hover:bg-transparent", resolvedTheme==="light" ? "border-black hover:text-gray-600" : "border-white hover:text-gray-400")}
@@ -54,7 +61,7 @@ export const ListingIdApply = ({
       </Button>}
       {isApply && <Button
         onClick={onDelete}
-        disabled={disabled}
+        disabled={disabled || isLoading}
         variant="outline"
         size="lg"
         className={cn("transition w-full hover:border-gray-600 hover:bg-transparent", resolvedTheme==="light" ? "border-black hover:text-gray-600" : "border-white hover:text-gray-400")}
