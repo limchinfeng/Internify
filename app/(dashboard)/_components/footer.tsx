@@ -8,6 +8,7 @@ import { AiFillFacebook } from "react-icons/ai";
 import { AiFillTwitterSquare } from "react-icons/ai";
 import { AiFillInstagram } from "react-icons/ai";
 import { AiFillLinkedin } from "react-icons/ai";
+import { IoDocumentSharp } from "react-icons/io5";
 import Link from "next/link";
 import { SiDiscord } from "react-icons/si";
 import Image from 'next/image'
@@ -22,10 +23,12 @@ const Footer = () => {
             <div className={resolvedTheme === 'dark' ? styles["footer-dark-container"] : styles["footer-container"]}>
                 <div className={styles["content-container"]}>
                     <div className={styles["about"]}>
-
-                        <a href="/" className={`a ${styles["website-link"]}`} >
-                            https://internify-deploy.vercel.app/
-                        </a>
+                        <div className="flex flex-row">
+                            <IoDocumentSharp size={30} className="pr-1" />
+                            <a href="https://forms.gle/bkYb95JHXTsg9V56A" className={`a ${styles["website-link"]}`} >
+                                Feedback Form
+                            </a>
+                        </div>
                         <div className={styles["about-text"]}>
                             <p>Internify is a comprehensive internship portal designed to connect students with their next professional stepping stone. By participating in Internify, students can enhance their industry acumen, engage with potential employers, and foster the skills essential for their future careers    </p>
                         </div>
