@@ -55,8 +55,25 @@ export const Actions = ({
     }
   }
 
+  const onVisit = () => {
+    setIsLoading(true);
+    router.push(`/project/${projectId}`)
+  }
+
   return (
     <div className="flex items-center gap-x-2">
+      {isPublished ? (
+      <Button
+        onClick={onVisit}
+        disabled={isLoading}
+        variant="black"
+        size="sm"
+      >
+        View Page
+      </Button>         
+      ) : (
+        <></>
+      )}
       <Button
         onClick={onClick}
         disabled={disabled || isLoading}

@@ -9,13 +9,19 @@ import { ProfileDescription } from "./_components/profile-description";
 import { ProfilePageLink } from "./_components/profile-page-link";
 import prismadb from "@/lib/prismadb";
 import { columns } from "./_components/columns";
+import { application_columns } from "./_components/application-columns";
 import { DataTable } from "./_components/data-table";
+import { ApplicationDataTable } from "./_components/application-data-table";
+import { CompanyDataTable } from "@/app/(company)/company/profile/_components/company-data-table";
+import { CompanyApplicationDataTable } from "@/app/(company)/company/profile/_components/company-application-data-table";
+import { CompanyColumns } from "@/app/(company)/company/profile/_components/company-columns";
+import { company_application_columns } from "@/app/(company)/company/profile/_components/company-application-columns";
 
 
 const ProfilePage = async () => {
   const currentUser = await getCurrentUser();
 
-  if(!currentUser) {
+  if (!currentUser) {
     return redirect("/");
   }
 
@@ -28,7 +34,69 @@ const ProfilePage = async () => {
     }
   });
 
-  return (  
+  const listings = await prismadb.listing.findMany({
+    where: {
+      userId: currentUser.id
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
+  const listingIds = listings.map((listing) => listing.id);
+
+  const user_applications = await prismadb.application.findMany({
+    where: {
+      userId: currentUser.id,
+    },
+    include: {
+      listing: {
+        include: {
+          user: true,
+        }
+      },
+      user: true,
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
+  const newDataUser = user_applications.map(item => ({
+    id: item.listing.id,
+    createdAt: new Date(item.createdAt),
+    listingId: item.listingId,
+    title: item.listing.title,
+    company: item.listing.user.name || "",
+    companyId: item.listing.user.id,
+  }));
+
+  const company_applications = await prismadb.application.findMany({
+    where: {
+      listingId: {
+        in: listingIds,
+      },
+    },
+    include: {
+      user: true,
+      listing: true,
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
+  const newDataApplication = company_applications.map(item => ({
+    id: item.listing.id,
+    createdAt: new Date(item.createdAt),
+    listingId: item.listingId,
+    title: item.listing.title,
+    candidate: item.user.name || "",
+    userId: item.user.id,
+    email: item.user.email || "",
+  }));
+
+  return (
     <div className="p-6 w-full flex flex-col items-center justify-center gap-10">
       <ProfileImage currentUser={currentUser} />
       <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 md:gap-10">
@@ -47,17 +115,56 @@ const ProfilePage = async () => {
           </div>
         </div>
       </div>
-      
+
       <ProfilePageLink currentUser={currentUser} />
-      
+
       <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
-        <DataTable 
+        <p className="text-lg font-bold">
+          Project
+        </p>
+        <DataTable
           columns={columns}
           data={projects}
         />
       </div>
+
+
+      {!currentUser.isCompany && (
+        <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
+          <p className="text-lg font-bold">
+            Listing Application
+          </p>
+          <ApplicationDataTable
+            columns={application_columns}
+            data={newDataUser}
+          />
+        </div>
+      )}
+
+
+
+      {currentUser.isCompany && (
+        <div className="mt-4 md:mt-6 w-full md:px-10 px-4">
+          <p className="text-lg font-bold">
+            Listing
+          </p>
+          <CompanyDataTable
+            columns={CompanyColumns}
+            data={listings}
+          />
+
+          <p className="text-lg font-bold mt-8">
+            Candidate Listing Application
+          </p>
+          <CompanyApplicationDataTable
+            columns={company_application_columns}
+            data={newDataApplication}
+          />
+        </div>
+      )}
+
     </div>
   );
 }
- 
+
 export default ProfilePage;

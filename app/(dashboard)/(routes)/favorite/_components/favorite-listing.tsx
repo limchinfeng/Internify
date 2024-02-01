@@ -20,13 +20,13 @@ export const FavoriteListing = ({
     <div className="w-full">
       {listings.length > 0 ? (
         <>
-          <Heading 
+          <Heading
             title='Listings Favorites'
             subtitle='List of listings you have favorited!'
           />
           <div className='grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 mt-5'>
             {listings.map((listing) => (
-              <ListingCard 
+              <ListingCard
                 key={listing.id}
                 id={listing.id}
                 title={listing.title}
@@ -44,12 +44,12 @@ export const FavoriteListing = ({
         </>
       ) : (
         <div className='h-[20vh] flex flex-col gap-2 justify-center items-center'>
-        <Heading 
-          center
-          title="No Favorites Listing found"
-          subtitle="Looks like you have no favorite listings"
+          <Heading
+            center
+            title="No Favorites Listing found"
+            subtitle="Looks like you have no favorite listings"
           />
-      </div>
+        </div>
       )}
     </div>
   )

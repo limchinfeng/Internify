@@ -39,7 +39,7 @@ const CompanyRegisterPage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post("/api/company/register", values);
-      toast.success('Company account registered successfully!');
+      toast.success('Company account registered successfully! Check your email to activate your account');
       router.refresh();
       router.push("/login");
 

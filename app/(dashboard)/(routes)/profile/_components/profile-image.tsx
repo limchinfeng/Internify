@@ -29,7 +29,7 @@ export const ProfileImage = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/profile`, values);
-      toast.success("Course updated");
+      toast.success("Image updated");
       toggleEdit();
       router.refresh();
     } catch {

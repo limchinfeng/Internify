@@ -2,10 +2,12 @@ import prismadb from "@/lib/prismadb";
 import getCurrentUser from "./getCurrentUser";
 
 export default async function getProjectFavoriteList() {
+    await new Promise(resolve => setTimeout(resolve, 500))
+
     try {
         const currentUser = await getCurrentUser();
 
-        if(!currentUser) {
+        if (!currentUser) {
             return [];
         }
 
@@ -22,7 +24,7 @@ export default async function getProjectFavoriteList() {
         });
 
         return favorites;
-    } catch(error: any) {
+    } catch (error: any) {
         throw new Error(error);
     }
 }

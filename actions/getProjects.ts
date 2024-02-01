@@ -8,6 +8,8 @@ interface getProjectsProps {
 export const getProjects = async ({
   title, categoryId
 }: getProjectsProps) => {
+  await new Promise(resolve => setTimeout(resolve, 500))
+
   try {
     const projects = await prismadb.project.findMany({
       where: {
@@ -27,8 +29,8 @@ export const getProjects = async ({
     });
 
     return projects;
-  } catch (error){
+  } catch (error) {
     console.log("[GET_PROJECTS]", error);
-    return [];    
+    return [];
   }
 }

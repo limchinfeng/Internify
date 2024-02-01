@@ -16,9 +16,14 @@ const routes = [
   },
   {
     icon: null,
-    label: "Resume Upload",
-    href: "/resume"
+    label: "Recommendation",
+    href: "/recommendation"
   },
+  // {
+  //   icon: null,
+  //   label: "Resume Upload",
+  //   href: "/resume"
+  // },
   {
     icon: null, //not important things, can skip if no time
     label: "Favorite",

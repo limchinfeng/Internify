@@ -29,6 +29,26 @@ export const CompanyColumns: ColumnDef<Project>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
+    },    
+    cell: ({ row }) => {
+      const { id, title, isPublished } = row.original;
+      return <>
+        {isPublished ? (
+          <div>
+            <Link
+              href={`/listing/${id}`}
+              target="_blank"
+              className="font-medium text-primary hover:text-blue-800 transition hover:underline"
+            >
+              {title}
+            </Link>
+          </div>
+        ): (
+          <p>
+            {title}
+          </p>
+        )}  
+      </>
     },
   },
   {
@@ -56,7 +76,7 @@ export const CompanyColumns: ColumnDef<Project>[] = [
         hour12: false,
         timeZoneName: 'short',
       }).format(createdAt);
-  
+
       return <div className="ml-3">{formattedDate}</div>;
     },
   },
@@ -85,7 +105,7 @@ export const CompanyColumns: ColumnDef<Project>[] = [
         hour12: false,
         timeZoneName: 'short',
       }).format(updatedAt);
-  
+
       return <div className="ml-3">{formattedDate}</div>;
     },
   },
@@ -102,7 +122,7 @@ export const CompanyColumns: ColumnDef<Project>[] = [
         </Button>
       )
     },
-    cell: ({row}) => {
+    cell: ({ row }) => {
       const isPublished = row.getValue("isPublished") || false;
 
       return (
@@ -115,7 +135,7 @@ export const CompanyColumns: ColumnDef<Project>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const {id} = row.original;
+      const { id } = row.original;
 
       return (
         <DropdownMenu>
@@ -128,7 +148,7 @@ export const CompanyColumns: ColumnDef<Project>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <Link href={`/company/profile/listing/${id}`}>
+            <Link href={`/profile/listing/${id}`}>
               <DropdownMenuItem>
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit

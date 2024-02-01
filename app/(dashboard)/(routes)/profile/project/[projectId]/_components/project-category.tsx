@@ -56,6 +56,7 @@ export const ProjectCategory = ({
   }
 
   const selectedOption = options.find((option) => option.value === initialData.categoryId)
+  let string : string;
 
   return (
     <div className="mt-6 border rounded-md p-4">

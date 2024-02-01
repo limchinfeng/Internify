@@ -4,63 +4,98 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NavbarImage } from "./navbar-image";
 import { User } from "@prisma/client";
+import Image from 'next/image'
+import ThemeSwitch from '../../../components/theme-switch'
+import { useTheme } from 'next-themes'
+
 
 export const NavbarRoutes = ({
   currentUser
-}: {currentUser?: User | null}) => {
+}: { currentUser?: User | null }) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const containsCompany = pathname?.includes('/company');
-  
+  const { resolvedTheme } = useTheme()
+  // const containsCompany = pathname?.includes('/company');
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  if(!isMounted) {
+  if (!isMounted) {
     return null;
   }
-  
+
+
   return (
     <>
       {currentUser?.isCompany ? <>
-        <div 
+        <div
           onClick={() => router.push("/")}
-          className="md:text-4xl text-3xl font-bold text-primary cursor-pointer flex items-center justify-center flex-row"
+          className="cursor-pointer flex items-center justify-center flex-row gap-2"
         >
-          <div>
-            Internify
+          <div className="">
+            <>
+              {resolvedTheme === 'light' ? (
+                <Image
+                  src="/Internify-logo.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              ) : (
+                <Image
+                  src="/Internify-logo-dark.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              )}
+            </>
           </div>
-          <p className='font-light text-base text-gray-600 mt-5'>
-            company
-          </p>
+
+          <div className="md:text-4xl text-3xl font-bold text-primary flex flex-row">
+            <div>
+              Internify
+            </div>
+            <p className='font-light text-base mt-5'>
+              company
+            </p>
+          </div>
         </div>
       </> : <>
-        <div 
+
+        <div
           onClick={() => router.push("/")}
-          className="md:text-4xl text-3xl font-bold text-primary cursor-pointer"
+          className="cursor-pointer flex items-center justify-center flex-row gap-2"
         >
-          Internify
+          <div className="">
+            <>
+              {resolvedTheme === 'light' ? (
+                <Image
+                  src="/Internify-logo.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              ) : (
+                <Image
+                  src="/Internify-logo-dark.png"
+                  width={70}
+                  height={45}
+                  alt="logo"
+                />
+              )}
+            </>
+          </div>
+          <div className="md:text-4xl text-3xl font-bold text-primary flex flex-row">
+            Internify
+          </div>
         </div>
       </>}
 
-      <div className="ml-auto flex flex-row items-center gap-3">
-        {/* {currentUser?.isCompany && containsCompany &&  (
-          <div 
-            className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-            onClick={() => router.push("/profile")}
-          >
-            Go to Profile
-          </div>
-        )} */}
-        {currentUser?.isCompany && (
-          <div 
-            className="block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-            onClick={() => router.push("/company/profile")}
-          >
-            Go to Company
-          </div>
-        )}
+      <div className="ml-auto flex flex-row items-center gap-6 ">
+        <ThemeSwitch />
         <NavbarImage currentUser={currentUser} />
       </div>
     </>
