@@ -3,6 +3,7 @@ import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 import Configuration from "openai";
 import OpenAI from "openai";
+import { string } from "zod";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -20,6 +21,13 @@ type JobListing = {
   state: string;
   category: string;
 };
+
+interface Job {
+  id: string;
+  title: string;
+  suitable: string;  // Assuming suitable is a string ('True' or 'False')
+  reason: string;
+}
 
 export async function POST(
   req: Request
@@ -66,14 +74,7 @@ export async function POST(
     })
 
     if (listings.length === 0) {
-      return NextResponse.json({
-        id: '',
-        title: '',
-        description: '',
-        requirement: '',
-        state: '',
-        reason: `No job listing in ${category?.name} category`
-      });
+      return NextResponse.json([]);
     }
 
     const internListing = listings.map(listing => ({
@@ -105,37 +106,39 @@ export async function POST(
       }).join('\n\n');
     };
 
-    console.log(internListing);
+    // console.log(internListing);
     const jobListingsText = convertListingsToText(internListing);
     console.log(jobListingsText);
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4-0613",
       messages: [
         {
           "role": "system",
-          "content": `Find the requirement "${messages}" that match the most with the job below: ${jobListingsText}
+          "content": `Based on the requirement "${messages}" ,justify whether the job suit the requirement and give reason for each job below: ${jobListingsText}
           
-          Given the specific job requirements outlined in the user's input, evaluate each job listing provided and determine its suitability.The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (such as machine learning is the job requirements outlined in the user's input), it should be 100% return false for Suitability.Provide a concise and clear rationale for each decision.
-
-          return only 1 job and the result in this JSON format without any other text:
+          Without additional text, return the comments of all the jobs and determine whether the requirent fit the job and the result in this JSON objects and then convert to string. Reason should no more than 50 words. The evaluation should be based on how closely each job matches the user's requirements. For instance, if a job doesn't involve skills or fields mentioned in the requirements (like machine learning), it should be marked as unsuitable.Provide a concise and clear rationale for each decision.
+          
+          Example of 2 jobs:
           {
             id: 'ID',
             title: 'Job Title',
-            description: 'Description',
-            requirement: 'Requirements',
-            state: 'Location',
             suitable: 'True or False',
-            reason: 'Write down the Brief Explanation as the reason'
+            reason: 'Write down the reason'
+          },
+          {
+            id: 'ID',
+            title: 'Job Title',
+            suitable: 'True or False',
+            reason: 'Write down the reason'
           }
-          
-          Ensure the reasons are specific to the job's relevance to the stated requirements and succinctly justify the suitability decision.
+
           `
         },
       ]
     });
 
-    console.log(response.choices[0].message.content)
+    // console.log(response.choices[0].message.content)
 
     // Extract the content from the response
     const jsonString = response.choices[0].message.content;
@@ -143,7 +146,6 @@ export async function POST(
     // Parse the content to JSON using the function
     const parsedJSON = parseContentToJSON(jsonString || "");
     console.log("--" + parsedJSON)
-
     return NextResponse.json(parsedJSON);
     // return NextResponse.json(response.choices[0].message.content);
   } catch (error) {
@@ -152,19 +154,21 @@ export async function POST(
   }
 };
 
-const parseContentToJSON = (content: string): any => {
-  try {
-    // Parse the content as JSON
-    const jsonContent = JSON.parse(content);
+function parseContentToJSON(jsonString: string) {
+  // First, trim the string to remove any leading or trailing whitespace
+  let trimmedString = jsonString.trim();
 
-    // If the parsing is successful, and it has the expected structure, return it
-    if (jsonContent && typeof jsonContent === 'object') {
-      return jsonContent;
-    }
-  } catch (error) {
-    console.error('Failed to parse content to JSON:', error);
+  // Replace line breaks and ensure it starts with '[' and ends with ']'
+  if (!trimmedString.startsWith('[') || !trimmedString.endsWith(']')) {
+    trimmedString = trimmedString.replace(/\}\s*,\s*\{/g, '},{');
+    trimmedString = '[' + trimmedString + ']';
   }
 
-  // Handle cases where the content doesn't match the expected structure or parsing fails
-  return null;
-};
+  try {
+    // Parse the string as JSON
+    return JSON.parse(trimmedString);
+  } catch (error) {
+    console.error('Error parsing JSON:', error);
+    throw error; // Re-throw the error for further handling if necessary
+  }
+}

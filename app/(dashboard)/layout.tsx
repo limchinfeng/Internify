@@ -1,6 +1,8 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import { Navbar } from "./_components/navbar";
 import { Sidebar } from "./_components/sidebar";
+import Footer from "./_components/footer";
+
 
 const mainLayout = async ({
   children
@@ -19,6 +21,7 @@ const mainLayout = async ({
       </div>
       <main className="md:pl-56 pt-[80px] h-full">
         {children}
+        <Footer />
       </main>
     </div>
   )

@@ -11,7 +11,7 @@ export const ListingIdDescription = ({
 }: ListingIdDescriptionProps) => {
   return (
     <div>
-      <div className="text-black text-2xl font-bold">
+      <div className="text-2xl font-bold">
         Description
       </div>
       <Preview 

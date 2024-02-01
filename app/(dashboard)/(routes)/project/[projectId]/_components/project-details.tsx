@@ -47,17 +47,8 @@ const ProjectDetails = ({
 
   return (
     <div className="flex flex-col gap-7">
-      <div className="flex flex-col gap-1">
-        <h1>
-          {title}
-        </h1>
-        <p>
-          {category}
-        </p>
-      </div>
-
       <div>
-        <h1 className="text-black text-xl">User Details</h1>
+        <h1 className="text-xl">User Details</h1>
 
         <div className="flex flex-col gap-3 mt-2">
           <div className="flex flex-col gap-2">

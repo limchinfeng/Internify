@@ -144,11 +144,11 @@ export default function ResetForm({
             </Form>
             <div className="flex flex-col gap-4 mt-5 w-full">
                 <hr />
-                <div className="text-neutral-500 text-center font-light">
+                <div className="text-center font-light">
                     <p>Never mind!&nbsp;
                         <span
                             onClick={() => router.push("/login")}
-                            className="text-neutral-800 cursor-pointer hover:underline"
+                            className="text-primary cursor-pointer hover:underline"
                         >
                             Take me back to login
                         </span>

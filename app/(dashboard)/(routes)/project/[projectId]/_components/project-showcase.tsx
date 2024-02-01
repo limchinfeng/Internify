@@ -11,8 +11,8 @@ interface ProjectShowcaseProps {
 const ProjectShowcase = ({ id, showcaseImages }: ProjectShowcaseProps) => {
   
   return (
-    <div>
-      <h1 className="text-black text-xl">Project Showcase</h1>
+    <div className="mt-4">
+      <h1 className="text-xl">Project Showcase</h1>
       <div className="grid md:grid-cols-2 gap-10 my-5">
         {showcaseImages.map((image: any) => (
           // eslint-disable-next-line react/jsx-key

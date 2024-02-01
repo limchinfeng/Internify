@@ -35,7 +35,7 @@ export const ListingIdCompanyDetails = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-black text-2xl font-bold">
+      <div className=" text-2xl font-bold">
         Company Details
       </div>
       <div className="flex flex-col gap-2 text-md">

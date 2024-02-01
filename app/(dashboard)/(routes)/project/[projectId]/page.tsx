@@ -5,6 +5,7 @@ import ProjectHead from "./_components/project-head";
 import ProjectDetails from "./_components/project-details";
 import ProjectDescription from "./_components/project-description";
 import ProjectShowcase from "./_components/project-showcase";
+import { ProjectTitle } from "./_components/project-title";
 
 const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
   const currentUser = await getCurrentUser();
@@ -43,22 +44,28 @@ const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
           currentUser={currentUser}
         />
 
+        <ProjectTitle 
+          title={project.title}
+          category={project.category?.name || ""}        
+        />
+
         <div className="flex flex-col md:flex-row md:gap-10">
           <div className="order-2 md:order-2 flex-1">
             <ProjectDescription description={project.description || ""} />
           </div>
 
           <div className="order-1 md:order-1 mb-5 md:mb-0 flex-1">
-            <ProjectDetails
-              id={project.user.id}
-              title={project.title}
-              category={project.category?.name || ""}
-              imageSrc={project.user.imageUrl || ""}
-              name={project.user.name || ""}
-              phone={project.user.phone || ""}
-              email={project.user.email || ""}
-              link={project.user.link || ""}
-            />
+              <ProjectDetails
+                id={project.user.id}
+                title={project.title}
+                category={project.category?.name || ""}
+                imageSrc={project.user.imageUrl || ""}
+                name={project.user.name || ""}
+                phone={project.user.phone || ""}
+                email={project.user.email || ""}
+                link={project.user.link || ""}
+              />
+            </div>
           </div>
         </div>
 
@@ -66,7 +73,6 @@ const ProjectIdPage = async ({ params }: { params: { projectId: string } }) => {
           id={project.id}
           showcaseImages={project.showcaseImages}
         />
-      </div>
       </div>
     </div>
   );

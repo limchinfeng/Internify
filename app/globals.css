@@ -32,7 +32,7 @@ body,
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 215 23% 57%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -43,6 +43,7 @@ body,
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
   }
 
   .dark {
@@ -70,7 +71,7 @@ body,
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
+    --border: 207, 50%, 21%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
@@ -151,5 +152,44 @@ body,
 .ql-container {
   font-size: 16px !important;
 }
-
+.quill > * {
+  border-color: inherit !important;
+  color: inherit !important;
+}
+.quill > .ql-toolbar {
+  /* border radius of the toolbar */
+  border-radius: 10px 10px 0 0;
+}
+.quill > .ql-container {
+  /* border radius of the container and for font size*/
+  font-size: inherit;
+  border-radius: 0 0 10px 10px;
+}
+.ql-toolbar.ql-snow .ql-picker-label {
+  color: inherit !important;
+  opacity: 0.76;
+}
+.ql-snow .ql-picker {
+  color: inherit !important;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  /* for placeholder */
+  color: inherit;
+}
+.ql-snow.ql-toolbar button svg {
+  opacity: 0.76;
+  color: currentColor;
+}
+.ql-snow .ql-stroke {
+  /* for the border of the editor */
+  stroke: currentColor !important;
+}
+.ql-snow .ql-fill {
+  /* for the bg color */
+  fill: currentColor !important;
+}
+.ql-picker-item {
+  /* for dropdown */
+  color: #444 !important;
+}
 @import "~@uploadthing/react/styles.css"

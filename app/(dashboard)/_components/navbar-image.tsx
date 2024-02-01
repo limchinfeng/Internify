@@ -7,43 +7,43 @@ import { signOut } from "next-auth/react";
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
 
-export const NavbarImage =  ({
+export const NavbarImage = ({
   currentUser
-}: {currentUser?: User | null}) => {
+}: { currentUser?: User | null }) => {
   const router = useRouter();
 
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Image 
+          <Image
             className='rounded-full cursor-pointer w-10 h-10'
             height='40'
             width='40'
             alt='Avatar'
-            src={ currentUser?.imageUrl || avatar}
+            src={currentUser?.imageUrl || avatar}
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>
             <div className="w-full flex items-center justify-center">
-              {currentUser  
+              {currentUser
                 ? <>{currentUser.name}</>
                 : <>Guest</>
               }
             </div>
-          </DropdownMenuLabel> 
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
-            {/* {currentUser?.isCompany && (
+          {/* {currentUser?.isCompany && (
               <DropdownMenuItem onClick={() => router.push("/company/profile")}>Go to Company</DropdownMenuItem>
             )} */}
-            {currentUser ? <>
-              <DropdownMenuItem onClick={() => router.push("/profile")}>Profile</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => signOut()}>Log Out</DropdownMenuItem>
-            </> : <>
+          {currentUser ? <>
+            <DropdownMenuItem onClick={() => router.push("/profile")}>Profile</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => signOut()}>Log Out</DropdownMenuItem>
+          </> : <>
             <DropdownMenuItem onClick={() => router.push("/login")}>Login</DropdownMenuItem>
             <DropdownMenuItem onClick={() => router.push("/register")}>Register</DropdownMenuItem>
-            </>}
+          </>}
         </DropdownMenuContent>
       </DropdownMenu>
     </>
